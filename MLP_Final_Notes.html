@@ -706,10 +706,8 @@
                         <div><button class="copy">Copy</button><button class="run">Run</button></div>
                     </div><textarea spellcheck="false" aria-label="Editable Python code cell">print("table shape (rows, columns):", passengers.shape)
     print("column names:", passengers.columns.tolist())
-    print("data types:
-    ", passengers.dtypes)
-    print("missing count per column:
-    ", passengers.isna().sum())
+    print("data types:\n", passengers.dtypes)
+    print("missing count per column:\n", passengers.isna().sum())
     
     X = passengers.drop(columns="survived")
     y = passengers["survived"]
@@ -745,10 +743,8 @@
                 <div class="code-cell" data-cell="1-3">
                     <div class="code-toolbar"><span>Python · code cell 4</span>
                         <div><button class="copy">Copy</button><button class="run">Run</button></div>
-                    </div><textarea spellcheck="false" aria-label="Editable Python code cell">print("missing by column:
-    ", passengers.isna().sum())
-    print("numeric summary:
-    ", passengers[["age", "fare"]].describe())
+                    </div><textarea spellcheck="false" aria-label="Editable Python code cell">print("missing by column:\n", passengers.isna().sum())
+    print("numeric summary:\n", passengers[["age", "fare"]].describe())
     print("fare range:", passengers["fare"].max() - passengers["fare"].min())
     print("fare median:", passengers["fare"].median())</textarea>
                     <pre class="result" aria-live="polite">Click Run to execute this cell.</pre>
@@ -2163,9 +2159,24 @@
 
         /* Auto-size code boxes to fit their code */
         (function () {
+
+            /* Remove stray indentation: first line flush-left, every later line indented */
+            function normalize(t) {
+                var lines = t.value.split('\n');
+                if (lines.length < 2) return;
+                var first = lines[0];
+                if (/^\s/.test(first) || /[:,\\]\s*$/.test(first) || /"""|\'\'\'/.test(first)) return;
+                var bal = 0; for (var k = 0; k < first.length; k++) { var c = first[k]; if ('([{'.indexOf(c) > -1) bal++; else if (')]}'.indexOf(c) > -1) bal--; }
+                if (bal > 0) return;
+                var min = Infinity;
+                for (var i = 1; i < lines.length; i++) { if (!lines[i].trim()) continue; var n = /^ */.exec(lines[i])[0].length; if (n < min) min = n; }
+                if (min === Infinity || min === 0) return;
+                t.value = [first].concat(lines.slice(1).map(function (l) { return l.trim() ? l.slice(min) : l; })).join('\n');
+            }
             function fit(t) { if (!t.offsetWidth) return; t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; }
             var ro = ('ResizeObserver' in window) ? new ResizeObserver(function (es) { es.forEach(function (e) { var t = e.target; if (t._w !== t.offsetWidth) { t._w = t.offsetWidth; fit(t); } }); }) : null;
             document.querySelectorAll('.code-cell textarea').forEach(function (t) {
+                normalize(t);
                 t.addEventListener('input', function () { fit(t); });
                 if (ro) ro.observe(t);
                 fit(t);
