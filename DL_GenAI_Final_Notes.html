@@ -415,12 +415,32 @@
                 font-size: 12px
             }
         }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0 0 14px;
+            padding: 6px 14px;
+            border: 1px solid rgba(255, 255, 255, .45);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .12);
+            color: #fff;
+            font: 600 14px/1.2 inherit;
+            text-decoration: none
+        }
+
+        .back-link:hover,
+        .back-link:focus-visible {
+            background: rgba(255, 255, 255, .25);
+            outline: none
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <div class="wrap">
+        <div class="wrap"><a class="back-link" href="index.html">← Back to home</a><br>
             <h1>Deep Learning &amp; Generative AI · Final Study Notes</h1>
             <p>A detailed, beginner-first reference compiled from the DL &amp; GenAI notebook series. Explanations,
                 editable runnable PyTorch cells, worked examples, and documentation guidance are all in this single HTML
@@ -526,8 +546,7 @@
                     <p><strong>How to use:</strong> open the notebook in Jupyter, run each code cell in order with
                         <strong>Shift + Enter</strong>, and read the explanation right after it. Code cells in this
                         series use small toy data and do not need a GPU or dataset download. PyTorch must be installed
-                        in the Python environment used by Jupyter.
-                    </p>
+                        in the Python environment used by Jupyter.</p>
                 </div>
                 <div class="prose">
                     <h2>The picture: example → prediction → error → learning</h2>
@@ -566,8 +585,7 @@
                     <p>A scalar has no dimensions; a vector has one; a matrix has two. For image batches, a common
                         PyTorch shape is <code>(batch, channels, height, width)</code>. For example
                         <code>(8, 1, 28, 28)</code> means 8 grayscale images, each 28 by 28 pixels. Keeping the axes in
-                        the correct order prevents many errors.
-                    </p>
+                        the correct order prevents many errors.</p>
                 </div>
                 <div class="code-cell" data-cell="0-1">
                     <div class="code-toolbar"><span>Python · code cell 2</span>
@@ -777,8 +795,7 @@
                     <p>For inputs x₁,…,xₙ, weights w₁,…,wₙ, and bias b: <code>z = Σᵢ xᵢwᵢ + b</code>. The value z is the
                         <strong>pre-activation</strong>. The neuron output is <code>a=f(z)</code>. The activation
                         function lets a network represent curved/nonlinear relationships; without nonlinear activations,
-                        many stacked linear layers collapse to one linear transformation.
-                    </p>
+                        many stacked linear layers collapse to one linear transformation.</p>
                 </div>
                 <div class="code-cell" data-cell="2-0">
                     <div class="code-toolbar"><span>Python · code cell 1</span>
@@ -801,8 +818,7 @@
                             pass through.</li>
                         <li><strong>Sigmoid:</strong> <code>1/(1+exp(−z))</code>, values between 0 and 1.
                             <code>sigmoid(0)=0.5</code>; its derivative is <code>s(1−s)</code> and peaks at 0.25 when
-                            s=0.5.
-                        </li>
+                            s=0.5.</li>
                         <li><strong>Tanh:</strong> values between −1 and 1; <code>tanh(0)=0</code>.</li>
                     </ul>
                     <p>Sigmoid is often used to express a binary probability; ReLU is common in hidden layers. An output
@@ -845,8 +861,7 @@
                         output layer uses the previous layer’s activations as input. In PyTorch
                         <code>nn.Linear(in_features, out_features)</code> stores weights with shape
                         <code>(out_features, in_features)</code> and a bias with shape <code>(out_features,)</code>.
-                        Matrix multiplication is why dimensions must match.
-                    </p>
+                        Matrix multiplication is why dimensions must match.</p>
                 </div>
                 <div class="code-cell" data-cell="2-3">
                     <div class="code-toolbar"><span>Python · code cell 4</span>
@@ -930,8 +945,7 @@
                     <p>Suppose <code>y_hat = w*x</code> and loss <code>L=(y_hat−y)²</code>. Chain rule gives
                         <code>dL/dw = 2(y_hat−y)*x</code>. If x=3, w=2, target=4, then y_hat=6, error=2 and gradient=12.
                         A positive gradient means increasing w increases loss here; gradient descent subtracts a small
-                        multiple of it.
-                    </p>
+                        multiple of it.</p>
                 </div>
                 <div class="code-cell" data-cell="3-1">
                     <div class="code-toolbar"><span>Python · code cell 2</span>
@@ -1032,8 +1046,7 @@
                         <code>forward</code>. Parameters inside registered layers (or values wrapped in
                         <code>nn.Parameter</code>) appear in <code>model.parameters()</code>. A plain Tensor—even one
                         with <code>requires_grad=True</code>—can receive gradients but is not automatically registered
-                        for the optimizer to update.
-                    </p>
+                        for the optimizer to update.</p>
                 </div>
                 <div class="code-cell" data-cell="4-0">
                     <div class="code-toolbar"><span>Python · code cell 1</span>
@@ -1098,8 +1111,7 @@
                         <code>model.eval()</code> switches those modules to evaluation behavior.
                         <code>torch.no_grad()</code> turns off gradient recording in a code region to save memory during
                         evaluation. <code>eval()</code> does not turn off autograd, and <code>no_grad()</code> does not
-                        itself switch Dropout or BatchNorm. Use both when evaluating.
-                    </p>
+                        itself switch Dropout or BatchNorm. Use both when evaluating.</p>
                 </div>
                 <div class="code-cell" data-cell="4-2">
                     <div class="code-toolbar"><span>Python · code cell 3</span>
@@ -1208,8 +1220,7 @@
                         <code>(pixel−μ)/σ</code>. <code>Compose</code> applies transforms in sequence. For one grayscale
                         channel, pass one-element tuples such as <code>(mean,)</code>; for RGB, provide one mean and
                         standard deviation per channel. Transforms are usually applied when a dataset item is retrieved,
-                        not when the transform object is created.
-                    </p>
+                        not when the transform object is created.</p>
                 </div>
                 <div class="code-cell" data-cell="5-2">
                     <div class="code-toolbar"><span>Python · code cell 3</span>
@@ -1287,8 +1298,7 @@
                         width. A Conv2d filter has shape <code>(C_out,C_in,K_h,K_w)</code>. Each output channel comes
                         from one learned filter that spans <strong>all</strong> input channels.
                         <code>nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)</code> specifies the
-                        layer.
-                    </p>
+                        layer.</p>
                 </div>
                 <div class="code-cell" data-cell="6-0">
                     <div class="code-toolbar"><span>Python · code cell 1</span>
@@ -1310,8 +1320,7 @@
                         <code>output = floor((input + 2*padding − kernel_size)/stride) + 1</code>. Calculate height and
                         width separately. With input 10, kernel 3, padding 0, stride 1: output is
                         <code>(10−3)/1+1 = 8</code>. Padding 1 makes it 10. Stride 2 reduces the number of positions
-                        because the filter jumps two pixels.
-                    </p>
+                        because the filter jumps two pixels.</p>
                 </div>
                 <div class="code-cell" data-cell="6-1">
                     <div class="code-toolbar"><span>Python · code cell 2</span>
@@ -1331,16 +1340,14 @@
                         where it fully overlaps the input, so spatial size shrinks. <strong>Same</strong> means output
                         spatial dimensions match input for stride 1. For an odd kernel K, symmetric padding per side is
                         <code>(K−1)/2</code>: K=3 → 1 pixel; K=5 → 2 pixels. For even kernels or strides greater than 1,
-                        padding can be asymmetric and the exact framework definition matters.
-                    </p>
+                        padding can be asymmetric and the exact framework definition matters.</p>
                 </div>
                 <div class="prose">
                     <h2>Convolution parameter counts</h2>
                     <p>For one Conv2d: weights = <code>K_h × K_w × C_in × C_out</code>; if bias is enabled, add
                         <code>C_out</code>. For a Linear layer: weights=<code>in_features × out_features</code>; add
                         <code>out_features</code> biases if enabled. Pooling, ReLU, sigmoid, flatten, and dropout have
-                        zero learned parameters.
-                    </p>
+                        zero learned parameters.</p>
                 </div>
                 <div class="code-cell" data-cell="6-2">
                     <div class="code-toolbar"><span>Python · code cell 3</span>
@@ -1471,8 +1478,7 @@
                     </ul>
                     <p>Call <code>model.eval()</code> for validation/testing, and usually wrap the forward pass in
                         <code>torch.no_grad()</code> or <code>torch.inference_mode()</code>. <code>no_grad</code> alone
-                        does not turn off Dropout.
-                    </p>
+                        does not turn off Dropout.</p>
                 </div>
                 <div class="code-cell" data-cell="7-2">
                     <div class="code-toolbar"><span>Python · code cell 3</span>
@@ -1492,8 +1498,7 @@
                     <p>For a grayscale 28×28 image, a small CNN can map 1 channel to 8 channels, pool to 14×14, map 8 to
                         16 channels, pool to 7×7, then flatten 16×7×7 values into class logits.
                         <code>CrossEntropyLoss</code> expects logits and integer class IDs. You do not need a softmax
-                        layer before this loss.
-                    </p>
+                        layer before this loss.</p>
                 </div>
                 <div class="code-cell" data-cell="7-3">
                     <div class="code-toolbar"><span>Python · code cell 4</span>
@@ -1771,8 +1776,7 @@
                         <code>y_t = W_hy h_t + b_y</code>. The previous hidden state carries information from earlier
                         steps. In PyTorch, a batch-first sequence has shape
                         <code>(batch, sequence_length, input_features)</code> when <code>batch_first=True</code>. The
-                        initial hidden state can be zero or learned.
-                    </p>
+                        initial hidden state can be zero or learned.</p>
                 </div>
                 <div class="code-cell" data-cell="10-0">
                     <div class="code-toolbar"><span>Python · code cell 1</span>
@@ -1803,8 +1807,7 @@
                         reveal. Sigmoid gates range 0…1. The additive cell-state update helps gradients travel across
                         many steps. Typical formulas are <code>f=σ(...)</code>, <code>i=σ(...)</code>,
                         <code>ĉ=tanh(...)</code>, <code>c=f⊙c_prev+i⊙ĉ</code>, <code>o=σ(...)</code>,
-                        <code>h=o⊙tanh(c)</code>. <code>⊙</code> means element-wise multiplication.
-                    </p>
+                        <code>h=o⊙tanh(c)</code>. <code>⊙</code> means element-wise multiplication.</p>
                 </div>
                 <div class="code-cell" data-cell="10-1">
                     <div class="code-toolbar"><span>Python · code cell 2</span>
@@ -2054,8 +2057,7 @@
                             extractor</strong> freezes most/all pretrained layers and learns a new task head.
                         <strong>Fine-tuning</strong> unfreezes some or all pretrained layers and updates them on the new
                         dataset. Preprocessing must match the pretrained model’s expected image size and normalization.
-                        Use a smaller learning rate for pretrained weights than a newly initialized head.
-                    </p>
+                        Use a smaller learning rate for pretrained weights than a newly initialized head.</p>
                 </div>
                 <div class="code-cell" data-cell="13-0">
                     <div class="code-toolbar"><span>Python · code cell 1</span>
@@ -2238,8 +2240,7 @@
                 <div class="prose">
                     <p><strong>Answer:</strong> prediction 2, error −3, squared loss 9, gradient
                         <code>2×(−3)×2 = −12</code>. Gradient descent subtracts the gradient, so a negative gradient
-                        makes w increase.
-                    </p>
+                        makes w increase.</p>
                 </div>
                 <div class="prose">
                     <h2>Practice 5 · Learnable parameter and training-loop order</h2>
@@ -2261,8 +2262,7 @@
                 <div class="prose">
                     <p><strong>Answer:</strong> BatchNorm has 2×24=48 learnable scale/shift values. Dropout is inactive
                         in eval mode. <code>no_grad()</code> only changes autograd tracking; it does not call
-                        <code>eval()</code> or change module-specific behavior.
-                    </p>
+                        <code>eval()</code> or change module-specific behavior.</p>
                 </div>
                 <div class="prose">
                     <h2>Practice 7 · Recall core formulas</h2>
@@ -2313,28 +2313,24 @@
                 <code>squeeze()</code> removes every size-1 axis. <code>unsqueeze(dim)</code> inserts a length-1 axis.
                 <code>reshape</code> may return a view or copy; <code>view</code> requires compatible strides/contiguous
                 layout. A tensor created from NumPy with <code>from_numpy</code> shares CPU storage when compatible;
-                <code>torch.tensor</code> copies.
-            </p>
+                <code>torch.tensor</code> copies.</p>
             <p>For convolutional images, PyTorch commonly uses <code>(N,C,H,W)</code>.
                 <code>nn.Linear(in_features,out_features)</code> accepts any input whose final dimension is
                 <code>in_features</code>, replaces that final dimension with <code>out_features</code>, and stores
                 weight shape <code>(out_features,in_features)</code> plus optional bias shape
-                <code>(out_features,)</code>.
-            </p>
+                <code>(out_features,)</code>.</p>
             <h3>Modules, parameters, autograd, and training</h3>
             <p><code>nn.Module</code> registers submodules and parameters assigned as attributes.
                 <code>nn.Parameter</code> is a Tensor subclass that, when assigned as a module attribute, is
                 automatically registered and returned by <code>parameters()</code>. A plain tensor with
                 <code>requires_grad=True</code> can receive a gradient but is not automatically included in an
-                optimizer's parameter list.
-            </p>
+                optimizer's parameter list.</p>
             <p>Autograd records operations on tensors requiring gradients and computes derivatives through the graph.
                 <code>.backward()</code> accumulates gradients into leaf tensors' <code>.grad</code>; it does not clear
                 them. <code>optimizer.zero_grad()</code> clears them. The standard order is clear → forward → loss →
                 backward → update. <code>torch.no_grad()</code> and <code>torch.inference_mode()</code> disable autograd
                 recording for their contexts. <code>module.eval()</code> changes modules with training-specific behavior
-                (e.g. Dropout/BatchNorm); it does not disable autograd. These controls are independent.
-            </p>
+                (e.g. Dropout/BatchNorm); it does not disable autograd. These controls are independent.</p>
             <p>A state dictionary stores parameters and persistent buffers. Saving/loading <code>state_dict()</code> is
                 the preferred pattern for restoring learned weights into an instantiated model. Model architecture must
                 match the keys/shapes in the state dictionary.</p>
@@ -2347,8 +2343,7 @@
                 <li><code>CrossEntropyLoss</code>: expects unnormalized class logits (commonly <code>(N,C)</code> or
                     <code>(N,C,H,W)</code>) and class-index targets of dtype long with matching batch/spatial
                     dimensions; it internally applies log-softmax and negative log likelihood. Do not apply softmax
-                    before it in the usual class-index case.
-                </li>
+                    before it in the usual class-index case.</li>
             </ul>
             <h3>Data API and image transforms</h3>
             <p>A <code>Dataset</code> implements <code>__len__</code> and <code>__getitem__</code>; a
@@ -2357,8 +2352,7 @@
                 not apply it. TorchVision <code>ToTensor</code> converts common PIL/NumPy image inputs to channel-first
                 floating tensors and scales uint8 [0,255] pixels to [0,1]. <code>Normalize(mean,std)</code> applies
                 channel-wise <code>(x−mean)/std</code>; mean/std channel counts must match. For deterministic
-                evaluation, normally do not use random augmentation transforms.
-            </p>
+                evaluation, normally do not use random augmentation transforms.</p>
             <h3>Conv2d and parameter calculation</h3>
             <p><code>nn.Conv2d</code> input is <code>(N,C_in,H,W)</code> (or unbatched <code>(C_in,H,W)</code>). Weight
                 shape is <code>(C_out,C_in/groups,K_h,K_w)</code>. For groups=1, weights count
@@ -2366,8 +2360,7 @@
                 channels must be divisible by groups and the weight count is divided by groups. Per-axis output is
                 <code>floor((input+2*padding−dilation*(kernel−1)−1)/stride + 1)</code>. Pooling layers typically have no
                 learned weights. <code>AdaptiveAvgPool2d((1,1))</code> outputs one spatial average per channel
-                regardless of input H,W; flatten from dimension 1 preserves batch.
-            </p>
+                regardless of input H,W; flatten from dimension 1 preserves batch.</p>
             <p>BatchNorm2d expects channel axis C at dimension 1. With <code>affine=True</code> (default), it learns γ
                 and β, two values per channel. Running mean/variance are buffers, not trainable parameters. In training
                 it uses batch statistics and updates running estimates; in eval it uses running values when tracking is
@@ -2379,8 +2372,7 @@
                 input/output order to <code>(batch,sequence,features)</code>, not the hidden-state order. Bidirectional
                 modules double output feature width. LSTM returns <code>(output,(h_n,c_n))</code>; GRU/RNN return
                 <code>(output,h_n)</code>. Hidden-state shape is
-                <code>(num_layers*num_directions,batch,hidden_size)</code>; LSTM cell state has the same shape.
-            </p>
+                <code>(num_layers*num_directions,batch,hidden_size)</code>; LSTM cell state has the same shape.</p>
             <h3>Attention and Transformer</h3>
             <p>Scaled dot-product attention uses query/key dot products divided by <code>sqrt(d_k)</code>, softmax over
                 keys, then a weighted sum of values. PyTorch's functional scaled attention can accept an attention mask

@@ -10,6 +10,7 @@ NOTES_DIR = Path(__file__).resolve().parent
 HTML_FILES = {
     "/MLP_Final_Notes.html": NOTES_DIR / "MLP_Final_Notes.html",
     "/DL_GenAI_Final_Notes.html": NOTES_DIR / "DL_GenAI_Final_Notes.html",
+    "/index.html": NOTES_DIR / "index.html",
 }
 EXPECTED_ORIGIN = f"http://{HOST}:{PORT}"
 SESSIONS = {}

@@ -415,12 +415,32 @@
                 font-size: 12px
             }
         }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0 0 14px;
+            padding: 6px 14px;
+            border: 1px solid rgba(255, 255, 255, .45);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .12);
+            color: #fff;
+            font: 600 14px/1.2 inherit;
+            text-decoration: none
+        }
+
+        .back-link:hover,
+        .back-link:focus-visible {
+            background: rgba(255, 255, 255, .25);
+            outline: none
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <div class="wrap">
+        <div class="wrap"><a class="back-link" href="index.html">← Back to home</a><br>
             <h1>Machine Learning Practice · Final Study Notes</h1>
             <p>A detailed, beginner-first reference compiled from the MLP notebook series. Explanations, editable
                 runnable Python cells, worked examples, and documentation guidance are all in this single HTML document.
