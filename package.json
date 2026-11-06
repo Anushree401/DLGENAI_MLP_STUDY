@@ -1,0 +1,11 @@
+{
+  "name": "mlp-dlgenai-study-notes",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@vercel/sandbox": "latest"
+  }
+}
