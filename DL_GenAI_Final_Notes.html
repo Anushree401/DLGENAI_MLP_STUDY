@@ -1,0 +1,594 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deep Learning &amp; Generative AI · Final Study Notes</title><style>
+:root{--ink:#182538;--muted:#5e6c80;--line:#dbe3ed;--blue:#1f5596;--pale:#f3f6fb;--panel:#fff;--green:#17764c;--code:#0e1726;--codeink:#e6edf7}*{box-sizing:border-box}body{margin:0;background:var(--pale);color:var(--ink);font:16px/1.62 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{background:linear-gradient(125deg,#153763,#22578c);color:#fff;padding:36px 22px 28px}.wrap{max-width:1120px;margin:auto;padding:0 22px}h1{font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;margin:0 0 12px}header p{max-width:850px;color:#e2edf9;margin:0}main{padding:24px 0 70px}.notice{margin:18px 0;background:#fff6df;border:1px solid #ead6a2;border-radius:12px;padding:14px 17px;color:#614900}.toolbar{position:sticky;top:0;z-index:5;margin:18px 0;background:rgba(243,246,251,.96);padding:12px 0;backdrop-filter:blur(8px)}.toolbar-inner{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;box-shadow:0 3px 14px #142b460a}button,.button{font:inherit;font-size:.9rem;border:1px solid #cbd6e4;background:#fff;color:#1b385f;border-radius:8px;padding:7px 11px;cursor:pointer;text-decoration:none}button:hover,.button:hover{border-color:var(--blue);color:var(--blue)}.connection{margin-left:auto;color:var(--muted);font-size:.87rem}.search{flex:1;min-width:180px;border:1px solid #cbd6e4;border-radius:8px;padding:8px 10px;font:inherit}.guide,.appendix{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin:20px 0}.guide h2,.appendix h2{margin-top:0}#toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;margin:20px 0}#toc h2{margin-top:0}.toc-link{display:block;color:#205b9a;text-decoration:none;padding:7px 9px;margin:3px 0;border-radius:7px}.toc-link:hover{background:#edf4fd;text-decoration:underline}.chapter{background:#fff;border:1px solid var(--line);border-radius:14px;margin:15px 0;overflow:hidden}.chapter>summary{list-style:none;display:flex;align-items:center;gap:13px;padding:15px 18px;background:#f9fbfe;cursor:pointer}.chapter>summary::-webkit-details-marker{display:none}.chapter>summary::after{content:"＋";color:var(--blue);font-size:1.3rem;margin-left:6px}.chapter[open]>summary{border-bottom:1px solid var(--line)}.chapter[open]>summary::after{content:"−"}.chapter-num{font-size:.78rem;font-weight:800;color:#fff;background:#28588b;border-radius:7px;padding:3px 7px}.chapter-title{font-size:1.04rem;font-weight:720;flex:1}.chapter-state{font-size:.8rem;color:var(--muted)}.chapter-tools{padding:12px 18px;background:#fbfcfe;display:flex;gap:8px;border-bottom:1px solid #edf1f6}.chapter-content{padding:18px}.prose{max-width:940px;margin:0 auto 13px}.prose h1,.prose h2,.prose h3,.prose h4{line-height:1.3;margin:1.4em 0 .55em}.prose h1{font-size:1.7rem}.prose h2{font-size:1.38rem}.prose h3{font-size:1.12rem}.prose p{margin:.65em 0}.prose ul,.prose ol{padding-left:1.55rem}.prose li{padding:.12em 0}.prose code{background:#edf2f8;border-radius:4px;padding:1px 5px;font-size:.92em}.prose pre.md-code{background:#f1f4f8;padding:12px;border-radius:8px;overflow:auto}.prose blockquote{margin:12px 0;padding:8px 14px;border-left:4px solid #8ba8c8;background:#f5f8fc;color:#43536a}.prose a{color:#205b9a}.code-cell{margin:14px auto 20px;max-width:960px;border:1px solid #2c3b52;border-radius:10px;overflow:hidden;background:var(--code)}.code-toolbar{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;color:#b8c6da;background:#18263a;font-size:.8rem}.code-toolbar button{padding:4px 9px;margin-left:5px;font-size:.8rem}textarea{display:block;width:100%;min-height:64px;resize:vertical;border:0;border-radius:0;background:var(--code);color:var(--codeink);padding:14px;font:13.5px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4;white-space:pre;overflow:auto;outline:none}.result{margin:0;padding:12px 14px;min-height:42px;max-height:360px;overflow:auto;border-top:1px solid #2c3b52;background:#111c2b;color:#c9d6e7;font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}.result.error{color:#ffb6ab}.result img{max-width:100%;height:auto;display:block;margin:8px auto;border-radius:4px}.appendix{margin-top:34px}.appendix h3{margin-top:1.6em}.appendix code{background:#edf2f8;padding:1px 5px;border-radius:4px}.appendix a{color:#205b9a}footer{color:var(--muted);text-align:center;padding:22px;font-size:.88rem}@media(max-width:650px){.wrap{padding:0 12px}.chapter-content{padding:12px}.chapter>summary{padding:12px}.chapter-title{font-size:.94rem}.connection{width:100%;margin-left:0}textarea{font-size:12px}}
+</style></head><body><header><div class="wrap"><h1>Deep Learning &amp; Generative AI · Final Study Notes</h1><p>A detailed, beginner-first reference compiled from the DL &amp; GenAI notebook series. Explanations, editable runnable PyTorch cells, worked examples, and documentation guidance are all in this single HTML document.</p></div></header><main class="wrap"><div class="notice"><strong>Executable code:</strong> Open this page through <code>python3 serve_notes.py</code> in this study-notes folder. The launcher opens this page on localhost and runs cells with that folder’s Python environment. The code editors are editable; each notebook has its own persistent session. You can also use the explanations and copy code without running it.</div><div class="toolbar"><div class="toolbar-inner"><button id="expand">Expand all chapters</button><button id="collapse">Collapse all chapters</button><a class="button" href="DL_GenAI_Final_Notes.html" download>Download this HTML</a><input class="search" id="search" placeholder="Find a topic or phrase…"><span class="connection" id="connection">Checking local runner…</span></div></div><section class="guide"><h2>Study guide</h2><h1>DL &amp; GenAI study notebook series</h1>
+<p>Beginner-first, code-led notebooks aligned to the supplied Quiz 1 exam notes, PYQs, reference topics, and the lecture-video list. The first notebooks cover the high-priority Quiz 1 foundations; later ones follow the wider course.</p>
+<h2>Suggested order</h2>
+<ol><li><code>00_Start_Here_Deep_Learning.ipynb</code> — vocabulary, tensor idea, workflow.</li><li><code>01_PyTorch_Tensors_and_Shapes.ipynb</code> — shape, numel, dtype, memory, stack/cat/squeeze/reshape.</li><li><code>02_Neurons_Activations_and_Forward_Pass.ipynb</code> — MP neuron, activations, MLP calculations, XOR, UAT.</li><li><code>03_Loss_Autograd_and_Backpropagation.ipynb</code> — MSE/BCE/cross-entropy, computation graph, gradients.</li><li><code>04_PyTorch_Modules_Training_Loops_and_Parameters.ipynb</code> — Module, Parameter, zero_grad/backward/step, modes, saving.</li><li><code>05_Datasets_DataLoaders_and_Image_Transforms.ipynb</code> — batches, image shapes, transforms, FashionMNIST transform trap.</li><li><code>06_CNN_Convolutions_Shapes_and_Parameters.ipynb</code> — Conv2d, padding, dimensions, parameters, receptive field, GAP, Inception.</li><li><code>07_Dropout_BatchNorm_and_CNN_Training.ipynb</code> — train/eval, dropout, BatchNorm, classifier shapes.</li><li><code>08_Optimization_SGD_Adam_and_Gradient_Problems.ipynb</code> — SGD variants, momentum, Adam, vanishing/exploding gradients.</li><li><code>09_Generative_Models_and_GANs.ipynb</code> — latent vectors, GAN objective, alternating update, VAE comparison.</li><li><code>10_Sequence_Models_RNN_LSTM_GRU.ipynb</code> — RNN, BPTT, LSTM gates, GRU, encoder-decoder.</li><li><code>11_Attention_Transformers_and_Language_Models.ipynb</code> — Q/K/V, attention, position, Transformer, BERT/GPT.</li><li><code>12_Diffusion_Models_DDPM_DDIM.ipynb</code> — noising, noise-prediction loss, reverse sampling, DDIM, guidance.</li><li><code>13_Computer_Vision_Transfer_Learning_Segmentation_ViT.ipynb</code> — transfer learning, segmentation/U-Net, ViT, evaluation.</li><li><code>14_Quiz1_Atomic_Practice.ipynb</code> — original worked practice for common calculation and concept types.</li></ol>
+<h2>Running the notebooks</h2>
+<p>Use JupyterLab, VS Code, or another Jupyter app with a Python 3 kernel. The core examples need PyTorch. Notebook 05 has a TorchVision example for the transform API, but the dataset download is intentionally commented out. All other examples use small local tensors and do not download data. Run cells top-to-bottom with <strong>Shift + Enter</strong>.</p>
+<p>Some sections show formulas before code: try calculating an answer yourself, then run the cell to confirm. The official PyTorch docs are linked at the end of every notebook. API details can vary across installed versions.</p>
+<h2>What is based on the sources</h2>
+<p>Quiz 1 emphasis follows the supplied exam notes and PYQ topic patterns: tensor operations, hand-computed forward passes and gradients, training-loop behavior, convolutional output shapes and parameter counts, Dropout/BatchNorm, and data transforms. Later notebooks include the broader topics listed by the lecture archive. The examples are original teaching examples rather than reproductions of complete exam papers.</p>
+<h2>Revision-recording note</h2>
+<p>The revision-session recording was provided, but its spoken audio was not transcribed for these notebooks. The Quiz 1 priorities therefore follow the supplied exam notes and PYQs; later course coverage follows the lecture-video archive titles.</p></section><nav id="toc"><h2>Contents</h2><a class="toc-link" href="#chapter-0">01. 00 · Start here: deep learning without scary words</a><a class="toc-link" href="#chapter-1">02. 01 · PyTorch tensors: create, reshape, count, and combine</a><a class="toc-link" href="#chapter-2">03. 02 · Neurons, activations, and forward passes</a><a class="toc-link" href="#chapter-3">04. 03 · Loss, autograd, and backpropagation</a><a class="toc-link" href="#chapter-4">05. 04 · Build a model and write a correct training loop</a><a class="toc-link" href="#chapter-5">06. 05 · Examples, batches, DataLoaders, and transforms</a><a class="toc-link" href="#chapter-6">07. 06 · CNNs: convolution, shape, padding, and parameter counts</a><a class="toc-link" href="#chapter-7">08. 07 · Dropout, BatchNorm, and image-model training</a><a class="toc-link" href="#chapter-8">09. 08 · Optimization: SGD, Adam, and gradient problems</a><a class="toc-link" href="#chapter-9">10. 09 · Generative models and GANs</a><a class="toc-link" href="#chapter-10">11. 10 · Sequences: RNN, LSTM, and GRU</a><a class="toc-link" href="#chapter-11">12. 11 · Attention, Transformers, and language models</a><a class="toc-link" href="#chapter-12">13. 12 · Diffusion models: add noise, learn to remove it</a><a class="toc-link" href="#chapter-13">14. 13 · Computer vision workflows: transfer learning and segmentation</a><a class="toc-link" href="#chapter-14">15. 14 · Quiz 1 atomic practice</a><a class="toc-link" href="#documentation-reference">Documentation reference appendix</a></nav><details class="chapter" id="chapter-0" open><summary><span class="chapter-num">01</span><span class="chapter-title">00 · Start here: deep learning without scary words</span><span class="chapter-state" data-state="0">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="0">Run all cells in this chapter</button><button class="reset" data-notebook="0">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>00 · Start here: deep learning without scary words</h1>
+<p>Welcome! This series begins from zero. A neural network is a calculator with adjustable numbers. We show it examples, measure how wrong it is, and use that error to adjust the numbers.</p>
+<p><strong>How to use:</strong> open the notebook in Jupyter, run each code cell in order with <strong>Shift + Enter</strong>, and read the explanation right after it. Code cells in this series use small toy data and do not need a GPU or dataset download. PyTorch must be installed in the Python environment used by Jupyter.</p></div><div class="prose"><h2>The picture: example → prediction → error → learning</h2>
+<ul><li><strong>Input:</strong> the clues we give the model (for example, pixel brightness values).</li><li><strong>Weight:</strong> a number that decides how much a clue matters.</li><li><strong>Bias:</strong> a learned offset added to a weighted sum.</li><li><strong>Neuron:</strong> computes a weighted sum plus bias, then applies a function.</li><li><strong>Layer:</strong> a group of neurons.</li><li><strong>Prediction:</strong> what the model says.</li><li><strong>Loss:</strong> a number describing how wrong the prediction is.</li><li><strong>Gradient:</strong> a direction and size describing how changing a parameter changes the loss.</li><li><strong>Optimizer:</strong> a rule that uses gradients to update weights.</li></ul>
+<p>Training repeats: predict → measure loss → calculate gradients → update weights.</p></div><div class="code-cell" data-cell="0-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+print("PyTorch version:", torch.__version__)
+print("device available:", "cuda" if torch.cuda.is_available() else "cpu")
+
+# A tensor is PyTorch's multi-dimensional container for numbers.
+x = torch.tensor([2.0, 3.0])
+w = torch.tensor([0.5, -1.0])
+b = torch.tensor(1.0)
+z = (x * w).sum() + b
+print("weighted sum plus bias:", z.item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Shapes are the first thing to check</h2>
+<p>A scalar has no dimensions; a vector has one; a matrix has two. For image batches, a common PyTorch shape is <code>(batch, channels, height, width)</code>. For example <code>(8, 1, 28, 28)</code> means 8 grayscale images, each 28 by 28 pixels. Keeping the axes in the correct order prevents many errors.</p></div><div class="code-cell" data-cell="0-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">images = torch.zeros(8, 1, 28, 28)
+print("shape:", images.shape)
+print("number of images:", images.shape[0])
+print("channels:", images.shape[1])
+print("height and width:", images.shape[2], images.shape[3])
+print("number of stored numbers:", images.numel())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>One tiny learnable model</h2>
+<p><code>nn.Module</code> is the base class for a model. <code>nn.Linear(2, 1)</code> learns two weights and one bias: it takes 2 numbers and returns 1 number. We can inspect the parameters the optimizer will learn.</p></div><div class="code-cell" data-cell="0-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">from torch import nn
+
+model = nn.Linear(in_features=2, out_features=1)
+print(model)
+for name, parameter in model.named_parameters():
+    print(name, parameter.shape, "trainable:", parameter.requires_grad)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Course map and exam focus</h2>
+<p>The first Quiz 1 priority is: tensor operations; neuron/MLP forward calculations; activations and loss; autograd and training-loop bugs; CNN shapes and parameter counts; transforms, Dropout, and BatchNorm. Later notebooks continue into optimization, GANs, RNNs/LSTMs, attention/Transformers, diffusion, transfer learning, segmentation, and vision transformers, matching the lecture-video list.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/intro.html" target="_blank" rel="noopener noreferrer">Basics</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/tensor_tutorial.html" target="_blank" rel="noopener noreferrer">Tensor</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Model</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-1" ><summary><span class="chapter-num">02</span><span class="chapter-title">01 · PyTorch tensors: create, reshape, count, and combine</span><span class="chapter-state" data-state="1">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="1">Run all cells in this chapter</button><button class="reset" data-notebook="1">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>01 · PyTorch tensors: create, reshape, count, and combine</h1>
+<p>A tensor is a box of numbers arranged along zero or more axes. A spreadsheet is like a 2D tensor; a color image is often a 3D tensor; a batch of images is a 4D tensor.</p></div><div class="code-cell" data-cell="1-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+
+scalar = torch.tensor(7)
+vector = torch.tensor([1, 2, 3])
+matrix = torch.tensor([[1., 2., 3.], [4., 5., 6.]])
+print(scalar.shape, vector.shape, matrix.shape)
+print("dtype:", matrix.dtype, "device:", matrix.device)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Shape, number of elements, and memory</h2>
+<p><code>shape</code> lists the size of each axis. <code>numel()</code> multiplies those sizes to count all stored numbers. <code>element_size()</code> returns bytes per element for the tensor’s data type. Approximate tensor storage is <code>numel × element_size</code> bytes; this excludes Python objects and other temporary memory.</p></div><div class="code-cell" data-cell="1-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">x = torch.randn(4, 3, 2, dtype=torch.float32)
+print("shape:", x.shape)
+print("elements:", x.numel())       # 4*3*2 = 24
+print("bytes per element:", x.element_size())
+print("tensor data bytes:", x.numel() * x.element_size())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><p>Common types: float32 uses 4 bytes, float16 2 bytes, int64 8 bytes. Neural network weights and activations are usually floating-point. Labels for class-index losses are often integer class IDs (<code>torch.long</code>, which is int64). Types and devices must be compatible when doing operations.</p></div><div class="code-cell" data-cell="1-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">floats = torch.tensor([1.0, 2.0], dtype=torch.float32)
+labels = torch.tensor([0, 2], dtype=torch.long)
+print(floats.dtype, floats.element_size())
+print(labels.dtype, labels.element_size())
+print("convert dtype:", floats.to(torch.float64).dtype)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Add an axis or remove size-one axes</h2>
+<p><code>unsqueeze(dim)</code> inserts an axis of size 1. <code>squeeze()</code> removes every axis whose size is 1. <code>squeeze(dim)</code> only tries to remove that specific axis if its size is 1. These operations do not change the number of values; they change how we view the axes.</p></div><div class="code-cell" data-cell="1-3"><div class="code-toolbar"><span>Python · code cell 4</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">x = torch.randn(1, 5, 1, 3, 1)
+print("original:", x.shape)
+print("squeeze axis 0:", x.squeeze(0).shape)
+print("squeeze all size-1 axes:", x.squeeze().shape)
+print("insert axis 1:", x.squeeze().unsqueeze(1).shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Reshape / view</h2>
+<p>Reshape changes the arrangement while preserving the element count. It cannot create or delete numbers. <code>reshape</code> may return a view or a copy depending on memory layout; use it when you only need the requested shape. <code>view</code> requires compatible contiguous memory. Do not guess a dimension—check <code>numel()</code> first.</p></div><div class="code-cell" data-cell="1-4"><div class="code-toolbar"><span>Python · code cell 5</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">values = torch.arange(12)
+print(values.reshape(3, 4))
+print("flattened:", values.flatten().shape)
+print("same count:", values.numel(), values.reshape(2, 2, 3).numel())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2><code>stack</code> adds an axis; <code>cat</code> uses an existing axis</h2>
+<p><code>torch.stack([a,b,c], dim=d)</code> requires equal-shaped inputs and creates a new dimension of length 3. <code>torch.cat(..., dim=d)</code> joins along a dimension that already exists; all other dimensions must match. In a comprehension question, write each input shape before selecting the operation.</p></div><div class="code-cell" data-cell="1-5"><div class="code-toolbar"><span>Python · code cell 6</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">a = torch.ones(3, 4)
+b = torch.zeros(3, 4)
+c = torch.full((3, 4), 2.0)
+print("stack along dim 0:", torch.stack([a,b,c], dim=0).shape)  # 3,3,4
+print("stack along dim 1:", torch.stack([a,b,c], dim=1).shape)  # 3,3,4
+print("cat along dim 0:", torch.cat([a,b,c], dim=0).shape)      # 9,4
+print("cat along dim 1:", torch.cat([a,b,c], dim=1).shape)      # 3,12</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>NumPy integration and reproducibility</h2>
+<p><code>torch.from_numpy(array)</code> shares CPU memory with a compatible NumPy array; changing one may change the other. <code>torch.tensor(array)</code> makes a copy. Set a seed when you want repeatable random toy examples. Reproducibility can still depend on hardware and some algorithms.</p></div><div class="code-cell" data-cell="1-6"><div class="code-toolbar"><span>Python · code cell 7</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import numpy as np
+array = np.array([1.0, 2.0], dtype=np.float32)
+shares = torch.from_numpy(array)
+copy = torch.tensor(array)
+array[0] = 99
+print("from_numpy shares update:", shares)
+print("torch.tensor copy:", copy)
+torch.manual_seed(0)
+print(torch.randn(3))</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/tensor_tutorial.html" target="_blank" rel="noopener noreferrer">Tensor</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/intro.html" target="_blank" rel="noopener noreferrer">Basics</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-2" ><summary><span class="chapter-num">03</span><span class="chapter-title">02 · Neurons, activations, and forward passes</span><span class="chapter-state" data-state="2">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="2">Run all cells in this chapter</button><button class="reset" data-notebook="2">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>02 · Neurons, activations, and forward passes</h1>
+<p>A neuron is a small recipe: multiply inputs by weights, add the results and a bias, then apply an activation. We will calculate each step by hand and with PyTorch.</p></div><div class="prose"><h2>Weighted sum and activation</h2>
+<p>For inputs x₁,…,xₙ, weights w₁,…,wₙ, and bias b: <code>z = Σᵢ xᵢwᵢ + b</code>. The value z is the <strong>pre-activation</strong>. The neuron output is <code>a=f(z)</code>. The activation function lets a network represent curved/nonlinear relationships; without nonlinear activations, many stacked linear layers collapse to one linear transformation.</p></div><div class="code-cell" data-cell="2-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+x = torch.tensor([1.0, 2.0])
+w = torch.tensor([0.5, -1.0])
+b = torch.tensor(0.25)
+z = torch.sum(x * w) + b
+print("products:", x*w)
+print("pre-activation z:", z.item())
+print("ReLU output:", torch.relu(z).item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Three activations to know</h2>
+<ul><li><strong>ReLU:</strong> <code>max(0,z)</code>. Negative inputs become zero; positive inputs pass through.</li><li><strong>Sigmoid:</strong> <code>1/(1+exp(−z))</code>, values between 0 and 1. <code>sigmoid(0)=0.5</code>; its derivative is <code>s(1−s)</code> and peaks at 0.25 when s=0.5.</li><li><strong>Tanh:</strong> values between −1 and 1; <code>tanh(0)=0</code>.</li></ul>
+<p>Sigmoid is often used to express a binary probability; ReLU is common in hidden layers. An output activation/loss pairing must match the task.</p></div><div class="code-cell" data-cell="2-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">z_values = torch.tensor([-2.0, 0.0, 1.0, 2.0])
+print("z:", z_values)
+print("ReLU:", torch.relu(z_values))
+print("sigmoid:", torch.sigmoid(z_values))
+print("tanh:", torch.tanh(z_values))
+s = torch.tensor(0.5)
+print("sigmoid derivative at z=0:", (s*(1-s)).item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>McCulloch–Pitts threshold neuron and XOR</h2>
+<p>A simple threshold neuron outputs 1 if the weighted sum reaches a threshold, otherwise 0. With two positive inputs, it can represent AND by firing only when both inputs are 1. But a single straight-line boundary cannot separate the XOR pattern (opposite corners positive) from the other two corners. A hidden layer can combine multiple boundaries to solve XOR.</p></div><div class="code-cell" data-cell="2-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell"># Demonstrate threshold logic by hand (not a trainable PyTorch model).
+def threshold_neuron(inputs, weights, threshold):
+    return int(sum(i*w for i, w in zip(inputs, weights)) &gt;= threshold)
+
+for row in [(0,0), (0,1), (1,0), (1,1)]:
+    print(row, "AND:", threshold_neuron(row, [1,1], 2), "OR:", threshold_neuron(row, [1,1], 1))
+print("XOR labels should be 0,1,1,0: no single threshold line can do that.")</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>A multilayer forward pass</h2>
+<p>A layer is often written <code>z = W x + b</code>, then <code>h = activation(z)</code>. The output layer uses the previous layer’s activations as input. In PyTorch <code>nn.Linear(in_features, out_features)</code> stores weights with shape <code>(out_features, in_features)</code> and a bias with shape <code>(out_features,)</code>. Matrix multiplication is why dimensions must match.</p></div><div class="code-cell" data-cell="2-3"><div class="code-toolbar"><span>Python · code cell 4</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell"># Two input values -&gt; two hidden neurons -&gt; one output
+W1 = torch.tensor([[1.0, -1.0], [-0.5, 1.0]])
+b1 = torch.tensor([0.0, -0.5])
+W2 = torch.tensor([[1.0, 0.5]])
+b2 = torch.tensor([0.0])
+x = torch.tensor([1.0, -1.0])
+z1 = W1 @ x + b1
+h = torch.relu(z1)
+z2 = W2 @ h + b2
+y_hat = z2  # regression output; no final activation
+print("z1:", z1, "hidden ReLU h:", h)
+print("output pre-activation:", z2.item(), "prediction:", y_hat.item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Universal Approximation Theorem (UAT)</h2>
+<p>At a high level, the UAT says a sufficiently wide neural network with a suitable nonlinear activation can approximate a broad class of continuous functions on a bounded region to arbitrary accuracy. It does <strong>not</strong> say that gradient descent will find the desired weights, that a small network suffices, or that the network generalizes from limited data.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Model</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/intro.html" target="_blank" rel="noopener noreferrer">Basics</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-3" ><summary><span class="chapter-num">04</span><span class="chapter-title">03 · Loss, autograd, and backpropagation</span><span class="chapter-state" data-state="3">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="3">Run all cells in this chapter</button><button class="reset" data-notebook="3">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>03 · Loss, autograd, and backpropagation</h1>
+<p>A loss is the model’s “how wrong am I?” score. Backpropagation figures out how much each parameter contributed to that score. PyTorch’s autograd engine applies the chain rule for us.</p></div><div class="prose"><h2>Loss functions: squared error and cross entropy</h2>
+<p>For one regression example, squared error is <code>(prediction − target)²</code>; for a batch, mean squared error averages those squares. Binary cross-entropy measures the mismatch between a binary target and a predicted probability. Multiclass cross-entropy compares class logits with an integer class label. With <code>CrossEntropyLoss</code>, provide raw logits (do not add a softmax yourself) and <code>torch.long</code> class-index targets.</p></div><div class="code-cell" data-cell="3-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+
+prediction = torch.tensor([2.0])
+target = torch.tensor([1.5])
+print("one-example squared error:", ((prediction-target)**2).item())
+print("MSE module:", nn.MSELoss()(prediction, target).item())
+
+binary_logits = torch.tensor([0.0])
+binary_target = torch.tensor([1.0])
+print("BCE with logits:", nn.BCEWithLogitsLoss()(binary_logits, binary_target).item())
+
+class_logits = torch.tensor([[2.0, 0.5, -1.0]])
+class_target = torch.tensor([0], dtype=torch.long)
+print("multiclass cross entropy:", nn.CrossEntropyLoss()(class_logits, class_target).item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>A tiny derivative by hand</h2>
+<p>Suppose <code>y_hat = w*x</code> and loss <code>L=(y_hat−y)²</code>. Chain rule gives <code>dL/dw = 2(y_hat−y)*x</code>. If x=3, w=2, target=4, then y_hat=6, error=2 and gradient=12. A positive gradient means increasing w increases loss here; gradient descent subtracts a small multiple of it.</p></div><div class="code-cell" data-cell="3-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">x = torch.tensor(3.0)
+w = torch.tensor(2.0, requires_grad=True)
+target = torch.tensor(4.0)
+y_hat = w*x
+loss = (y_hat-target)**2
+loss.backward()
+print("prediction:", y_hat.item())
+print("loss:", loss.item())
+print("gradient dL/dw:", w.grad.item())  # should be 12</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Computation graph and <code>backward()</code></h2>
+<p>When a tensor operation uses a parameter with <code>requires_grad=True</code>, PyTorch records how the result was made. Calling <code>.backward()</code> on a scalar loss walks backward through that graph and places derivatives in leaf tensors’ <code>.grad</code> fields. A tensor is a <strong>leaf</strong> when it was created directly rather than produced by an operation. Intermediate gradients are normally not retained unless requested.</p></div><div class="code-cell" data-cell="3-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">a = torch.tensor(2.0, requires_grad=True)
+b = torch.tensor(3.0, requires_grad=True)
+c = a*b + a**2
+c.backward()
+print("c:", c.item())
+print("dc/da = b + 2a:", a.grad.item())
+print("dc/db = a:", b.grad.item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Backpropagate through a tiny network</h2>
+<p>For <code>h=ReLU(W₁x+b₁)</code> and <code>y_hat=W₂h+b₂</code>, gradients flow from the loss through W₂, then the activation, then W₁. When the question asks for a hidden-activation gradient, multiply the output gradient by the relevant output weight(s), summing contributions from each output. Shape-check every vector/matrix multiplication.</p></div><div class="code-cell" data-cell="3-3"><div class="code-toolbar"><span>Python · code cell 4</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">W1 = torch.tensor([[1.0, -1.0], [-0.5, 1.0]], requires_grad=True)
+b1 = torch.tensor([0.0, -0.5], requires_grad=True)
+W2 = torch.tensor([[1.0, 0.5]], requires_grad=True)
+b2 = torch.tensor([0.0], requires_grad=True)
+x = torch.tensor([1.0, -1.0])
+target = torch.tensor([1.5])
+h = torch.relu(W1 @ x + b1)
+pred = W2 @ h + b2
+loss = ((pred-target)**2).mean()
+loss.backward()
+print("hidden:", h.detach())
+print("prediction/loss:", pred.item(), loss.item())
+print("dL/dW2:\n", W2.grad)
+print("dL/dW1:\n", W1.grad)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Why clear gradients?</h2>
+<p>PyTorch <strong>adds</strong> new gradients into <code>.grad</code>; it does not replace old gradients automatically. That is useful when intentionally accumulating gradients across mini-batches, but ordinary training should clear gradients before each update. The next notebook shows the standard order.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" target="_blank" rel="noopener noreferrer">Autograd</a></li><li><a href="https://docs.pytorch.org/docs/stable/notes/autograd.html" target="_blank" rel="noopener noreferrer">Autograd Notes</a></li><li><a href="https://docs.pytorch.org/docs/stable/nn.html#loss-functions" target="_blank" rel="noopener noreferrer">Loss</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-4" ><summary><span class="chapter-num">05</span><span class="chapter-title">04 · Build a model and write a correct training loop</span><span class="chapter-state" data-state="4">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="4">Run all cells in this chapter</button><button class="reset" data-notebook="4">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>04 · Build a model and write a correct training loop</h1>
+<p>This is the practical heart of training in PyTorch. We define a model, choose a loss and optimizer, then repeat the correct five-step loop.</p></div><div class="prose"><h2><code>nn.Module</code> and registered parameters</h2>
+<p>Subclass <code>nn.Module</code>; create layers in <code>__init__</code>; implement <code>forward</code>. Parameters inside registered layers (or values wrapped in <code>nn.Parameter</code>) appear in <code>model.parameters()</code>. A plain Tensor—even one with <code>requires_grad=True</code>—can receive gradients but is not automatically registered for the optimizer to update.</p></div><div class="code-cell" data-cell="4-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+
+class TinyRegressor(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.hidden = nn.Linear(1, 8)
+        self.output = nn.Linear(8, 1)
+        self.activation = nn.ReLU()
+    def forward(self, x):
+        return self.output(self.activation(self.hidden(x)))
+
+model = TinyRegressor()
+print(model)
+print("parameter tensors:", [(name, p.shape) for name,p in model.named_parameters()])
+print("all trainable scalar values:", sum(p.numel() for p in model.parameters()))</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>A correct training-loop order</h2>
+<p>For each mini-batch:</p>
+<ol><li><code>optimizer.zero_grad()</code> clears gradients from the previous update.</li><li><code>prediction = model(inputs)</code> runs the forward pass.</li><li><code>loss = loss_fn(prediction, target)</code> measures error.</li><li><code>loss.backward()</code> calculates gradients.</li><li><code>optimizer.step()</code> changes registered parameters.</li></ol>
+<p>If <code>zero_grad()</code> is missing, gradients accumulate. If <code>backward()</code> is missing, gradients are not computed. If <code>step()</code> is missing, parameters are not updated.</p></div><div class="code-cell" data-cell="4-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">torch.manual_seed(0)
+X = torch.linspace(-2, 2, 80).reshape(-1, 1)
+y = 3*X - 0.5 + 0.15*torch.randn_like(X)
+model = TinyRegressor()
+loss_fn = nn.MSELoss()
+optimizer = torch.optim.SGD(model.parameters(), lr=0.05)
+
+for epoch in range(101):
+    model.train()
+    optimizer.zero_grad()                 # 1. clear old gradients
+    predictions = model(X)                # 2. forward
+    loss = loss_fn(predictions, y)         # 3. loss
+    loss.backward()                        # 4. gradients
+    optimizer.step()                       # 5. update parameters
+    if epoch % 25 == 0:
+        print(epoch, loss.item())
+print("prediction for x=1:", model(torch.tensor([[1.0]])).item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Train mode, evaluation mode, and no-grad are different</h2>
+<p><code>model.train()</code> sets training behavior for modules such as Dropout and BatchNorm. <code>model.eval()</code> switches those modules to evaluation behavior. <code>torch.no_grad()</code> turns off gradient recording in a code region to save memory during evaluation. <code>eval()</code> does not turn off autograd, and <code>no_grad()</code> does not itself switch Dropout or BatchNorm. Use both when evaluating.</p></div><div class="code-cell" data-cell="4-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">model.eval()
+with torch.no_grad():
+    test_prediction = model(torch.tensor([[0.0], [1.0]]))
+print(test_prediction)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Save and load learned parameters</h2>
+<p><code>state_dict()</code> is a dictionary of a module’s parameters and persistent buffers. Save it and load into the same architecture. Saving a state dictionary is generally more flexible than serializing the whole Python model object.</p></div><div class="code-cell" data-cell="4-3"><div class="code-toolbar"><span>Python · code cell 4</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import io
+buffer = io.BytesIO()
+torch.save(model.state_dict(), buffer)
+buffer.seek(0)
+new_model = TinyRegressor()
+new_model.load_state_dict(torch.load(buffer, weights_only=True))
+new_model.eval()
+with torch.no_grad():
+    print(new_model(torch.tensor([[1.0]])))</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Model</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.parameter.Parameter.html" target="_blank" rel="noopener noreferrer">Parameter</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html" target="_blank" rel="noopener noreferrer">Optimization</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" target="_blank" rel="noopener noreferrer">Autograd</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/saveloadrun_tutorial.html" target="_blank" rel="noopener noreferrer">Save</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-5" ><summary><span class="chapter-num">06</span><span class="chapter-title">05 · Examples, batches, DataLoaders, and transforms</span><span class="chapter-state" data-state="5">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="5">Run all cells in this chapter</button><button class="reset" data-notebook="5">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>05 · Examples, batches, DataLoaders, and transforms</h1>
+<p>A dataset knows how to return one example. A DataLoader gathers examples into mini-batches and can shuffle them. A transform changes one example, for example turning a picture into a tensor and normalizing its pixel values.</p></div><div class="prose"><h2>Dataset and DataLoader with tiny offline data</h2>
+<p>The input and target must have the same number of examples. <code>TensorDataset</code> pairs corresponding rows. <code>DataLoader</code> returns batches; <code>batch_size=4</code> means four examples per batch. <code>shuffle=True</code> randomizes the order each epoch, which helps avoid learning from an accidental fixed order.</p></div><div class="code-cell" data-cell="5-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch.utils.data import TensorDataset, DataLoader
+
+features = torch.arange(20, dtype=torch.float32).reshape(10, 2)
+labels = (features[:, 0] &gt; 8).long()
+dataset = TensorDataset(features, labels)
+loader = DataLoader(dataset, batch_size=4, shuffle=True, generator=torch.Generator().manual_seed(3))
+for batch_x, batch_y in loader:
+    print("batch X:", batch_x.shape, "batch y:", batch_y.shape)
+    break</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Image shape and pixel scale</h2>
+<p>A grayscale image may begin as a height-by-width array <code>(H,W)</code>. A CNN expects channels too, commonly <code>(C,H,W)</code> for one image or <code>(N,C,H,W)</code> for a batch. Pixel values stored as integers 0…255 are often converted to floating-point values 0…1. Normalization then subtracts a chosen mean and divides by a chosen standard deviation per channel.</p></div><div class="code-cell" data-cell="5-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell"># Pretend grayscale image with uint8 values (0 through 255)
+image_uint8 = torch.randint(0, 256, (28, 28), dtype=torch.uint8)
+image_float = image_uint8.float() / 255.0
+image_chw = image_float.unsqueeze(0)  # add channel axis
+image_nchw = image_chw.unsqueeze(0)   # add batch axis
+print(image_uint8.shape, image_chw.shape, image_nchw.shape)
+print(image_float.min().item(), image_float.max().item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Normalize and compose transforms</h2>
+<p>For a channel with mean μ and standard deviation σ, normalization computes <code>(pixel−μ)/σ</code>. <code>Compose</code> applies transforms in sequence. For one grayscale channel, pass one-element tuples such as <code>(mean,)</code>; for RGB, provide one mean and standard deviation per channel. Transforms are usually applied when a dataset item is retrieved, not when the transform object is created.</p></div><div class="code-cell" data-cell="5-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell"># Normalize one channel with PyTorch math (no extra package needed).
+mean, std = 0.2860, 0.3530
+normalized = (image_float - mean) / std
+print("normalized shape:", normalized.shape)
+
+# The equivalent TorchVision pattern is:
+# from torchvision import transforms
+# transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((mean,), (std,))])
+# Attach it to a dataset with transform=transform.</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>The missing-transform trap from the PYQs</h2>
+<p>Defining <code>transform = ...</code> does nothing by itself. It must be passed into the dataset constructor as <code>transform=transform</code>. If it is omitted, the dataset may return its original image object rather than the tensor you expected. Always inspect one dataset item and its type/shape.</p></div><div class="code-cell" data-cell="5-3"><div class="code-toolbar"><span>Python · code cell 4</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell"># Correct pattern for a TorchVision dataset (download is intentionally not run here):
+# from torchvision.datasets import FashionMNIST
+# train_set = FashionMNIST(root="./data", train=True, download=True, transform=transform)
+# image, label = train_set[0]
+# print(type(image), image.shape, label)
+
+print("Transform defined; attach it to the dataset with transform=transform.")</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Reproducibility and data splits</h2>
+<p>Training data is used to update weights; validation data helps choose settings; test data is reserved for the final check. Shuffle training examples but preserve meaningful order for sequence/time-series tasks. Set random seeds for repeatable demonstrations, remembering that exact GPU reproducibility can require additional settings.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/data_tutorial.html" target="_blank" rel="noopener noreferrer">Dataloader</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/transforms_tutorial.html" target="_blank" rel="noopener noreferrer">Transforms</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/intro.html" target="_blank" rel="noopener noreferrer">Basics</a></li><li><a href="https://pytorch.org/vision/stable/index.html" target="_blank" rel="noopener noreferrer">Torchvision</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-6" ><summary><span class="chapter-num">07</span><span class="chapter-title">06 · CNNs: convolution, shape, padding, and parameter counts</span><span class="chapter-state" data-state="6">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="6">Run all cells in this chapter</button><button class="reset" data-notebook="6">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>06 · CNNs: convolution, shape, padding, and parameter counts</h1>
+<p>A convolutional neural network looks for local patterns in images. A small learned filter slides across an image; the same filter weights are reused at many positions. This sharing is why convolution can use far fewer parameters than a fully connected layer on pixels.</p></div><div class="prose"><h2>Image and filter dimensions</h2>
+<p>Use the common PyTorch batch shape <code>(N,C,H,W)</code>: batch size, input channels, height, width. A Conv2d filter has shape <code>(C_out,C_in,K_h,K_w)</code>. Each output channel comes from one learned filter that spans <strong>all</strong> input channels. <code>nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)</code> specifies the layer.</p></div><div class="code-cell" data-cell="6-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+
+images = torch.randn(8, 1, 10, 10)  # 8 grayscale 10x10 images
+conv = nn.Conv2d(in_channels=1, out_channels=5, kernel_size=3, stride=1, padding=0)
+out = conv(images)
+print("filter weight shape:", conv.weight.shape)
+print("bias shape:", conv.bias.shape)
+print("output shape:", out.shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Output size formula</h2>
+<p>For one spatial dimension: <code>output = floor((input + 2*padding − kernel_size)/stride) + 1</code>. Calculate height and width separately. With input 10, kernel 3, padding 0, stride 1: output is <code>(10−3)/1+1 = 8</code>. Padding 1 makes it 10. Stride 2 reduces the number of positions because the filter jumps two pixels.</p></div><div class="code-cell" data-cell="6-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">def conv_output_size(size, kernel, padding=0, stride=1, dilation=1):
+    # General formula includes dilation: effective kernel = dilation*(kernel-1)+1
+    effective_kernel = dilation * (kernel - 1) + 1
+    return (size + 2*padding - effective_kernel) // stride + 1
+
+for args in [(10,3,0,1), (10,3,1,1), (10,3,0,2), (32,5,2,1)]:
+    print(args, "-&gt;", conv_output_size(*args))</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>SAME and VALID padding</h2>
+<p><strong>Valid</strong> commonly means no padding (<code>padding=0</code>): the filter only fits where it fully overlaps the input, so spatial size shrinks. <strong>Same</strong> means output spatial dimensions match input for stride 1. For an odd kernel K, symmetric padding per side is <code>(K−1)/2</code>: K=3 → 1 pixel; K=5 → 2 pixels. For even kernels or strides greater than 1, padding can be asymmetric and the exact framework definition matters.</p></div><div class="prose"><h2>Convolution parameter counts</h2>
+<p>For one Conv2d: weights = <code>K_h × K_w × C_in × C_out</code>; if bias is enabled, add <code>C_out</code>. For a Linear layer: weights=<code>in_features × out_features</code>; add <code>out_features</code> biases if enabled. Pooling, ReLU, sigmoid, flatten, and dropout have zero learned parameters.</p></div><div class="code-cell" data-cell="6-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">conv = nn.Conv2d(3, 16, kernel_size=3, bias=True)
+count_formula = 3*3*3*16 + 16
+count_from_model = sum(p.numel() for p in conv.parameters())
+print("formula:", count_formula, "model:", count_from_model)
+linear = nn.Linear(32*8*8, 128)
+print("linear formula:", 32*8*8*128 + 128)
+print("linear model:", sum(p.numel() for p in linear.parameters()))</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Pooling, 1×1 convolution, receptive field</h2>
+<p>A 2×2 max-pool with stride 2 halves height/width when divisible by 2; it has no trainable weights. A 1×1 convolution changes channels but (with stride 1 and no spatial padding need) preserves height/width. Receptive field is the input region that can affect one output. For n stride-1 convolutions of kernel K, <code>RF = 1+n(K−1)</code>; three 3×3 layers give 7×7.</p></div><div class="code-cell" data-cell="6-3"><div class="code-toolbar"><span>Python · code cell 4</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">x = torch.randn(2, 8, 16, 16)
+pool = nn.MaxPool2d(kernel_size=2, stride=2)
+print("pool:", pool(x).shape)
+pointwise = nn.Conv2d(8, 12, kernel_size=1)
+print("1x1 conv:", pointwise(x).shape)
+print("RF of three 3x3 stride-1 convs:", 1 + 3*(3-1))</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Flatten vs Global Average Pooling (GAP)</h2>
+<p>Flatten turns a <code>(C,H,W)</code> feature map into <code>C×H×W</code> numbers. GAP averages each channel over its H×W positions, leaving C numbers. With 7×7×512 features and 10 output classes, flatten + dense layer needs <code>25088×10+10=250,890</code> parameters; GAP + dense needs <code>512×10+10=5,130</code>. Inception branches with matching H,W concatenate along the channel axis, so output channels are the sum of branch channels.</p></div><div class="code-cell" data-cell="6-4"><div class="code-toolbar"><span>Python · code cell 5</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">features = torch.randn(4, 512, 7, 7)
+flattened = torch.flatten(features, start_dim=1)
+gap = nn.AdaptiveAvgPool2d((1,1))(features).flatten(start_dim=1)
+print("flatten:", flattened.shape, "dense parameters to 10:", 25088*10+10)
+print("GAP:", gap.shape, "dense parameters to 10:", 512*10+10)
+branches = [torch.randn(4, c, 28, 28) for c in (64, 128, 32, 32)]
+print("Inception concatenation:", torch.cat(branches, dim=1).shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv2d.html" target="_blank" rel="noopener noreferrer">Conv2D</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MaxPool2d.html" target="_blank" rel="noopener noreferrer">Pool</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Model</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-7" ><summary><span class="chapter-num">08</span><span class="chapter-title">07 · Dropout, BatchNorm, and image-model training</span><span class="chapter-state" data-state="7">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="7">Run all cells in this chapter</button><button class="reset" data-notebook="7">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>07 · Dropout, BatchNorm, and image-model training</h1>
+<p>Some layers behave differently while learning and while making final predictions. The model must be told whether it is training or evaluating.</p></div><div class="prose"><h2>Dropout</h2>
+<p>During training, Dropout randomly sets input elements to zero with probability <code>p</code>. Remaining values are scaled so their expected size stays comparable. This discourages reliance on one exact pathway. During evaluation, Dropout is the identity: no units are randomly removed. The mask is random each training call, not a fixed sequence of neurons.</p></div><div class="code-cell" data-cell="7-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+
+drop = nn.Dropout(p=0.5)
+x = torch.ones(12)
+drop.train()
+print("training call 1:", drop(x))
+print("training call 2:", drop(x))
+drop.eval()
+print("eval call:", drop(x))</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>BatchNorm</h2>
+<p>Batch normalization normalizes activations using batch statistics during training, then maintains running estimates for evaluation. <code>BatchNorm2d(C)</code> on image tensors normalizes per channel. It has two learnable values per channel (scale γ and shift β), so <code>2C</code> learnable parameters, plus running-statistic buffers that are not trainable parameters.</p></div><div class="code-cell" data-cell="7-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">bn = nn.BatchNorm2d(num_features=64)
+print("trainable values:", sum(p.numel() for p in bn.parameters()))  # 128
+print("buffers:", [(n, b.shape) for n,b in bn.named_buffers()])
+images = torch.randn(8, 64, 10, 10)
+bn.train()
+y_train = bn(images)
+bn.eval()
+y_eval = bn(images)
+print(y_train.shape, y_eval.shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2><code>.train()</code>, <code>.eval()</code>, and <code>no_grad()</code> are separate controls</h2>
+<ul><li><code>model.train()</code> enables training-mode behavior in Dropout/BatchNorm.</li><li><code>model.eval()</code> enables inference-mode behavior in those modules.</li><li><code>torch.no_grad()</code> disables gradient tracking for a block of computation.</li></ul>
+<p>Call <code>model.eval()</code> for validation/testing, and usually wrap the forward pass in <code>torch.no_grad()</code> or <code>torch.inference_mode()</code>. <code>no_grad</code> alone does not turn off Dropout.</p></div><div class="code-cell" data-cell="7-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">model = nn.Sequential(nn.Linear(4, 16), nn.BatchNorm1d(16), nn.ReLU(), nn.Dropout(0.3), nn.Linear(16, 3))
+inputs = torch.randn(5, 4)
+model.train()
+train_output = model(inputs)
+model.eval()
+with torch.no_grad():
+    eval_output = model(inputs)
+print(train_output.shape, eval_output.shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Build an image classifier shape-by-shape</h2>
+<p>For a grayscale 28×28 image, a small CNN can map 1 channel to 8 channels, pool to 14×14, map 8 to 16 channels, pool to 7×7, then flatten 16×7×7 values into class logits. <code>CrossEntropyLoss</code> expects logits and integer class IDs. You do not need a softmax layer before this loss.</p></div><div class="code-cell" data-cell="7-3"><div class="code-toolbar"><span>Python · code cell 4</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">class SmallCNN(nn.Module):
+    def __init__(self, classes=10):
+        super().__init__()
+        self.features = nn.Sequential(
+            nn.Conv2d(1, 8, kernel_size=3, padding=1), nn.ReLU(), nn.MaxPool2d(2),
+            nn.Conv2d(8, 16, kernel_size=3, padding=1), nn.ReLU(), nn.MaxPool2d(2)
+        )
+        self.classifier = nn.Linear(16*7*7, classes)
+    def forward(self, x):
+        x = self.features(x)
+        x = torch.flatten(x, start_dim=1)
+        return self.classifier(x)  # raw logits
+
+cnn = SmallCNN()
+logits = cnn(torch.randn(4,1,28,28))
+targets = torch.tensor([0,1,2,3], dtype=torch.long)
+print("logits:", logits.shape)
+print("loss:", nn.CrossEntropyLoss()(logits, targets).item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Dropout.html" target="_blank" rel="noopener noreferrer">Dropout</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.BatchNorm2d.html" target="_blank" rel="noopener noreferrer">Batchnorm</a></li><li><a href="https://docs.pytorch.org/docs/stable/nn.html#loss-functions" target="_blank" rel="noopener noreferrer">Loss</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Model</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/data_tutorial.html" target="_blank" rel="noopener noreferrer">Dataloader</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-8" ><summary><span class="chapter-num">09</span><span class="chapter-title">08 · Optimization: SGD, Adam, and gradient problems</span><span class="chapter-state" data-state="8">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="8">Run all cells in this chapter</button><button class="reset" data-notebook="8">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>08 · Optimization: SGD, Adam, and gradient problems</h1>
+<p>An optimizer is the rule that nudges the model’s weights to reduce its loss. This notebook builds the intuition behind gradient descent, mini-batches, momentum, Adam, vanishing gradients, and clipping.</p></div><div class="prose"><h2>Gradient descent</h2>
+<p>A gradient points toward the direction of fastest increase in loss. To reduce loss, update parameter θ as <code>θ ← θ − learning_rate × gradient</code>. The learning rate controls step size. Too small: slow learning. Too large: jump past a good solution or become unstable. In PyTorch, an optimizer automates the parameter updates after <code>loss.backward()</code>.</p></div><div class="code-cell" data-cell="8-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell"># One-dimensional example: loss=(w-3)^2. Minimum occurs at w=3.
+w = torch.tensor(0.0)
+learning_rate = 0.1
+for step in range(5):
+    gradient = 2*(w-3)  # derivative of (w-3)^2
+    w = w - learning_rate*gradient
+    print(step+1, "w=", round(w.item(),3), "loss=", round(((w-3)**2).item(),3))</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Batch, stochastic, and mini-batch updates</h2>
+<ul><li><strong>Batch gradient descent:</strong> use the whole training set for each update; stable but may be slow.</li><li><strong>Stochastic gradient descent:</strong> use one example per update; noisy, frequent updates.</li><li><strong>Mini-batch SGD:</strong> use a small group per update; common compromise in deep learning.</li></ul>
+<p>One pass over all training examples is an <strong>epoch</strong>. A mini-batch is not the same as an epoch.</p></div><div class="prose"><h2>SGD, momentum, RMSprop, Adam</h2>
+<p>SGD uses the current gradient. Momentum adds a running direction to smooth updates. RMSprop scales learning rates using recent squared gradients. Adam combines first-moment (momentum-like) and second-moment (adaptive-scale) estimates with bias correction. Adam is a common starting point, but it is not guaranteed to be best. Weight decay is a separate regularization choice; AdamW decouples it from Adam’s adaptive update.</p></div><div class="code-cell" data-cell="8-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+
+for Optimizer in [torch.optim.SGD, torch.optim.Adam, torch.optim.AdamW]:
+    layer = nn.Linear(2, 1)
+    optimizer = Optimizer(layer.parameters(), lr=0.01)
+    x = torch.tensor([[1.0, 2.0]])
+    y = torch.tensor([[3.0]])
+    optimizer.zero_grad()
+    loss = nn.MSELoss()(layer(x), y)
+    loss.backward()
+    optimizer.step()
+    print(Optimizer.__name__, "loss before update:", loss.item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Vanishing and exploding gradients</h2>
+<p>Backpropagation multiplies derivatives across layers/time steps. If many factors are small, gradients can shrink toward zero (<strong>vanish</strong>); if factors are large, they can grow explosively (<strong>explode</strong>). Sigmoid/tanh saturation can contribute to vanishing gradients. ReLU variants and residual connections help in some architectures; gradient clipping limits very large gradients, especially in recurrent networks.</p></div><div class="code-cell" data-cell="8-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell"># Gradient clipping example; call after backward and before optimizer.step().
+model = nn.Sequential(nn.Linear(3, 8), nn.ReLU(), nn.Linear(8, 1))
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+x = torch.randn(5,3); target = torch.randn(5,1)
+optimizer.zero_grad()
+loss = nn.MSELoss()(model(x), target)
+loss.backward()
+total_norm = nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+optimizer.step()
+print("pre-clipping total gradient norm:", float(total_norm))</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/docs/stable/optim.html" target="_blank" rel="noopener noreferrer">Optim</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html" target="_blank" rel="noopener noreferrer">Optimization</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" target="_blank" rel="noopener noreferrer">Autograd</a></li><li><a href="https://docs.pytorch.org/docs/stable/notes/autograd.html" target="_blank" rel="noopener noreferrer">Autograd Notes</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-9" ><summary><span class="chapter-num">10</span><span class="chapter-title">09 · Generative models and GANs</span><span class="chapter-state" data-state="9">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="9">Run all cells in this chapter</button><button class="reset" data-notebook="9">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>09 · Generative models and GANs</h1>
+<p>A discriminative model answers “which label fits this input?” A generative model learns patterns in data so it can create new examples. A GAN has two networks that compete: a generator creates fakes; a discriminator judges real versus fake.</p></div><div class="prose"><h2>Generator, discriminator, latent vector</h2>
+<p>The generator receives a random <strong>latent vector</strong> z (noise) and maps it to a synthetic sample. The discriminator receives a sample and predicts whether it came from real data. During training, the discriminator tries to classify correctly, while the generator tries to fool it. This game can be unstable; the generator may collapse to producing only a few kinds of output (mode collapse).</p></div><div class="prose"><h2>Minimax idea</h2>
+<p>The original GAN objective is <code>min_G max_D E[log D(x)] + E[log(1−D(G(z)))]</code>. D wants D(real) near 1 and D(fake) near 0. G wants D(fake) near 1. In practice a non-saturating generator loss <code>−E[log D(G(z))]</code> often gives stronger gradients early. At an ideal equilibrium, D cannot distinguish real and generated samples and outputs about 0.5.</p></div><div class="code-cell" data-cell="9-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+
+class Generator(nn.Module):
+    def __init__(self, noise_dim=4):
+        super().__init__()
+        self.net = nn.Sequential(nn.Linear(noise_dim, 16), nn.ReLU(), nn.Linear(16, 1))
+    def forward(self, z): return self.net(z)
+
+class Discriminator(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.net = nn.Sequential(nn.Linear(1, 16), nn.LeakyReLU(0.2), nn.Linear(16, 1))
+    def forward(self, x): return self.net(x)  # logits, not probabilities
+
+G, D = Generator(), Discriminator()
+print(G(torch.randn(5,4)).shape, D(torch.randn(5,1)).shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>One tiny alternating training step</h2>
+<p>We use 1D toy “real” samples, not images. <code>BCEWithLogitsLoss</code> combines sigmoid and binary cross-entropy stably. First update D using real labels 1 and fake labels 0; detach fake samples so this update does not train G. Then update G with the discriminator’s fake predictions labeled as real. This demonstrates the mechanics; it is not a state-of-the-art GAN recipe.</p></div><div class="code-cell" data-cell="9-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">torch.manual_seed(2)
+G, D = Generator(), Discriminator()
+opt_G = torch.optim.Adam(G.parameters(), lr=0.001)
+opt_D = torch.optim.Adam(D.parameters(), lr=0.001)
+loss_fn = nn.BCEWithLogitsLoss()
+batch = 32
+real = torch.randn(batch,1)*0.4 + 2.0
+
+# 1) Train discriminator: real should be 1, generated should be 0.
+z = torch.randn(batch,4)
+fake = G(z).detach()
+opt_D.zero_grad()
+loss_D = loss_fn(D(real), torch.ones(batch,1)) + loss_fn(D(fake), torch.zeros(batch,1))
+loss_D.backward(); opt_D.step()
+
+# 2) Train generator: try to make generated samples look real to D.
+z = torch.randn(batch,4)
+opt_G.zero_grad()
+loss_G = loss_fn(D(G(z)), torch.ones(batch,1))
+loss_G.backward(); opt_G.step()
+print("D loss:", loss_D.item(), "G loss:", loss_G.item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>GAN vs VAE, at a high level</h2>
+<p>A Variational Autoencoder learns a structured latent distribution and optimizes a reconstruction-plus-regularization objective (ELBO). GANs use an adversarial game. VAEs often provide a more organized latent space and stable likelihood-based training; GANs can produce sharp samples but can be harder to train and may omit modes. These are tendencies, not absolute laws.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Model</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" target="_blank" rel="noopener noreferrer">Autograd</a></li><li><a href="https://docs.pytorch.org/docs/stable/optim.html" target="_blank" rel="noopener noreferrer">Optim</a></li><li><a href="https://docs.pytorch.org/docs/stable/nn.html#loss-functions" target="_blank" rel="noopener noreferrer">Loss</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-10" ><summary><span class="chapter-num">11</span><span class="chapter-title">10 · Sequences: RNN, LSTM, and GRU</span><span class="chapter-state" data-state="10">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="10">Run all cells in this chapter</button><button class="reset" data-notebook="10">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>10 · Sequences: RNN, LSTM, and GRU</h1>
+<p>A sequence is an ordered list, such as words in a sentence or daily temperatures. A recurrent network reads one step at a time and carries a hidden state—a small memory—forward.</p></div><div class="prose"><h2>Vanilla RNN equations and tensor shapes</h2>
+<p>At time t: <code>h_t = tanh(W_xh x_t + W_hh h_(t−1) + b_h)</code>. The output may be <code>y_t = W_hy h_t + b_y</code>. The previous hidden state carries information from earlier steps. In PyTorch, a batch-first sequence has shape <code>(batch, sequence_length, input_features)</code> when <code>batch_first=True</code>. The initial hidden state can be zero or learned.</p></div><div class="code-cell" data-cell="10-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+
+batch, steps, features = 2, 5, 3
+sequence = torch.randn(batch, steps, features)
+rnn = nn.RNN(input_size=features, hidden_size=4, batch_first=True)
+outputs, last_hidden = rnn(sequence)
+print("input:", sequence.shape)
+print("output at each step:", outputs.shape)  # batch, steps, hidden
+print("last hidden state:", last_hidden.shape) # layers*directions, batch, hidden</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Why long sequences are hard</h2>
+<p>Backpropagation through time (BPTT) unrolls the recurrence across steps and applies the chain rule backward. Repeated multiplication by recurrent weights/derivatives can make gradients vanish or explode. Truncated BPTT limits backward propagation to a chosen number of steps, reducing memory/computation but limiting long-range credit assignment.</p></div><div class="prose"><h2>LSTM: a controlled memory cell</h2>
+<p>An LSTM adds a cell state c and gates. The forget gate chooses how much old memory to keep; the input gate chooses how much candidate information to write; the output gate chooses what to reveal. Sigmoid gates range 0…1. The additive cell-state update helps gradients travel across many steps. Typical formulas are <code>f=σ(...)</code>, <code>i=σ(...)</code>, <code>ĉ=tanh(...)</code>, <code>c=f⊙c_prev+i⊙ĉ</code>, <code>o=σ(...)</code>, <code>h=o⊙tanh(c)</code>. <code>⊙</code> means element-wise multiplication.</p></div><div class="code-cell" data-cell="10-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">lstm = nn.LSTM(input_size=3, hidden_size=4, num_layers=1, batch_first=True)
+sequence = torch.randn(2,5,3)
+outputs, (hidden, cell) = lstm(sequence)
+print(outputs.shape, hidden.shape, cell.shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>GRU: fewer gates</h2>
+<p>A GRU combines memory into the hidden state and uses reset/update gates. It has fewer gates/parameters than an LSTM and can perform comparably, but no single recurrent unit is best for every task. Compare using validation data.</p></div><div class="code-cell" data-cell="10-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">gru = nn.GRU(input_size=3, hidden_size=4, num_layers=1, batch_first=True)
+outputs, final_hidden = gru(torch.randn(2,5,3))
+print(outputs.shape, final_hidden.shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Encoder-decoder and bidirectional ideas</h2>
+<p>An encoder converts an input sequence into hidden representations; a decoder generates an output sequence, useful in translation. A bidirectional RNN reads left-to-right and right-to-left, then combines both directions. Bidirectional context is useful when the full input is available, but not for predicting future values in a live stream.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.RNN.html" target="_blank" rel="noopener noreferrer">Rnn</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTM.html" target="_blank" rel="noopener noreferrer">Lstm</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.GRU.html" target="_blank" rel="noopener noreferrer">Gru</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" target="_blank" rel="noopener noreferrer">Autograd</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-11" ><summary><span class="chapter-num">12</span><span class="chapter-title">11 · Attention, Transformers, and language models</span><span class="chapter-state" data-state="11">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="11">Run all cells in this chapter</button><button class="reset" data-notebook="11">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>11 · Attention, Transformers, and language models</h1>
+<p>Attention lets each token choose which other tokens to use as context. Transformers build heavily on attention and feed-forward layers, avoiding the strictly step-by-step recurrence of a vanilla RNN.</p></div><div class="prose"><h2>Query, Key, Value</h2>
+<p>Each token is projected into a <strong>query</strong> (what it seeks), <strong>key</strong> (what it can match on), and <strong>value</strong> (the content to pass along). Similarity between queries and keys becomes an attention weight; a weighted sum of values creates the attended representation.</p></div><div class="prose"><h2>Scaled dot-product attention</h2>
+<p><code>Attention(Q,K,V)=softmax(QKᵀ/√d_k)V</code>. The dot product measures match strength. Dividing by √d_k keeps large dimensions from producing overly large logits that make softmax saturate. Softmax weights are nonnegative and sum to 1 across the attended positions.</p></div><div class="code-cell" data-cell="11-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+import torch.nn.functional as F
+
+# One batch, two query tokens, key dimension 4, two value tokens with 3D values.
+Q = torch.randn(1,2,4)
+K = torch.randn(1,2,4)
+V = torch.randn(1,2,3)
+scores = Q @ K.transpose(-2,-1) / (Q.shape[-1] ** 0.5)
+weights = torch.softmax(scores, dim=-1)
+attended = weights @ V
+print("scores:", scores.shape, "weights:", weights.shape, "result:", attended.shape)
+print("weights sum over keys:", weights.sum(dim=-1))
+print("PyTorch helper shape:", F.scaled_dot_product_attention(Q,K,V).shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Self-attention, cross-attention, and position</h2>
+<ul><li><strong>Self-attention:</strong> Q, K, V come from the same sequence.</li><li><strong>Cross-attention:</strong> queries come from a decoder sequence; keys/values come from encoder outputs.</li><li>Self-attention alone does not know token order. Positional encodings or learned position embeddings add this information.</li><li><strong>Causal masking</strong> prevents a next-token model from looking at future tokens.</li></ul></div><div class="prose"><h2>Transformer blocks</h2>
+<p>An encoder layer typically has multi-head self-attention then a position-wise feed-forward network, with residual connections and layer normalization. A decoder adds masked self-attention and often cross-attention. Multi-head attention runs several attention patterns in parallel and concatenates/projects their outputs.</p></div><div class="code-cell" data-cell="11-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell"># A small transformer encoder example (batch_first means batch, sequence, features).
+from torch import nn
+layer = nn.TransformerEncoderLayer(d_model=16, nhead=4, dim_feedforward=32,
+                                   batch_first=True, dropout=0.0)
+encoder = nn.TransformerEncoder(layer, num_layers=2)
+tokens = torch.randn(3, 5, 16)  # 3 sequences, 5 tokens, embedding width 16
+encoded = encoder(tokens)
+print(tokens.shape, "-&gt;", encoded.shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>BERT, GPT, and language modeling</h2>
+<p>A language model predicts token sequences. GPT-style decoder-only models use causal attention and predict the next token. BERT-style encoder models use bidirectional context and commonly train by predicting masked tokens. A token is a chunk of text, not always one word. A large language model is a transformer-based model trained on a very large text corpus; prompting and fine-tuning are different ways to guide behavior.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html" target="_blank" rel="noopener noreferrer">Attention</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Transformer.html" target="_blank" rel="noopener noreferrer">Transformer</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.TransformerEncoderLayer.html" target="_blank" rel="noopener noreferrer">Transformer Layer</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Model</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-12" ><summary><span class="chapter-num">13</span><span class="chapter-title">12 · Diffusion models: add noise, learn to remove it</span><span class="chapter-state" data-state="12">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="12">Run all cells in this chapter</button><button class="reset" data-notebook="12">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>12 · Diffusion models: add noise, learn to remove it</h1>
+<p>A diffusion model learns to turn noise into a sample. During training we gradually corrupt a real sample with known noise. The neural network learns to predict the noise. During generation we begin with random noise and repeatedly denoise.</p></div><div class="prose"><h2>Forward noising process</h2>
+<p>A common DDPM formula samples <code>x_t = √(ᾱ_t)x_0 + √(1−ᾱ_t)ε</code>, where x₀ is the original data, ε is standard Gaussian noise, and ᾱ_t decreases as the noise level grows. At late t, x_t is mostly noise. A schedule defines how quickly the signal is removed.</p></div><div class="code-cell" data-cell="12-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+
+x0 = torch.tensor([0.2, -0.4, 0.8])
+epsilon = torch.randn_like(x0)
+alpha_bar = torch.tensor(0.35)  # toy noise level at one selected time
+xt = alpha_bar.sqrt()*x0 + (1-alpha_bar).sqrt()*epsilon
+print("original:", x0)
+print("noise:", epsilon)
+print("noisy sample:", xt)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Training objective</h2>
+<p>A neural network εθ(x_t,t) receives the noisy sample and time/noise level. A common simplified DDPM objective is the mean squared difference between true added noise ε and predicted noise εθ. The network is not directly asked to paint the clean sample in one step; it learns a denoising direction for many steps.</p></div><div class="code-cell" data-cell="12-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+
+noise_predictor = nn.Sequential(nn.Linear(4, 32), nn.ReLU(), nn.Linear(32, 3))
+noisy_plus_time = torch.cat([xt, torch.tensor([0.5])]).unsqueeze(0)
+predicted_noise = noise_predictor(noisy_plus_time)
+loss = nn.MSELoss()(predicted_noise.squeeze(0), epsilon)
+print("predicted noise shape:", predicted_noise.shape, "noise-prediction loss:", loss.item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Reverse sampling, DDIM, and guidance</h2>
+<p>At inference, start with x_T sampled from a standard Gaussian and apply a learned reverse update from T down to 0. DDPM sampling is stochastic. DDIM provides a family of updates that can be deterministic and often use fewer steps. Classifier-free guidance combines conditional and unconditional noise predictions: <code>ε_guided=ε_uncond+w(ε_cond−ε_uncond)</code>. Larger w usually strengthens conditioning but can reduce diversity or quality if pushed too far.</p></div><div class="prose"><h2>Latent diffusion</h2>
+<p>Images contain many pixels. Latent diffusion first encodes an image into a smaller latent representation, performs diffusion there, then decodes back to pixels. This can reduce computation while preserving useful structure. Stable Diffusion is a well-known latent diffusion family, but specific model designs vary.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Model</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" target="_blank" rel="noopener noreferrer">Autograd</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html" target="_blank" rel="noopener noreferrer">Optimization</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-13" ><summary><span class="chapter-num">14</span><span class="chapter-title">13 · Computer vision workflows: transfer learning and segmentation</span><span class="chapter-state" data-state="13">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="13">Run all cells in this chapter</button><button class="reset" data-notebook="13">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>13 · Computer vision workflows: transfer learning and segmentation</h1>
+<p>This notebook follows the vision topics in the lecture archive. We will focus on what each workflow means, tensor shapes, and a small offline PyTorch example. Image datasets are not downloaded.</p></div><div class="prose"><h2>Transfer learning</h2>
+<p>A pretrained model has already learned visual features from a large dataset. A <strong>feature extractor</strong> freezes most/all pretrained layers and learns a new task head. <strong>Fine-tuning</strong> unfreezes some or all pretrained layers and updates them on the new dataset. Preprocessing must match the pretrained model’s expected image size and normalization. Use a smaller learning rate for pretrained weights than a newly initialized head.</p></div><div class="code-cell" data-cell="13-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn
+
+# Shape demonstration for a feature extractor + new classification head.
+feature_extractor = nn.Sequential(nn.Conv2d(3,16,3,padding=1), nn.ReLU(), nn.AdaptiveAvgPool2d((1,1)))
+for p in feature_extractor.parameters():
+    p.requires_grad = False  # freeze learned feature weights
+new_head = nn.Linear(16, 4)  # new task has 4 classes
+images = torch.randn(2,3,64,64)
+features = feature_extractor(images).flatten(1)
+logits = new_head(features)
+print(features.shape, logits.shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Image segmentation and U-Net</h2>
+<p>Classification gives one label per image. Segmentation gives a label per pixel, so logits may have shape <code>(batch, classes, height, width)</code>. U-Net has a downsampling encoder and upsampling decoder. Skip connections copy high-resolution encoder details to matching decoder stages, helping local boundaries survive the bottleneck.</p></div><div class="code-cell" data-cell="13-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell"># Segmentation output/loss shape pattern (a full U-Net is larger; this is the interface).
+segmentation_head = nn.Conv2d(16, 3, kernel_size=1)  # 3 classes per pixel
+feature_map = torch.randn(2,16,32,32)
+pixel_logits = segmentation_head(feature_map)
+pixel_labels = torch.randint(0,3,(2,32,32), dtype=torch.long)
+print(pixel_logits.shape, pixel_labels.shape)
+print("pixel-wise cross entropy:", nn.CrossEntropyLoss()(pixel_logits, pixel_labels).item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Vision Transformers</h2>
+<p>A Vision Transformer (ViT) splits an image into patches, flattens each patch into a vector, projects patches into token embeddings, adds position information, and applies transformer encoder layers. Unlike a CNN’s local sliding filters, self-attention can connect distant patches directly. Patch size controls the number of tokens and therefore attention cost.</p></div><div class="code-cell" data-cell="13-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">image = torch.randn(2,3,32,32)
+patch_size = 8
+patches = image.unfold(2,patch_size,patch_size).unfold(3,patch_size,patch_size)
+# Shape before rearranging: batch, channels, grid_h, grid_w, patch_h, patch_w
+patch_tokens = patches.permute(0,2,3,1,4,5).reshape(2,-1,3*patch_size*patch_size)
+print("patch grid:", patches.shape[2:4], "tokens:", patch_tokens.shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Evaluation and responsible comparisons</h2>
+<p>Image-generation evaluation asks different questions: Is each image realistic? Are generated examples diverse? Do they match a condition or class? No single score answers all of these. For segmentation, metrics such as per-class precision/recall or intersection-over-union can reveal errors hidden by pixel accuracy when classes are imbalanced. Always inspect examples as well as aggregate scores.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://pytorch.org/vision/stable/index.html" target="_blank" rel="noopener noreferrer">Torchvision</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Model</a></li><li><a href="https://docs.pytorch.org/docs/stable/nn.html#loss-functions" target="_blank" rel="noopener noreferrer">Loss</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.TransformerEncoderLayer.html" target="_blank" rel="noopener noreferrer">Transformer Layer</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><details class="chapter" id="chapter-14" ><summary><span class="chapter-num">15</span><span class="chapter-title">14 · Quiz 1 atomic practice</span><span class="chapter-state" data-state="14">Ready</span></summary><div class="chapter-tools"><button class="run-all" data-notebook="14">Run all cells in this chapter</button><button class="reset" data-notebook="14">Restart chapter session</button></div><div class="chapter-content"><div class="prose"><h1>14 · Quiz 1 atomic practice</h1>
+<p>This notebook turns the highest-priority Quiz 1 skills into short practice questions. They are original practice problems inspired by the concepts in your PYQs, not copied questions. Try each prompt before reading its worked solution cell.</p></div><div class="code-cell" data-cell="14-0"><div class="code-toolbar"><span>Python · code cell 1</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">import torch
+from torch import nn</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><h2>Practice 1 · Tensor element count and shape</h2>
+<p>Given <code>x</code> shape <code>(2, 1, 4, 3)</code>, what is <code>x.numel()</code>? What is the shape after <code>x.squeeze(1)</code>? What is the shape after <code>x.squeeze()</code>? Remember: only dimensions whose size equals 1 disappear.</p></div><div class="code-cell" data-cell="14-1"><div class="code-toolbar"><span>Python · code cell 2</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">x = torch.zeros(2,1,4,3)
+print("numel:", x.numel())
+print("squeeze axis 1:", x.squeeze(1).shape)
+print("squeeze all singleton axes:", x.squeeze().shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><p><strong>Answer:</strong> 24 elements. Removing axis 1 gives <code>(2,4,3)</code>. Squeezing all singleton axes gives the same result here because axis 1 is the only size-1 dimension.</p></div><div class="prose"><h2>Practice 2 · CNN output and parameter count</h2>
+<p>Input is <code>(batch=4, channels=3, height=32, width=32)</code>. Apply Conv2d with 8 filters, kernel 3, stride 1, padding 1, and bias. Find the output shape and trainable parameter count. Then apply 2×2 max-pool with stride 2.</p></div><div class="code-cell" data-cell="14-2"><div class="code-toolbar"><span>Python · code cell 3</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">from torch import nn
+x = torch.randn(4,3,32,32)
+conv = nn.Conv2d(3,8,kernel_size=3,stride=1,padding=1,bias=True)
+y = conv(x)
+pooled = nn.MaxPool2d(2,2)(y)
+print("conv output:", y.shape)
+print("conv parameters:", sum(p.numel() for p in conv.parameters()))
+print("after pool:", pooled.shape)</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><p><strong>Answer:</strong> Conv output <code>(4,8,32,32)</code> because padding 1 preserves spatial size. Parameters are <code>3×3×3×8 + 8 = 224</code>. Pool output is <code>(4,8,16,16)</code>. Pooling has zero learned parameters.</p></div><div class="prose"><h2>Practice 3 · Manual forward pass and loss</h2>
+<p>A hidden neuron computes <code>z=2x−1</code> then ReLU. For x=0,1,2, calculate hidden values. An output neuron computes <code>ŷ=3h+0.5</code>. If target is 2 when x=1, calculate squared error.</p></div><div class="code-cell" data-cell="14-3"><div class="code-toolbar"><span>Python · code cell 4</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">x = torch.tensor([0.0,1.0,2.0])
+h = torch.relu(2*x - 1)
+y_hat = 3*h + 0.5
+print("hidden:", h)
+print("prediction:", y_hat)
+print("x=1 squared error vs target 2:", (y_hat[1]-2.0).square().item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><p><strong>Answer:</strong> z values are −1, 1, 3; ReLU gives 0, 1, 3. Predictions are 0.5, 3.5, 9.5. At x=1 the squared error is <code>(3.5−2)²=2.25</code>.</p></div><div class="prose"><h2>Practice 4 · One autograd gradient</h2>
+<p>For <code>L=(w*x−target)²</code>, use x=2, w=1, target=5. Calculate prediction and loss, then let autograd find dL/dw. Check by hand: <code>dL/dw=2(wx−target)x</code>.</p></div><div class="code-cell" data-cell="14-4"><div class="code-toolbar"><span>Python · code cell 5</span><div><button class="copy">Copy</button><button class="run">Run</button></div></div><textarea spellcheck="false" aria-label="Editable Python code cell">x = torch.tensor(2.0)
+w = torch.tensor(1.0, requires_grad=True)
+target = torch.tensor(5.0)
+loss = (w*x-target)**2
+loss.backward()
+print("prediction:", (w*x).item(), "loss:", loss.item(), "gradient:", w.grad.item())</textarea><pre class="result" aria-live="polite">Click Run to execute this cell.</pre></div><div class="prose"><p><strong>Answer:</strong> prediction 2, error −3, squared loss 9, gradient <code>2×(−3)×2 = −12</code>. Gradient descent subtracts the gradient, so a negative gradient makes w increase.</p></div><div class="prose"><h2>Practice 5 · Learnable parameter and training-loop order</h2>
+<p>Explain why <code>self.weight = torch.randn(...)</code> may not update with an optimizer even when it requires gradients. Put these actions in order: optimizer step, forward pass, clear gradients, loss, backward pass.</p></div><div class="prose"><p><strong>Answer:</strong> use <code>nn.Parameter(...)</code> (or a registered layer) so the weight appears in <code>model.parameters()</code> and is found by the optimizer. Correct order: clear gradients → forward → loss → backward → optimizer step. Gradients otherwise accumulate.</p></div><div class="prose"><h2>Practice 6 · BatchNorm, Dropout, and evaluation</h2>
+<p>A BatchNorm2d layer has 24 channels. How many learned parameters? In eval mode, does Dropout still randomly zero values? Does <code>torch.no_grad()</code> call <code>model.eval()</code> for you?</p></div><div class="prose"><p><strong>Answer:</strong> BatchNorm has 2×24=48 learnable scale/shift values. Dropout is inactive in eval mode. <code>no_grad()</code> only changes autograd tracking; it does not call <code>eval()</code> or change module-specific behavior.</p></div><div class="prose"><h2>Practice 7 · Recall core formulas</h2>
+<p>Before you finish, write from memory: convolution parameter count; convolution output-size formula; receptive field for n stride-1 K×K layers; GAP output size; sigmoid derivative maximum.</p></div><div class="prose"><p><strong>Answers:</strong> Conv weights=<code>K_h K_w C_in C_out</code>, plus <code>C_out</code> biases if enabled. Output per spatial axis=<code>floor((input+2P−effective_kernel)/stride)+1</code>. For ordinary dilation 1, effective kernel K; RF=<code>1+n(K−1)</code>. GAP gives one number per channel. Sigmoid derivative peaks at 0.25.</p></div><div class="prose"><h3>Official documentation</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/tensor_tutorial.html" target="_blank" rel="noopener noreferrer">Tensor</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv2d.html" target="_blank" rel="noopener noreferrer">Conv2D</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" target="_blank" rel="noopener noreferrer">Autograd</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.parameter.Parameter.html" target="_blank" rel="noopener noreferrer">Parameter</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Dropout.html" target="_blank" rel="noopener noreferrer">Dropout</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.BatchNorm2d.html" target="_blank" rel="noopener noreferrer">Batchnorm</a></li><li><a href="https://docs.pytorch.org/docs/stable/nn.html#loss-functions" target="_blank" rel="noopener noreferrer">Loss</a></li></ul>
+<p>Read this notebook first for intuition, then use the API reference to confirm exact arguments and details for your installed PyTorch version.</p></div></div></details><section class="appendix" id="documentation-reference"><h2>PyTorch documentation reference · practical details</h2>
+<p>This appendix paraphrases the API behavior most relevant to the notebook topics. Official docs are linked for full signatures, version-specific behavior, and additional caveats.</p>
+<h3>Tensors, shapes, and devices</h3>
+<p>A <code>torch.Tensor</code> has a shape, dtype, device, and layout. Operations generally require compatible shapes, dtypes, and devices. <code>numel()</code> is the total number of elements; <code>element_size()</code> is the bytes per element. <code>stack</code> requires equal shapes and adds a new dimension. <code>cat</code> joins along an existing dimension and requires all other dimensions to match. <code>squeeze(dim)</code> removes that axis only when its size is 1; no-argument <code>squeeze()</code> removes every size-1 axis. <code>unsqueeze(dim)</code> inserts a length-1 axis. <code>reshape</code> may return a view or copy; <code>view</code> requires compatible strides/contiguous layout. A tensor created from NumPy with <code>from_numpy</code> shares CPU storage when compatible; <code>torch.tensor</code> copies.</p>
+<p>For convolutional images, PyTorch commonly uses <code>(N,C,H,W)</code>. <code>nn.Linear(in_features,out_features)</code> accepts any input whose final dimension is <code>in_features</code>, replaces that final dimension with <code>out_features</code>, and stores weight shape <code>(out_features,in_features)</code> plus optional bias shape <code>(out_features,)</code>.</p>
+<h3>Modules, parameters, autograd, and training</h3>
+<p><code>nn.Module</code> registers submodules and parameters assigned as attributes. <code>nn.Parameter</code> is a Tensor subclass that, when assigned as a module attribute, is automatically registered and returned by <code>parameters()</code>. A plain tensor with <code>requires_grad=True</code> can receive a gradient but is not automatically included in an optimizer's parameter list.</p>
+<p>Autograd records operations on tensors requiring gradients and computes derivatives through the graph. <code>.backward()</code> accumulates gradients into leaf tensors' <code>.grad</code>; it does not clear them. <code>optimizer.zero_grad()</code> clears them. The standard order is clear → forward → loss → backward → update. <code>torch.no_grad()</code> and <code>torch.inference_mode()</code> disable autograd recording for their contexts. <code>module.eval()</code> changes modules with training-specific behavior (e.g. Dropout/BatchNorm); it does not disable autograd. These controls are independent.</p>
+<p>A state dictionary stores parameters and persistent buffers. Saving/loading <code>state_dict()</code> is the preferred pattern for restoring learned weights into an instantiated model. Model architecture must match the keys/shapes in the state dictionary.</p>
+<h3>Loss input contracts</h3>
+<ul><li><code>MSELoss</code>: inputs/targets have compatible shapes; by default, squared elementwise errors are averaged (<code>reduction="mean"</code>).</li><li><code>BCELoss</code>: expects probabilities in [0,1]. <code>BCEWithLogitsLoss</code> expects raw logits and combines sigmoid with BCE more stably.</li><li><code>CrossEntropyLoss</code>: expects unnormalized class logits (commonly <code>(N,C)</code> or <code>(N,C,H,W)</code>) and class-index targets of dtype long with matching batch/spatial dimensions; it internally applies log-softmax and negative log likelihood. Do not apply softmax before it in the usual class-index case.</li></ul>
+<h3>Data API and image transforms</h3>
+<p>A <code>Dataset</code> implements <code>__len__</code> and <code>__getitem__</code>; a <code>DataLoader</code> batches samples, optionally shuffles, and can use workers/pinning. Dataset transforms are commonly called from <code>__getitem__</code>; merely defining a transform object does not apply it. TorchVision <code>ToTensor</code> converts common PIL/NumPy image inputs to channel-first floating tensors and scales uint8 [0,255] pixels to [0,1]. <code>Normalize(mean,std)</code> applies channel-wise <code>(x−mean)/std</code>; mean/std channel counts must match. For deterministic evaluation, normally do not use random augmentation transforms.</p>
+<h3>Conv2d and parameter calculation</h3>
+<p><code>nn.Conv2d</code> input is <code>(N,C_in,H,W)</code> (or unbatched <code>(C_in,H,W)</code>). Weight shape is <code>(C_out,C_in/groups,K_h,K_w)</code>. For groups=1, weights count <code>C_out*C_in*K_h*K_w</code>; optional bias adds <code>C_out</code>. With groups, input/output channels must be divisible by groups and the weight count is divided by groups. Per-axis output is <code>floor((input+2*padding−dilation*(kernel−1)−1)/stride + 1)</code>. Pooling layers typically have no learned weights. <code>AdaptiveAvgPool2d((1,1))</code> outputs one spatial average per channel regardless of input H,W; flatten from dimension 1 preserves batch.</p>
+<p>BatchNorm2d expects channel axis C at dimension 1. With <code>affine=True</code> (default), it learns γ and β, two values per channel. Running mean/variance are buffers, not trainable parameters. In training it uses batch statistics and updates running estimates; in eval it uses running values when tracking is enabled. Dropout randomly zeros each element with probability p during training and scales retained elements; in eval it is identity.</p>
+<h3>Sequence modules</h3>
+<p><code>nn.RNN</code>, <code>nn.LSTM</code>, and <code>nn.GRU</code> accept sequence tensors shaped <code>(sequence,batch,features)</code> by default; <code>batch_first=True</code> changes the input/output order to <code>(batch,sequence,features)</code>, not the hidden-state order. Bidirectional modules double output feature width. LSTM returns <code>(output,(h_n,c_n))</code>; GRU/RNN return <code>(output,h_n)</code>. Hidden-state shape is <code>(num_layers*num_directions,batch,hidden_size)</code>; LSTM cell state has the same shape.</p>
+<h3>Attention and Transformer</h3>
+<p>Scaled dot-product attention uses query/key dot products divided by <code>sqrt(d_k)</code>, softmax over keys, then a weighted sum of values. PyTorch's functional scaled attention can accept an attention mask and causal flag; mask conventions and supported kernels should be checked in the installed version docs. Transformer layers require embedding width <code>d_model</code> divisible by the number of heads. Sequence masks control what tokens may attend; causal masking blocks future positions in autoregressive decoding. Positional information must be supplied by the model/input embedding path if order matters.</p>
+<h3>Optimization and generation</h3>
+<p>Optimizers update the exact parameter iterable passed at construction; newly created/unregistered parameters will not update unless added. Learning rate is an optimizer setting. Gradient clipping is called after backward and before optimizer step. A GAN discriminator is commonly trained with real=1/fake=0 targets, then generator with fake=1 targets; detach fake samples during discriminator training to prevent accidental generator updates in that step. In diffusion, a common DDPM objective predicts sampled Gaussian noise with an MSE loss; reverse sampling iteratively denoises from a noise sample. Specific schedules/samplers vary by implementation.</p>
+<h3>Official PyTorch references</h3>
+<ul><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/intro.html" target="_blank" rel="noopener noreferrer">Learn the Basics</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/tensor_tutorial.html" target="_blank" rel="noopener noreferrer">Tensor operations</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/data_tutorial.html" target="_blank" rel="noopener noreferrer">Dataset and DataLoader</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/transforms_tutorial.html" target="_blank" rel="noopener noreferrer">Transforms</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html" target="_blank" rel="noopener noreferrer">Build a model</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html" target="_blank" rel="noopener noreferrer">Autograd</a></li><li><a href="https://docs.pytorch.org/docs/stable/notes/autograd.html" target="_blank" rel="noopener noreferrer">Autograd mechanics and grad modes</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html" target="_blank" rel="noopener noreferrer">Optimization loop</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/basics/saveloadrun_tutorial.html" target="_blank" rel="noopener noreferrer">Save and load models</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv2d.html" target="_blank" rel="noopener noreferrer">Conv2d</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Dropout.html" target="_blank" rel="noopener noreferrer">Dropout</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.BatchNorm2d.html" target="_blank" rel="noopener noreferrer">BatchNorm2d</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.RNN.html" target="_blank" rel="noopener noreferrer">RNN</a>, <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTM.html" target="_blank" rel="noopener noreferrer">LSTM</a>, <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.GRU.html" target="_blank" rel="noopener noreferrer">GRU</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html" target="_blank" rel="noopener noreferrer">Scaled dot-product attention</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.Transformer.html" target="_blank" rel="noopener noreferrer">Transformer</a></li></ul></section></main><footer>Local study notes · Code executes in your local Python environment when served by the included launcher.</footer>
+<script>
+const PORT=8766;const endpoint=location.origin+'/execute';
+function sessionFor(ch){let root=sessionStorage.getItem('study-notes-session');if(!root){root=crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random();sessionStorage.setItem('study-notes-session',root)}return root+'-'+(location.pathname.includes('DL_GenAI')?'dl':'mlp')+'-'+ch}
+async function runCell(cell){const btn=cell.querySelector('.run');const out=cell.querySelector('.result');btn.disabled=true;btn.textContent='Running…';out.classList.remove('error');out.textContent='';try{const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session:sessionFor(cell.closest('.chapter').id.replace('chapter-','')),code:cell.querySelector('textarea').value})});const data=await r.json();out.textContent=data.stdout||'';if(data.stderr){out.textContent+=(out.textContent?'\n':'')+data.stderr;out.classList.add('error')}for(const img of (data.images||[])){const im=document.createElement('img');im.src='data:image/png;base64,'+img;out.appendChild(im)}if(!out.textContent&&!data.images?.length)out.textContent='Cell finished (no printed output).';}catch(e){out.textContent='Could not reach the local Python runner. Start it with: python3 serve_notes.py\n\n'+e;out.classList.add('error')}finally{btn.disabled=false;btn.textContent='Run'}}
+document.querySelectorAll('.run').forEach(b=>b.addEventListener('click',()=>runCell(b.closest('.code-cell'))));
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{const c=b.closest('.code-cell').querySelector('textarea').value;await navigator.clipboard.writeText(c);b.textContent='Copied';setTimeout(()=>b.textContent='Copy',900)}));
+document.querySelectorAll('.run-all').forEach(b=>b.addEventListener('click',async()=>{const d=b.closest('.chapter'),state=d.querySelector('.chapter-state');d.open=true;state.textContent='Running…';for(const cell of d.querySelectorAll('.code-cell'))await runCell(cell);state.textContent='Finished'}));
+document.querySelectorAll('.reset').forEach(b=>b.addEventListener('click',async()=>{const ch=b.dataset.notebook;try{await fetch(location.origin+'/reset',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session:sessionFor(ch)})});const d=b.closest('.chapter');d.querySelectorAll('.result').forEach(o=>{o.classList.remove('error');o.textContent='Session restarted.'});d.querySelector('.chapter-state').textContent='Ready'}catch(e){alert('Start the local runner first.')}}));
+document.getElementById('expand').onclick=()=>document.querySelectorAll('.chapter').forEach(d=>d.open=true);document.getElementById('collapse').onclick=()=>document.querySelectorAll('.chapter').forEach(d=>d.open=false);
+document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('.chapter').forEach(d=>{const match=!q||d.innerText.toLowerCase().includes(q);d.hidden=!match;if(q&&match)d.open=true})});
+fetch(location.origin+'/health').then(r=>r.json()).then(()=>document.getElementById('connection').textContent='Local Python runner connected · Python '+navigator.platform).catch(()=>document.getElementById('connection').textContent='Runner not connected · start serve_notes.py');
+</script></body></html>
