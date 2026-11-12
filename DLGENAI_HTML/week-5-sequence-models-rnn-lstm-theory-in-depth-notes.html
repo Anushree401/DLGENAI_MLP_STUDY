@@ -218,8 +218,8 @@ with torch.no_grad():
 print("logits:", logits)
 print("probabilities:", probabilities)
 print("predicted class:", predicted_class.item())</code></pre><h3>Walkthrough</h3><ol><li><b>Sequence construction:</b> every example has T=20 ordered scalar observations; feature width F=1. Labels are integer class IDs 0/1.</li><li><b>Batch shape:</b> a batch is [B,20,1]. The batch_first option makes this convention explicit.</li><li><b>LSTM output:</b> output is [B,T,H], while h_n and c_n are [1,B,H] for one layer/direction.</li><li><b>Many-to-one head:</b> h_n[-1] selects final hidden state for the top layer; classifier maps H=16 to C=2 logits.</li><li><b>Parameter count:</b> LSTM has 1,216 parameters; head has 34; total 1,250.</li><li><b>Loss:</b> CrossEntropyLoss receives [B,2] logits and [B] long labels.</li><li><b>Update sequence:</b> zero_grad, forward, loss, backward, clipping, step. Clipping is applied after gradients exist.</li><li><b>Validation:</b> eval plus no_grad. No optimizer step occurs.</li><li><b>Inference:</b> logits rank classes; softmax is included only to show probabilities.</li></ol><div class="box good"><b>Shape audit:</b> [B,20,1] → LSTM output [B,20,16], h_n [1,B,16], c_n [1,B,16] → final h [B,16] → classifier logits [B,2].</div></section>
-</div><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-6-sequential-data-practice-in-depth-notes.html">Go to Week 6 &gt;</a></nav>
-<footer class="footer">Week 5 · Modeling Sequential Data: Theory · Deep Learning &amp; GenAI exam notes</footer></main></div><script>
+</div>
+</main></div><script>
 (() => {
   const definitions = {
     'retrieval-augmented generation pipeline': 'The full process of preparing searchable documents, retrieving evidence for a question, putting it in the prompt, and generating an answer grounded in that evidence.',

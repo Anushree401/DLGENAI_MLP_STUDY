@@ -276,8 +276,8 @@ print("predicted class IDs:", test_classes.numpy())</code></pre><h3>Read the ful
 
 grads = tape.gradient(loss, model.trainable_variables)
 optimizer.apply_gradients(zip(grads, model.trainable_variables))</code></pre><p>This corresponds conceptually to PyTorch's forward → loss → backward → step. Frameworks differ in API and gradient management; the mathematical steps are the same.</p></section>
-</div><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-3-modeling-vision-cnn-theory-in-depth-notes.html">Go to Week 3 &gt;</a></nav>
-<footer class="footer">Week 2 · Artificial Neural Networks: Practice · Deep Learning &amp; GenAI exam notes</footer></main></div><script>
+</div>
+</main></div><script>
 (() => {
   const definitions = {
     'retrieval-augmented generation pipeline': 'The full process of preparing searchable documents, retrieving evidence for a question, putting it in the prompt, and generating an answer grounded in that evidence.',
