@@ -5,7 +5,15 @@
 *{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.68 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.layout{max-width:1260px;margin:25px auto;padding:0 18px;display:grid;grid-template-columns:255px minmax(0,900px);gap:24px;align-items:start}.toc{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:white;border:1px solid var(--line);border-radius:12px;padding:16px}.toc b{display:block;color:var(--n);margin-bottom:8px}.toc a{display:block;padding:3px 0 3px 8px;border-left:2px solid transparent;text-decoration:none;color:var(--muted);font-size:.84rem}.toc a:hover{color:var(--t);border-color:var(--t)}main{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 9px 32px #102b3d10}.hero{padding:48px 56px 38px;background:linear-gradient(130deg,#132f45,#087e8b);color:white}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#b9efeb;font-size:.78rem;font-weight:750}.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.1;margin:.4em 0}.hero p{max-width:720px;color:#e6f5f5;font-size:1.08rem}.pill{display:inline-block;border:1px solid #ffffff66;border-radius:99px;padding:3px 10px;margin:3px;font-size:.77rem}.week-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 56px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#f7fafc}.week-navigation a,.week-navigation span{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 15px;border-radius:8px;font-weight:700;text-decoration:none}.week-navigation a{background:#eaf6f5;color:var(--n);border:1px solid #b9deda}.week-navigation a:hover{background:#dff1ef}.week-navigation .week-home{background:#fff;color:var(--muted);border-color:var(--line)}.week-navigation .week-disabled{color:#7c8992;background:#f0f2f4;border:1px solid var(--line)}.content{padding:20px 56px 55px}h2{font-size:1.75rem;color:var(--n);line-height:1.25;margin:2em 0 .55em;padding-top:.5em;border-top:1px solid var(--line)}h2:first-child{margin-top:.5em}h3{color:var(--t);font-size:1.24rem;margin:1.4em 0 .35em}h4{color:var(--n);margin:.3em 0}p{margin:.45em 0 .9em}li{margin:.25em 0}.lead{font-size:1.08rem;color:#354f60}.box{padding:14px 17px;border-left:4px solid var(--t);background:var(--pale);border-radius:6px;margin:14px 0}.exam{border-color:#5b80b6;background:var(--blue)}.warn{border-color:#d29a23;background:var(--gold)}.good{border-color:#478e66;background:var(--green)}.math{font:1.08em Cambria,"Times New Roman",serif;background:#f2f6f8;padding:1px 4px;border-radius:3px}.eq{display:block;text-align:center;font:1.16rem/1.7 Cambria,"Times New Roman",serif;background:#f2f7f9;color:var(--n);border:1px solid #dce7ec;border-radius:7px;padding:9px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:9px;padding:13px 15px}.card p{margin-bottom:.3em}.diagram{overflow:auto;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fcfefe;margin:16px 0}.diagram svg{display:block;max-width:100%;height:auto;margin:auto}.diagram figcaption{text-align:center;color:var(--muted);font-size:.88rem;margin-top:8px}.tablewrap{overflow-x:auto;margin:14px 0}table{width:100%;border-collapse:collapse;font-size:.91rem}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--n);color:#fff}tbody tr:nth-child(even){background:#f5f8fa}pre{overflow:auto;background:var(--code);color:#e7f0f5;padding:16px 18px;border-radius:9px;font:.84rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}code{font:.91em ui-monospace,SFMono-Regular,Consolas,monospace;background:#edf2f5;padding:.1em .3em;border-radius:4px}pre code{background:transparent;padding:0}details{border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:10px 14px}summary{cursor:pointer;color:var(--n);font-weight:700}.footer{padding:18px 56px;background:#f6f9fb;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
 @media(max-width:900px){.layout{display:block;margin:0;padding:0}.toc{position:relative;top:auto;max-height:250px;margin:9px}.hero{padding:32px 23px}.content{padding:15px 23px 40px}.footer{padding:17px 23px}.grid{grid-template-columns:1fr}main{border-radius:0}.week-navigation{margin:12px 23px 0;flex-wrap:wrap}.week-navigation a,.week-navigation span{flex:1}}
 @media print{body{background:white;font-size:10.5pt}.layout{display:block;padding:0;margin:0}.toc{display:none}main{border:0;box-shadow:none}.hero{padding:22px 32px;print-color-adjust:exact}.content{padding:10px 32px}.footer{padding:10px 32px}.week-navigation{margin:8px 32px}h2{break-before:page}h2:first-child{break-before:auto}pre,.diagram,.box,.card,details{break-inside:avoid}}
-</style></head><body><div class="layout">
+</style><style>
+.jargon-tip{border-bottom:1px dotted #087e8b;cursor:help;text-decoration:none;text-decoration-color:#087e8b;text-underline-offset:3px}
+.jargon-tip:focus-visible{outline:2px solid #087e8b;outline-offset:2px;border-radius:2px}
+.jargon-bubble{position:fixed;z-index:99999;max-width:min(310px,calc(100vw - 24px));padding:10px 13px;border-radius:9px;background:#102b3d;color:#fff;box-shadow:0 8px 24px #102b3d38;font:500 14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;pointer-events:none}
+.jargon-bubble[hidden]{display:none}
+@media(prefers-reduced-motion:no-preference){.jargon-bubble{animation:tip-in .12s ease-out}@keyframes tip-in{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}}
+@media print{.jargon-tip{border-bottom:0}.jargon-bubble{display:none!important}}
+</style>
+</head><body><div class="layout">
 <aside class="toc"><b>Week 9 contents</b><a href="#roadmap">How to use these notes</a><a href="#gan">GAN practice</a><a href="#inference">Pretrained diffusion inference</a><a href="#adapt">Adaptation & evaluation</a><a href="#numericals">Worked numericals</a><a href="#practice">Exam-pattern practice</a><a href="#fullcode">Complete programs</a><a href="#recap">Formula card & references</a></aside>
 <main><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-10-transformers-tokenization-attention-in-depth-notes.html">Go to Week 10 &gt;</a></nav><header class="hero"><div class="eyebrow">Deep Learning &amp; GenAI · Week 9 Practice</div><h1>Generate images with GANs and diffusion</h1><p>Hands-on image generation: train a compact GAN, use pretrained diffusion pipelines, calculate guidance, adapt models with LoRA, and evaluate outputs.</p><span class="pill">GAN practice</span><span class="pill">Pretrained diffusion</span><span class="pill">CFG &amp; LoRA</span><span class="pill">Image evaluation</span></header>
 <div class="content"><section id="roadmap"><h2>How to use these notes</h2><p class="lead">Week 9 is the lab bridge from generative-model theory to producing images. It has two different workflows: train a small GAN yourself, and run inference with pretrained diffusion components. For exam questions, trace the update order, identify which tensor is detached, calculate one objective/guidance value, and distinguish model weights from adapter weights.</p><div class="box exam"><b>Quiz-paper alignment:</b> The four supplied Quiz 1 papers are concentrated mainly on Weeks 1–4. They repeatedly use MCQ/MSQ, short numerical answers, code-output and tensor-shape tracing, and linked contexts. The exam notes add GAN-equilibrium and diffusion/LoRA formula prompts. There is little direct Week 9 hands-on PYQ coverage, so the exercises below adapt the observed format rather than pretending to quote unseen questions.</div><figure class="diagram"><svg viewBox="0 0 850 230" role="img" aria-label="GAN training and pretrained text-to-image diffusion inference pipelines"><defs><marker id="w9a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" fill="#17374e"><text x="18" y="36" font-size="15" font-weight="bold">Train a GAN</text><g text-anchor="middle" font-size="12"><rect x="125" y="17" width="110" height="48" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="180" y="45">noise z</text><rect x="305" y="17" width="120" height="48" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="365" y="45">Generator G</text><rect x="515" y="17" width="130" height="48" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="580" y="45">Discriminator D</text><rect x="710" y="17" width="110" height="48" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="765" y="45">real / fake</text></g><path d="M235 41H299M425 41H509M645 41H704" stroke="#087e8b" stroke-width="2" marker-end="url(#w9a)"/><text x="18" y="121" font-size="15" font-weight="bold">Run pretrained diffusion</text><g text-anchor="middle" font-size="12"><rect x="95" y="100" width="110" height="48" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="150" y="128">prompt + seed</text><rect x="245" y="100" width="130" height="48" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="310" y="128">text encoder</text><rect x="415" y="100" width="130" height="48" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="480" y="128">scheduler + denoiser</text><rect x="585" y="100" width="100" height="48" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="635" y="128">VAE decode</text><rect x="725" y="100" width="100" height="48" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="775" y="128">image</text></g><path d="M205 124H239M375 124H409M545 124H579M685 124H719" stroke="#087e8b" stroke-width="2" marker-end="url(#w9a)"/><path d="M480 153C480 193 420 193 420 153" fill="none" stroke="#b76845" stroke-width="2" marker-end="url(#w9a)"/><text x="450" y="212" font-size="12" text-anchor="middle">repeat denoising over scheduler timesteps</text></g></svg><figcaption>Figure 1. GAN training updates two competing networks; diffusion inference repeatedly denoises a latent before decoding it to pixels.</figcaption></figure></section>
@@ -185,4 +193,241 @@ print("Saved GAN grids/checkpoint and pretrained diffusion sample.")</code></pre
 <h3>Code walkthrough and shape audit</h3><ol><li><b>Real-data scaling:</b> MNIST ToTensor creates [0,1]; Normalize(.5,.5) changes it to [−1,1], matching G’s tanh.</li><li><b>Generator shapes:</b> [B,100,1,1]→[B,128,7,7]→[B,64,14,14]→[B,1,28,28].</li><li><b>Discriminator:</b> image [B,1,28,28]→[B,64,14,14]→[B,128,7,7]→[B,1] logit.</li><li><b>Alternating updates:</b> fake is detached only for D training; D weights are frozen during G step while gradients can pass back to G.</li><li><b>Fixed grid:</b> reusing fixed_z makes epoch-to-epoch visual comparisons meaningful.</li><li><b>Pretrained pipeline:</b> model, text encoder, VAE, scheduler are loaded from the checkpoint; each call runs multiple denoising steps.</li><li><b>Reproducibility:</b> fixed seed, prompt, checkpoint and settings make comparisons controlled, but backends may not guarantee exact bitwise equality.</li><li><b>Security:</b> authenticate with the CLI or environment-managed credentials; never paste tokens into the notebook or public source.</li></ol><div class="box warn"><b>Compute and rights:</b> this script downloads MNIST and a pretrained checkpoint. Diffusion inference is memory-intensive; use a compatible smaller model or CPU offload when necessary. Read the checkpoint model card/license and respect image/data rights.</div></section>
 
 <section id="recap"><h2>7. Week 9 formula card and sources</h2><div class="grid"><div class="card"><h4>GAN update</h4><p>D learns real=1/fake=0; non-saturating G learns fake=1.</p></div><div class="card"><h4>Guidance</h4><p>ε<sub>g</sub>=ε<sub>u</sub>+w(ε<sub>c</sub>−ε<sub>u</sub>).</p></div><div class="card"><h4>LoRA</h4><p>W′=W+(α/r)BA; additional parameters r(d<sub>in</sub>+d<sub>out</sub>).</p></div><div class="card"><h4>Controlled sampling</h4><p>Hold prompt, seed, checkpoint, steps, scheduler, and resolution fixed when comparing one change.</p></div></div><p>Quiz alignment: the supplied October 2025 and March/July 2026 Quiz 1 papers are used for observed question format; most direct tested material is earlier weeks. The supplied exam notes include the GAN equilibrium answer D(G(z))≈0.5 and formula prompts, which are covered here.</p><ul><li><a href="https://docs.pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html">PyTorch DCGAN tutorial: training and architecture</a></li><li><a href="https://huggingface.co/docs/diffusers/api/pipelines/stable_diffusion/text2img">Hugging Face Diffusers text-to-image pipeline API</a></li><li><a href="https://huggingface.co/docs/diffusers/main/using-diffusers/loading_adapters">Diffusers: load pretrained LoRA/adapters</a></li><li><a href="https://arxiv.org/abs/1406.2661">Goodfellow et al., Generative Adversarial Nets</a></li><li><a href="https://www.youtube.com/playlist?list=PLZ2ps__7DhBa9hqi20allqocTSUUt3nWX">Student-supplied course playlist</a> (the link is retained; playlist metadata was not retrievable)</li></ul></section>
-<nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-10-transformers-tokenization-attention-in-depth-notes.html">Go to Week 10 &gt;</a></nav></div><footer class="footer">Week 9 · GAN &amp; Pretrained Diffusion Practice · Deep Learning &amp; GenAI exam notes</footer></main></div></body></html>
+<nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-10-transformers-tokenization-attention-in-depth-notes.html">Go to Week 10 &gt;</a></nav></div><footer class="footer">Week 9 · GAN &amp; Pretrained Diffusion Practice · Deep Learning &amp; GenAI exam notes</footer></main></div><script>
+(() => {
+  const definitions = {
+    'Generative Adversarial Network': 'A pair of networks where one creates fakes and the other learns to detect them.',
+    'retrieval-augmented generation': 'Finding useful outside information and giving it to the model before it answers.',
+    'convolutional neural network': 'A network that scans images with small filters to find patterns like edges and shapes.',
+    'scaled dot-product attention': 'Attention that compares queries and keys, scales the scores, then mixes the values.',
+    'Artificial neural network': 'A computer system made of connected little math units that learns patterns from examples.',
+    'recurrent neural network': 'A network that processes one item at a time while carrying information from earlier items.',
+    'reparameterization trick': 'A clever way to sample a random hidden code while still letting learning gradients pass through.',
+    'classifier-free guidance': 'A knob that makes generated results follow the text prompt more strongly.',
+    'masked language modeling': 'A practice task where the model fills in words hidden from a sentence.',
+    'variational autoencoder': 'An autoencoder that learns a smooth, sampleable hidden space for making new examples.',
+    'Long Short-Term Memory': 'An RNN design with gates that helps information survive across many steps.',
+    'supervised fine-tuning': 'Teaching a model with examples that show both the input and the desired answer.',
+    'fully connected layer': 'A layer where each input is connected to each output.',
+    'encoder-decoder model': 'A model that reads an input with an encoder and writes an output with a decoder.',
+    'next-token prediction': 'A practice task where the model guesses which token comes next.',
+    'binary cross-entropy': 'A loss for a yes-or-no prediction, comparing its probability with the true label.',
+    'multi-head attention': 'Several attention lookers working in parallel, each learning to focus in a different way.',
+    'feed-forward network': 'A small network applied to each token after attention to transform its features.',
+    'activation function': 'A rule that helps a neuron decide what signal to send onward.',
+    'batch normalization': 'A method that keeps layer values on a steadier scale while training.',
+    'positional encoding': 'Extra information that tells a Transformer where each token sits in the sequence.',
+    'residual connection': 'A shortcut that lets information skip around a layer and helps deep networks learn.',
+    'machine translation': 'Using a model to turn a sentence in one language into another language.',
+    'low-rank adaptation': 'Another name for LoRA, a way to adapt a model using small low-rank updates.',
+    'mean squared error': 'A loss that squares each prediction mistake and averages the results.',
+    'vanishing gradient': 'When learning signals shrink so much while traveling backward that early steps barely learn.',
+    'encoder-only model': 'A model built mainly to understand or label the input text.',
+    'decoder-only model': 'A model built to continue text one next token at a time.',
+    'prompt engineering': 'Writing and arranging instructions so a model is more likely to give the kind of answer you need.',
+    'instruction tuning': 'Training a model on examples of instructions and good answers.',
+    'artificial neuron': 'A tiny math unit that mixes clues, adds a learned offset, then decides what signal to pass on.',
+    'data augmentation': 'Making altered copies of training examples, like flipped pictures, to give the model more practice.',
+    'transfer learning': 'Starting with a model that already learned useful patterns and adapting it to a new task.',
+    'forward diffusion': 'The practice process that slowly adds noise to a clean example.',
+    'reverse diffusion': 'The generation process that slowly removes noise to make an example.',
+    'cosine similarity': 'A score for whether two number-vectors point in a similar direction.',
+    'gradient descent': 'A way of improving a model by nudging its numbers downhill on the loss landscape.',
+    'confusion matrix': 'A table showing which kinds of answers the model got right or mixed up.',
+    'one-hot encoding': 'A way to mark one choice with a 1 and all the other choices with 0s.',
+    'noise prediction': 'Guessing the noise inside a corrupted example so it can be removed.',
+    'latent diffusion': 'Doing the slow denoising work on a smaller hidden picture, then decoding it to full pixels.',
+    'Stable Diffusion': 'A popular text-to-image diffusion model that gradually turns random noise into a picture.',
+    'pretrained model': 'A model that has already learned from lots of data before you use it.',
+    'prompt injection': 'Text that tries to trick a model into ignoring its proper instructions.',
+    'linear function': 'A simple straight-line calculation that cannot by itself bend to learn complicated patterns.',
+    'backpropagation': 'A method that sends blame for prediction mistakes backward through the network.',
+    'receptive field': 'The part of the original picture that can affect one particular neuron.',
+    'teacher forcing': 'During practice, giving a sequence model the correct previous word instead of its own guess.',
+    'greedy decoding': 'Choosing the most likely next token every time, without trying alternatives.',
+    'diffusion model': 'A model that learns to turn noise into a sample by repeatedly cleaning it up.',
+    'vector database': 'A searchable store for number-vectors that represent pieces of information.',
+    'semantic search': 'Searching by meaning, so related phrases can match even when the words differ.',
+    'neural network': 'A group of connected math units that learns from examples, a bit like a team passing clues along.',
+    'hyperparameter': 'A setting chosen by the person training the model, such as learning rate or batch size.',
+    'validation set': 'Examples used during development to check whether the model is learning sensibly.',
+    'regularization': 'A trick that discourages a model from becoming too complicated or memorizing.',
+    'word embedding': 'A list of numbers that represents a word and its learned relationships to other words.',
+    'autoregressive': 'Making one next item at a time, using the items already produced.',
+    'top-k sampling': 'Choosing randomly from only the k most likely next tokens.',
+    'top-p sampling': 'Choosing randomly from the smallest group of tokens whose probabilities add to p.',
+    'noise schedule': 'A plan for how much noise is added or removed at each step.',
+    'self-attention': 'A way for each token to look at other tokens and gather the useful information.',
+    'context window': 'The amount of text a model can look at or remember at one time.',
+    'precision at k': 'Among the first k search results, the fraction that are useful.',
+    'non-linearity': 'A bendy rule that lets a network learn more than straight-line patterns.',
+    'loss function': 'A score that tells the model how far its answer is from the right answer.',
+    'cross-entropy': 'A loss that strongly penalizes the model when it gives the right answer a tiny probability.',
+    'learning rate': 'The size of each learning step; too big can jump past a good answer, too small can take ages.',
+    'normalization': 'Rescaling numbers into a more convenient range so learning is easier.',
+    'latent vector': 'A short list of numbers describing one point in the model’s hidden map.',
+    'KL divergence': 'A number measuring how different two probability distributions are.',
+    'discriminator': 'The network that judges whether an example looks real or generated.',
+    'mode collapse': 'When a generator keeps making only a few kinds of outputs instead of many different ones.',
+    'system prompt': 'The high-level instructions that tell an assistant how it should behave.',
+    'prompt tuning': 'Learning a small set of hidden prompt vectors while keeping the main model mostly fixed.',
+    'hallucination': 'When a model confidently makes up something that is not supported by the facts it was given.',
+    'forward pass': 'The trip data makes through the model to produce an answer.',
+    'underfitting': 'When a model is too simple or undertrained to learn the important pattern.',
+    'tensor shape': 'A description of how many numbers a tensor has along each dimension.',
+    'hidden state': 'The RNN’s running summary of what it has seen so far.',
+    'tokenization': 'Splitting text into the little pieces called tokens that a model can handle.',
+    'latent space': 'A compact hidden map where the model stores the important features of examples.',
+    'padding mask': 'A rule that tells the model to ignore empty filler tokens added to make batches the same length.',
+    'quantization': 'Storing model numbers with fewer bits so the model uses less memory.',
+    'dense layer': 'A layer where every input can send information to every output.',
+    'overfitting': 'When a model memorizes practice examples but does poorly on new ones.',
+    'fine-tuning': 'Continuing to train an already-trained model so it becomes better at a particular task.',
+    'convolution': 'Sliding a small grid of learned numbers over data to detect a local pattern.',
+    'feature map': 'A picture-like grid showing where a filter noticed its pattern.',
+    'max pooling': 'Shrinking a patch by keeping only its biggest number.',
+    'forget gate': 'An LSTM switch that decides which old memories to erase.',
+    'output gate': 'An LSTM switch that chooses what memory to reveal as its output.',
+    'beam search': 'Keeping a few promising partial answers while generating, then choosing the best whole sequence.',
+    'temperature': 'A sampling knob: lower makes choices safer, higher makes them more varied.',
+    'autoencoder': 'A network that squeezes data into a compact code and then tries to rebuild the original.',
+    'Transformer': 'A network that lets each token look at other tokens to decide what matters.',
+    'causal mask': 'A rule that stops a token from peeking at future tokens it is supposed to predict.',
+    'soft prompt': 'Learned number-vectors prepended to text inside the model, even though they are not ordinary words.',
+    'recall at k': 'Among all useful items, the fraction found in the first k search results.',
+    'perceptron': 'One simple artificial neuron that makes a decision from weighted inputs.',
+    'parameters': 'Numbers inside a model that training is allowed to learn.',
+    'batch size': 'How many examples the model looks at together in one training step.',
+    'vocabulary': 'The collection of token pieces a model knows how to read.',
+    'cell state': 'The LSTM’s longer-lasting memory lane.',
+    'input gate': 'An LSTM switch that chooses which new information to store.',
+    'perplexity': 'A measure of how surprised a language model is by real text; lower is usually better on the same test.',
+    'parameter': 'A number inside a model that training is allowed to learn.',
+    'optimizer': 'A recipe for using gradients to update the model’s learned numbers.',
+    'iteration': 'One training update, often using one batch.',
+    'train set': 'Examples used to teach the model.',
+    'precision': 'Of the things the model called positive, how many really were positive.',
+    'embedding': 'A list of numbers that represents an item so a model can compare and use it.',
+    'posterior': 'The model’s updated guess about a hidden code after seeing an example.',
+    'generator': 'The network that creates a new example, such as a made-up picture.',
+    'denoising': 'Removing noise to recover a clearer signal or image.',
+    'inference': 'Using a trained model to make a prediction or create something new.',
+    'attention': 'A way for the model to give more focus to the pieces of information that matter right now.',
+    'LayerNorm': 'A step that keeps values within each token’s feature list on a steady scale.',
+    'zero-shot': 'Asking the model to do a task without showing it any examples first.',
+    'retrieval': 'Searching a collection to bring back the pieces most likely to help answer a question.',
+    'grounding': 'Tying an answer to trustworthy information, such as the documents provided.',
+    'gradient': 'A direction and amount that tell us how changing a number would change the loss.',
+    'test set': 'Held-back examples used for a final, fair check of the model.',
+    'accuracy': 'The fraction of predictions that are correct.',
+    'sequence': 'A set of items with an order, like words in a sentence or measurements over time.',
+    'few-shot': 'Showing the model a few examples in the prompt before asking it to do the task.',
+    'chunking': 'Cutting long documents into smaller pieces so the search system can find the right part.',
+    'reranker': 'A second checker that reorders search results to put the most useful ones first.',
+    'citation': 'A pointer showing which source supports a statement.',
+    'weights': 'Numbers the model learns that say how strongly each clue should matter.',
+    'sigmoid': 'A squashing rule that turns any number into a value between zero and one.',
+    'softmax': 'A rule that turns a list of scores into probabilities that add up to one.',
+    'dropout': 'A training trick that temporarily switches off some neurons so the network cannot rely on just a few.',
+    'padding': 'Extra border pixels added so a filter can reach image edges or preserve size.',
+    'pooling': 'A way to shrink a feature map while keeping its strongest or average signals.',
+    'channel': 'One stack of image values, such as red, green, or blue, or a learned feature stack.',
+    'flatten': 'Laying a multi-dimensional grid out as one long list.',
+    'encoder': 'The part that turns input into a useful internal representation.',
+    'decoder': 'The part that turns an internal representation into an output.',
+    'minimax': 'A contest where one player tries to make a score smaller while the other tries to make it bigger.',
+    'Q, K, V': 'Short names for query, key, and value: the question, matching label, and information in attention.',
+    'seq2seq': 'Short for sequence-to-sequence: turning one sequence, like a sentence, into another.',
+    'adapter': 'A small set of extra learned pieces attached to a large model for a new task.',
+    'weight': 'A number the model learns that says how strongly one clue should matter.',
+    'biases': 'Learned numbers that let neurons shift their decisions.',
+    'recall': 'Of all the truly positive things, how many the model found.',
+    'tensor': 'A box of numbers; it can be a single number, a list, a table, or more dimensions.',
+    'kernel': 'The small grid of numbers that slides over an image to look for a pattern.',
+    'filter': 'A small learned pattern detector that scans across an image.',
+    'stride': 'How many pixels a filter moves each time it slides.',
+    'prompt': 'The instructions or question you give to a language model.',
+    'layer': 'One stage in a network that transforms information before passing it along.',
+    'logit': 'A model’s raw score before it is turned into a probability.',
+    'batch': 'A small group of examples processed together before a learning update.',
+    'epoch': 'One full pass through all the training examples.',
+    'token': 'A small piece of text the language model reads, often a word or part of a word.',
+    'prior': 'The model’s starting guess about what hidden codes should look like before seeing an example.',
+    'query': 'In attention, the question a token asks when looking for useful information.',
+    'value': 'In attention, the information a token contributes if it is judged relevant.',
+    'ROUGE': 'A text-summary score that checks overlap with a reference answer.',
+    'bias': 'A learned number added to a neuron so its decision can shift even when inputs are zero.',
+    'ReLU': 'A rule that keeps positive numbers and turns negative numbers into zero.',
+    'tanh': 'A squashing rule that turns numbers into values between minus one and one.',
+    'loss': 'A score for how wrong a model’s answer is; training tries to make it smaller.',
+    'Adam': 'An optimizer that adjusts its steps using a running history of gradients.',
+    'LSTM': 'A special RNN with gates that help it decide what to remember and what to forget.',
+    'ELBO': 'A score a VAE tries to improve, balancing good reconstruction with a well-behaved hidden space.',
+    'DDPM': 'A diffusion model trained to gradually add noise, then learn how to remove it.',
+    'seed': 'A starting number that makes random generation repeatable when everything else stays the same.',
+    'BERT': 'A Transformer model trained to understand text using clues from both sides of a missing word.',
+    'PEFT': 'Parameter-efficient fine-tuning: changing a small add-on instead of all the model’s many weights.',
+    'LoRA': 'A fine-tuning trick that learns two small matrices instead of changing one huge weight matrix directly.',
+    'rank': 'How many independent directions a low-rank update can use; smaller rank means a smaller add-on.',
+    'BLEU': 'A translation score that checks how much generated text overlaps with reference wording.',
+    'SGD': 'A simple optimizer that takes a small step using the current batch’s gradient.',
+    'CNN': 'A network especially good at pictures because it looks for small visual patterns across the image.',
+    'RNN': 'A network that reads a sequence step by step and carries a small memory forward.',
+    'VAE': 'A variational autoencoder: it learns a hidden space from which it can create new examples.',
+    'GAN': 'Two networks compete: one makes fake examples and the other tries to spot them.',
+    'FID': 'A score comparing real and generated image features; lower often means closer, if measured fairly.',
+    'key': 'In attention, a label a token offers so queries can decide whether it is relevant.',
+    'GPT': 'A Transformer model trained to predict the next token and continue text.',
+    'SFT': 'Supervised fine-tuning: practicing with examples that include the expected answer.',
+    'RAG': 'Retrieval-augmented generation: finding helpful documents first, then asking the model to answer using them.'
+  };
+  const terms = Object.keys(definitions).sort((a,b) => b.length-a.length);
+  const escapeRegExp = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const matcher = new RegExp('\\b(?:' + terms.map(escapeRegExp).join('|') + ')\\b', 'gi');
+  const skip = 'a,code,pre,script,style,svg,button,textarea,input,select,option,.jargon-tip';
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node) {
+      if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      const parent = node.parentElement;
+      return parent && parent.closest(skip) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
+  for (const node of nodes) {
+    const text=node.nodeValue; matcher.lastIndex=0;
+    if (!matcher.test(text)) continue;
+    matcher.lastIndex=0;
+    const fragment=document.createDocumentFragment(); let at=0, match;
+    while ((match=matcher.exec(text))) {
+      if (match.index>at) fragment.append(document.createTextNode(text.slice(at,match.index)));
+      const term=terms.find(t => t.toLowerCase()===match[0].toLowerCase());
+      const span=document.createElement('span');
+      span.className='jargon-tip'; span.tabIndex=0; span.setAttribute('role','note');
+      span.dataset.tip=definitions[term]; span.textContent=match[0];
+      fragment.append(span); at=match.index+match[0].length;
+    }
+    if (at<text.length) fragment.append(document.createTextNode(text.slice(at)));
+    node.parentNode.replaceChild(fragment,node);
+  }
+  const bubble=document.createElement('div'); bubble.className='jargon-bubble';
+  bubble.setAttribute('role','tooltip'); bubble.hidden=true; document.body.append(bubble);
+  let active=null;
+  function show(el){
+    if(!el || !el.classList.contains('jargon-tip')) return;
+    active=el; bubble.textContent=el.dataset.tip; bubble.hidden=false;
+    el.setAttribute('aria-describedby','jargon-tooltip'); bubble.id='jargon-tooltip';
+    const r=el.getBoundingClientRect(); const pad=12;
+    bubble.style.left=Math.max(pad,Math.min(window.innerWidth-bubble.offsetWidth-pad,r.left+r.width/2-bubble.offsetWidth/2))+'px';
+    bubble.style.top=Math.max(pad,r.top-bubble.offsetHeight-10)+'px';
+  }
+  function hide(el){ if(active===el){bubble.hidden=true; active=null;} }
+  document.addEventListener('pointerover',e=>{const el=e.target.closest?.('.jargon-tip'); if(el) show(el);});
+  document.addEventListener('pointerout',e=>{const el=e.target.closest?.('.jargon-tip'); if(el && !el.contains(e.relatedTarget)) hide(el);});
+  document.addEventListener('focusin',e=>show(e.target.closest?.('.jargon-tip')));
+  document.addEventListener('focusout',e=>hide(e.target.closest?.('.jargon-tip')));
+  document.addEventListener('click',e=>{const el=e.target.closest?.('.jargon-tip'); if(el){if(active===el) hide(el); else show(el);}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape' && active){hide(active); active.focus();}});
+  window.addEventListener('scroll',()=>{if(active) show(active);},{passive:true});
+})();
+</script>
+</body></html>
