@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 9 | GAN & Pretrained Diffusion Practice</title><style>
+:root{--n:#17374e;--t:#087e8b;--ink:#1d303d;--muted:#536a78;--line:#d5e0e6;--pale:#eaf6f5;--gold:#fff6df;--blue:#eef4fb;--green:#edf8f1;--code:#10202b}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.68 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.layout{max-width:1260px;margin:25px auto;padding:0 18px;display:grid;grid-template-columns:255px minmax(0,900px);gap:24px;align-items:start}.toc{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:white;border:1px solid var(--line);border-radius:12px;padding:16px}.toc b{display:block;color:var(--n);margin-bottom:8px}.toc a{display:block;padding:3px 0 3px 8px;border-left:2px solid transparent;text-decoration:none;color:var(--muted);font-size:.84rem}.toc a:hover{color:var(--t);border-color:var(--t)}main{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 9px 32px #102b3d10}.hero{padding:48px 56px 38px;background:linear-gradient(130deg,#132f45,#087e8b);color:white}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#b9efeb;font-size:.78rem;font-weight:750}.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.1;margin:.4em 0}.hero p{max-width:720px;color:#e6f5f5;font-size:1.08rem}.pill{display:inline-block;border:1px solid #ffffff66;border-radius:99px;padding:3px 10px;margin:3px;font-size:.77rem}.week-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 56px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#f7fafc}.week-navigation a,.week-navigation span{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 15px;border-radius:8px;font-weight:700;text-decoration:none}.week-navigation a{background:#eaf6f5;color:var(--n);border:1px solid #b9deda}.week-navigation a:hover{background:#dff1ef}.week-navigation .week-home{background:#fff;color:var(--muted);border-color:var(--line)}.week-navigation .week-disabled{color:#7c8992;background:#f0f2f4;border:1px solid var(--line)}.content{padding:20px 56px 55px}h2{font-size:1.75rem;color:var(--n);line-height:1.25;margin:2em 0 .55em;padding-top:.5em;border-top:1px solid var(--line)}h2:first-child{margin-top:.5em}h3{color:var(--t);font-size:1.24rem;margin:1.4em 0 .35em}h4{color:var(--n);margin:.3em 0}p{margin:.45em 0 .9em}li{margin:.25em 0}.lead{font-size:1.08rem;color:#354f60}.box{padding:14px 17px;border-left:4px solid var(--t);background:var(--pale);border-radius:6px;margin:14px 0}.exam{border-color:#5b80b6;background:var(--blue)}.warn{border-color:#d29a23;background:var(--gold)}.good{border-color:#478e66;background:var(--green)}.math{font:1.08em Cambria,"Times New Roman",serif;background:#f2f6f8;padding:1px 4px;border-radius:3px}.eq{display:block;text-align:center;font:1.16rem/1.7 Cambria,"Times New Roman",serif;background:#f2f7f9;color:var(--n);border:1px solid #dce7ec;border-radius:7px;padding:9px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:9px;padding:13px 15px}.card p{margin-bottom:.3em}.diagram{overflow:auto;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fcfefe;margin:16px 0}.diagram svg{display:block;max-width:100%;height:auto;margin:auto}.diagram figcaption{text-align:center;color:var(--muted);font-size:.88rem;margin-top:8px}.tablewrap{overflow-x:auto;margin:14px 0}table{width:100%;border-collapse:collapse;font-size:.91rem}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--n);color:#fff}tbody tr:nth-child(even){background:#f5f8fa}pre{overflow:auto;background:var(--code);color:#e7f0f5;padding:16px 18px;border-radius:9px;font:.84rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}code{font:.91em ui-monospace,SFMono-Regular,Consolas,monospace;background:#edf2f5;padding:.1em .3em;border-radius:4px}pre code{background:transparent;padding:0}details{border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:10px 14px}summary{cursor:pointer;color:var(--n);font-weight:700}.footer{padding:18px 56px;background:#f6f9fb;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+@media(max-width:900px){.layout{display:block;margin:0;padding:0}.toc{position:relative;top:auto;max-height:250px;margin:9px}.hero{padding:32px 23px}.content{padding:15px 23px 40px}.footer{padding:17px 23px}.grid{grid-template-columns:1fr}main{border-radius:0}.week-navigation{margin:12px 23px 0;flex-wrap:wrap}.week-navigation a,.week-navigation span{flex:1}}
+@media print{body{background:white;font-size:10.5pt}.layout{display:block;padding:0;margin:0}.toc{display:none}main{border:0;box-shadow:none}.hero{padding:22px 32px;print-color-adjust:exact}.content{padding:10px 32px}.footer{padding:10px 32px}.week-navigation{margin:8px 32px}h2{break-before:page}h2:first-child{break-before:auto}pre,.diagram,.box,.card,details{break-inside:avoid}}
+</style></head><body><div class="layout">
+<aside class="toc"><b>Week 9 contents</b><a href="#roadmap">How to use these notes</a><a href="#gan">GAN practice</a><a href="#inference">Pretrained diffusion inference</a><a href="#adapt">Adaptation & evaluation</a><a href="#numericals">Worked numericals</a><a href="#practice">Exam-pattern practice</a><a href="#fullcode">Complete programs</a><a href="#recap">Formula card & references</a></aside>
+<main><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-10-transformers-tokenization-attention-in-depth-notes.html">Go to Week 10 &gt;</a></nav><header class="hero"><div class="eyebrow">Deep Learning &amp; GenAI · Week 9 Practice</div><h1>Generate images with GANs and diffusion</h1><p>Hands-on image generation: train a compact GAN, use pretrained diffusion pipelines, calculate guidance, adapt models with LoRA, and evaluate outputs.</p><span class="pill">GAN practice</span><span class="pill">Pretrained diffusion</span><span class="pill">CFG &amp; LoRA</span><span class="pill">Image evaluation</span></header>
+<div class="content"><section id="roadmap"><h2>How to use these notes</h2><p class="lead">Week 9 is the lab bridge from generative-model theory to producing images. It has two different workflows: train a small GAN yourself, and run inference with pretrained diffusion components. For exam questions, trace the update order, identify which tensor is detached, calculate one objective/guidance value, and distinguish model weights from adapter weights.</p><div class="box exam"><b>Quiz-paper alignment:</b> The four supplied Quiz 1 papers are concentrated mainly on Weeks 1–4. They repeatedly use MCQ/MSQ, short numerical answers, code-output and tensor-shape tracing, and linked contexts. The exam notes add GAN-equilibrium and diffusion/LoRA formula prompts. There is little direct Week 9 hands-on PYQ coverage, so the exercises below adapt the observed format rather than pretending to quote unseen questions.</div><figure class="diagram"><svg viewBox="0 0 850 230" role="img" aria-label="GAN training and pretrained text-to-image diffusion inference pipelines"><defs><marker id="w9a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" fill="#17374e"><text x="18" y="36" font-size="15" font-weight="bold">Train a GAN</text><g text-anchor="middle" font-size="12"><rect x="125" y="17" width="110" height="48" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="180" y="45">noise z</text><rect x="305" y="17" width="120" height="48" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="365" y="45">Generator G</text><rect x="515" y="17" width="130" height="48" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="580" y="45">Discriminator D</text><rect x="710" y="17" width="110" height="48" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="765" y="45">real / fake</text></g><path d="M235 41H299M425 41H509M645 41H704" stroke="#087e8b" stroke-width="2" marker-end="url(#w9a)"/><text x="18" y="121" font-size="15" font-weight="bold">Run pretrained diffusion</text><g text-anchor="middle" font-size="12"><rect x="95" y="100" width="110" height="48" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="150" y="128">prompt + seed</text><rect x="245" y="100" width="130" height="48" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="310" y="128">text encoder</text><rect x="415" y="100" width="130" height="48" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="480" y="128">scheduler + denoiser</text><rect x="585" y="100" width="100" height="48" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="635" y="128">VAE decode</text><rect x="725" y="100" width="100" height="48" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="775" y="128">image</text></g><path d="M205 124H239M375 124H409M545 124H579M685 124H719" stroke="#087e8b" stroke-width="2" marker-end="url(#w9a)"/><path d="M480 153C480 193 420 193 420 153" fill="none" stroke="#b76845" stroke-width="2" marker-end="url(#w9a)"/><text x="450" y="212" font-size="12" text-anchor="middle">repeat denoising over scheduler timesteps</text></g></svg><figcaption>Figure 1. GAN training updates two competing networks; diffusion inference repeatedly denoises a latent before decoding it to pixels.</figcaption></figure></section>
+
+<section id="gan"><h2>1. GAN practice: train, monitor, and sample</h2><h3>1.1 The loop as a two-player optimization problem</h3><p>Given real minibatch x and noise z, the generator produces x̃=G(z). A discriminator returns a realness logit. The discriminator update teaches real→1 and generated→0; the generator update teaches generated→1. It is not one ordinary supervised classifier: each network’s objective changes as the other changes.</p><ol><li><b>Prepare real:</b> use a consistent image shape and normalize to match generator output. If G ends in tanh, train on [−1,1].</li><li><b>Update D:</b> clear D gradients; evaluate D(x) and D(G(z).detach()); compute real/fake losses; backpropagate and step D.</li><li><b>Update G:</b> clear G gradients; sample z and compute D(G(z)); label fake as real; backpropagate through D to G; step G.</li><li><b>Monitor:</b> save generated grids from a fixed z batch each epoch; inspect diversity, artifacts, and memorization as well as losses.</li></ol><div class="eq">L<sub>D</sub>=BCE(D(x),1)+BCE(D(G(z).detach()),0)<br>L<sub>G</sub>=BCE(D(G(z)),1)  (non-saturating form)</div><p>Use logits with <code>BCEWithLogitsLoss</code>; it combines sigmoid and BCE stably. D receives logits, not sigmoid probabilities. The output of D for each image is typically [B,1]. The real/fake labels should have the same shape.</p>
+<h3>1.2 Why detach fake only for the D update?</h3><p>In the D step, the optimization target is D’s parameters; <code>fake.detach()</code> blocks gradients from this discriminator loss into G. In the G step, fake must remain connected to G. Gradients travel through D’s computation to its input and then into G; D’s parameters can be frozen to avoid calculating their gradients while retaining this input gradient.</p><pre><code># D phase
+opt_D.zero_grad(set_to_none=True)
+loss_D = bce(D(real), ones) + bce(D(G(z).detach()), zeros)
+loss_D.backward()
+opt_D.step()
+
+# G phase: freeze D weights, but do NOT detach G(z)
+for p in D.parameters(): p.requires_grad_(False)
+opt_G.zero_grad(set_to_none=True)
+loss_G = bce(D(G(z)), ones)
+loss_G.backward()
+opt_G.step()
+for p in D.parameters(): p.requires_grad_(True)</code></pre>
+<h3>1.3 Architecture and image normalization</h3><p>A DCGAN commonly maps a latent vector [B,Z,1,1] through transposed convolutions to an image, and maps the image back to a scalar score through strided convolutions. Spatial dimensions follow the convolution formula; design the generator/discriminator so output images exactly match training image size. When G outputs tanh in [−1,1], transform ToTensor pixels x∈[0,1] to 2x−1. Mismatched scales make the discriminator’s job artificially easy.</p><div class="tablewrap"><table><thead><tr><th>Question cue</th><th>Reasoning/check</th></tr></thead><tbody><tr><td>G input [B,100,1,1]</td><td>100 noise features per sample, spatial 1×1</td></tr><tr><td>G output [B,1,28,28]</td><td>One-channel grayscale image</td></tr><tr><td>D output [B,1]</td><td>One realness logit per image, not 10 digit classes</td></tr><tr><td>tanh output but real data [0,1]</td><td>Range mismatch; rescale real images to [−1,1]</td></tr><tr><td>fake detached in both phases</td><td>Generator cannot receive gradient during its own update</td></tr></tbody></table></div>
+<h3>1.4 Losses do not tell the whole story</h3><p>GAN losses can oscillate and need not decrease monotonically as samples improve. Compare fixed-seed sample grids over time. Mode collapse appears when many noise inputs yield a small set of similar outputs. FID estimates feature-distribution distance using real and generated sample sets; it needs enough samples and can be biased by preprocessing. Precision/recall style metrics separate fidelity and coverage. Human review remains useful for prompt/data-specific defects; no single score captures all quality.</p></section>
+
+<section id="inference"><h2>2. Pretrained diffusion: from prompt to image</h2><h3>2.1 What a text-to-image pipeline loads</h3><p>A Stable-Diffusion-style pipeline generally packages a tokenizer and text encoder, denoiser (often a U-Net in classic latent diffusion), a VAE encoder/decoder, and a scheduler. At inference, tokenize the prompt, encode it, start from random latent noise, repeatedly predict noise (conditioned on the text), update the latent according to scheduler timesteps, and decode the final latent to pixels. Text guidance may use unconditional and conditional estimates.</p><div class="eq">prompt → token IDs → text embeddings → guided denoise loop → latent z₀ → VAE decoder → image</div><p>Classic latent diffusion shrinks images in the VAE latent, so denoising costs less than operating on every pixel. The exact latent scale, channel count, scheduler, and model architecture depend on the checkpoint; do not memorize one model’s numbers as universal.</p>
+<h3>2.2 Inference controls and their effects</h3><div class="tablewrap"><table><thead><tr><th>Control</th><th>What it controls</th><th>Typical tradeoff</th></tr></thead><tbody><tr><td>Prompt</td><td>Conditioning text</td><td>Specific language may steer subject/style but remains ambiguous</td></tr><tr><td>Negative prompt</td><td>Conditioned “avoid these” direction where pipeline supports it</td><td>Can suppress desired features too</td></tr><tr><td>Seed / torch.Generator</td><td>Initial random latent (and reproducibility)</td><td>Same seed is a controlled comparison, not a quality guarantee</td></tr><tr><td>Inference steps</td><td>Number of reverse updates</td><td>More steps cost time; quality may plateau or depend on scheduler</td></tr><tr><td>Guidance scale w</td><td>Strength of prompt conditioning</td><td>High values may reduce diversity or create artifacts</td></tr><tr><td>Resolution</td><td>Latent/image dimensions</td><td>Memory and compute increase; checkpoint has supported limits</td></tr><tr><td>Precision/device</td><td>Memory use and throughput</td><td>Half precision often reduces memory on supported GPUs; CPU may need float32</td></tr></tbody></table></div>
+<h3>2.3 Classifier-free guidance numeric</h3><p>Given unconditional noise prediction ε<sub>u</sub>=2, conditional prediction ε<sub>c</sub>=5, and guidance w=3:</p><div class="eq">ε<sub>guided</sub>=ε<sub>u</sub>+w(ε<sub>c</sub>−ε<sub>u</sub>)=2+3(5−2)=<b>11</b></div><p>The result extrapolates beyond ε<sub>c</sub>; it is not a convex average when w&gt;1. At w=0, the unconditional result remains; w=1 returns ε<sub>c</sub>. High guidance is not always “better.”</p>
+<h3>2.4 Prompt composition and controlled iteration</h3><p>Describe subject, action, setting, composition, visual medium, lighting, and constraints when they matter. Avoid contradictory descriptors. Change one factor per experiment, keep the seed and other settings fixed, and save a contact sheet. A prompt is conditioning, not a guarantee: models may miscount objects, misspell text, or combine incompatible attributes.</p><pre><code>from diffusers import DiffusionPipeline
+import torch
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+dtype = torch.float16 if device == "cuda" else torch.float32
+pipe = DiffusionPipeline.from_pretrained(
+    MODEL_ID, torch_dtype=dtype, use_safetensors=True
+).to(device)
+gen = torch.Generator(device=device).manual_seed(1234)
+image = pipe(
+    prompt="a watercolor diagram of a neuron, clean labels, white background",
+    negative_prompt="blurry, cluttered, illegible text",
+    num_inference_steps=30, guidance_scale=6.5, generator=gen
+).images[0]
+image.save("sample.png")</code></pre><p><code>MODEL_ID</code> must be replaced with an appropriate checkpoint identifier. Some model repositories require accepting a license or logging in. Keep access tokens out of source files and public notebooks. Check the model card’s allowed use and supported precision/resolution.</p></section>
+
+<section id="adapt"><h2>3. Personalization: full tuning, LoRA, textual inversion</h2><h3>3.1 What is adapted?</h3><ul><li><b>Full fine-tuning / DreamBooth-style adaptation:</b> update many or all model weights using examples of a subject/style. Flexible but costly, and small datasets can overfit.</li><li><b>LoRA:</b> freeze original matrix W; learn low-rank factors A and B so <span class="math">W′=W+(α/r)BA</span>. Store a compact adapter and load it alongside the base.</li><li><b>Textual inversion:</b> learn a new embedding for a placeholder token while keeping the larger model mostly fixed.</li><li><b>Control adapters:</b> condition on structural inputs such as edges, depth, or pose; the task plan should identify the control model and compatible base pipeline.</li></ul><p>For a linear projection d<sub>in</sub>→d<sub>out</sub>, full matrix parameters=d<sub>in</sub>d<sub>out</sub>; rank-r LoRA adds r(d<sub>in</sub>+d<sub>out</sub>) parameters (ignoring bias). For 768→768 and r=8, full=589,824; LoRA=8(768+768)=12,288, which is 2.083% of the dense matrix. Adapter parameter ratio is not the same as total-model ratio.</p><h3>3.2 Load an image-generation LoRA</h3><pre><code># After loading a compatible Diffusers pipeline:
+pipe.load_lora_weights("your-account/your-style-adapter",
+                       adapter_name="style")
+image = pipe("a small cabin in the learned watercolor style").images[0]
+# To return to the base model in supported pipelines:
+pipe.unload_lora_weights()</code></pre><p>Adapters are checkpoint-specific: the compatible base model, target modules, text encoder(s), and scale matter. Keep the adapter configuration with its weights and verify prompt behavior on held-out prompts.</p></section>
+
+<section id="numericals"><h2>4. Worked numericals and exam-style code reading</h2><h3>Numerical A: one GAN batch loss</h3><p>For D(real)=.8 and D(fake)=.2, the per-example BCE losses are −ln(.8)=.2231 and −ln(1−.2)=.2231. If summed, L<sub>D</sub>=.4462; if averaged over the two examples, L<sub>D</sub>=.2231. With non-saturating G, L<sub>G</sub>=−ln(.2)=1.609. The reduction convention changes the displayed magnitude.</p><h3>Numerical B: CFG interpolation/extrapolation</h3><p>εu=[1,0], εc=[3,2], w=2: εg=[1,0]+2([3,2]−[1,0])=[1,0]+[4,4]=<b>[5,4]</b>.</p><h3>Numerical C: LoRA savings for one adapted layer</h3><p>For 1024×1024 projection and r=4: dense=1,048,576 parameters; LoRA=4(1024+1024)=8,192, about 0.78125% of that matrix. This excludes scaling, optional biases, and any unfreezed modules.</p><h3>Code-reading checklist</h3><div class="tablewrap"><table><thead><tr><th>Question asks</th><th>Trace this</th></tr></thead><tbody><tr><td>Which weights change?</td><td>Which optimizer owns them, requires_grad status, and whether the loss path reaches them</td></tr><tr><td>What shape does an image batch have?</td><td>[B,C,H,W] for Torchvision/PyTorch conv nets; print after transforms and after batching</td></tr><tr><td>Why is generated image range wrong?</td><td>Match training normalization to final activation (tanh→[−1,1])</td></tr><tr><td>Will a repeated seed reproduce output?</td><td>Use a seeded generator on the right device, same checkpoint/scheduler/software; exact bitwise determinism can still be backend-dependent</td></tr><tr><td>What does guidance do?</td><td>Substitute εu, εc, w into formula before interpreting</td></tr><tr><td>Why is a LoRA checkpoint small?</td><td>Trainable low-rank updates are stored; compatible base model is still required</td></tr></tbody></table></div></section>
+
+<section id="practice"><h2>5. Exam-style practice with worked answers</h2><details><summary>Q1. In discriminator training, should G(z) remain connected to G?</summary><p>No. Detach fake data for the discriminator update so that the D loss updates D only. In the generator update, keep G(z) connected so gradients reach G.</p></details><details><summary>Q2. If εu=1, εc=3, and w=2, what is εguided?</summary><p>1+2(3−1)=5.</p></details><details><summary>Q3. Does a guidance scale of 3 mean “three times the conditional prediction”?</summary><p>No. It is εu+3(εc−εu). It starts from unconditional prediction and scales the difference vector.</p></details><details><summary>Q4. G ends with Tanh, while real images remain ToTensor values in [0,1]. What mismatch exists?</summary><p>The two distributions occupy different numeric ranges. Normalize the real images to [−1,1], or choose a matching generator output activation/data scale.</p></details><details><summary>Q5. A 768×768 matrix gets rank-8 LoRA. How many trainable low-rank parameters are added?</summary><p>8(768+768)=12,288, excluding any biases or additional trainable modules.</p></details><details><summary>Q6. A fixed seed improves which property?</summary><p>Reproducibility/control of the initial random noise for comparisons. It does not guarantee higher quality or identical results across every device/backend/version.</p></details></section>
+
+<section id="fullcode"><h2>6. Complete end-of-week lab: train a GAN and use pretrained diffusion</h2><p>This end-to-end script has two independent tracks: a small DCGAN learns MNIST digits from scratch; a pretrained text-to-image pipeline generates an image from a prompt. It saves a fixed-noise grid and a diffusion image. Model download, checkpoint license, GPU memory, and training time depend on your environment.</p><pre><code>"""Week 9 lab: DCGAN training + pretrained diffusion inference."""
+import os
+import torch
+from torch import nn
+from torch.nn import functional as F
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms, utils
+
+SEED = 29
+torch.manual_seed(SEED)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# --------------------- Part A: train DCGAN -------------------
+BATCH, ZDIM, EPOCHS = 128, 100, 5
+train_data = datasets.MNIST(
+    root="data", train=True, download=True,
+    transform=transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.5,), (0.5,))  # [0,1] -> [-1,1]
+    ])
+)
+loader = DataLoader(train_data, batch_size=BATCH, shuffle=True,
+                    drop_last=True, num_workers=0)
+
+class Generator(nn.Module):
+    def __init__(self, zdim=100):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.ConvTranspose2d(zdim, 128, 7, 1, 0, bias=False),
+            nn.BatchNorm2d(128), nn.ReLU(True),       # 1 -> 7
+            nn.ConvTranspose2d(128, 64, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(64), nn.ReLU(True),        # 7 -> 14
+            nn.ConvTranspose2d(64, 1, 4, 2, 1),
+            nn.Tanh()                                  # 14 -> 28
+        )
+    def forward(self, z):
+        return self.net(z)
+
+class Discriminator(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Conv2d(1, 64, 4, 2, 1), nn.LeakyReLU(0.2, True),
+            nn.Conv2d(64, 128, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(128), nn.LeakyReLU(0.2, True),
+            nn.Flatten(), nn.Linear(128 * 7 * 7, 1)  # one logit/image
+        )
+    def forward(self, x):
+        return self.net(x)
+
+G = Generator(ZDIM).to(device)
+D = Discriminator().to(device)
+opt_G = torch.optim.Adam(G.parameters(), lr=2e-4, betas=(0.5, 0.999))
+opt_D = torch.optim.Adam(D.parameters(), lr=2e-4, betas=(0.5, 0.999))
+bce = nn.BCEWithLogitsLoss()
+fixed_z = torch.randn(64, ZDIM, 1, 1, device=device)
+os.makedirs("week9_samples", exist_ok=True)
+
+for epoch in range(EPOCHS):
+    G.train(); D.train()
+    d_running = g_running = 0.0
+    for real, _ in loader:
+        real = real.to(device)
+        b = real.size(0)
+        ones = torch.ones(b, 1, device=device)
+        zeros = torch.zeros(b, 1, device=device)
+
+        # Update D: real -> 1, fake -> 0; stop fake loss at G.
+        opt_D.zero_grad(set_to_none=True)
+        z = torch.randn(b, ZDIM, 1, 1, device=device)
+        fake = G(z)
+        d_real = bce(D(real), ones)
+        d_fake = bce(D(fake.detach()), zeros)
+        loss_D = d_real + d_fake
+        loss_D.backward()
+        opt_D.step()
+
+        # Update G: fool D; preserve the graph from D(fake) back into G.
+        for p in D.parameters(): p.requires_grad_(False)
+        opt_G.zero_grad(set_to_none=True)
+        z = torch.randn(b, ZDIM, 1, 1, device=device)
+        generated = G(z)
+        loss_G = bce(D(generated), ones)
+        loss_G.backward()
+        opt_G.step()
+        for p in D.parameters(): p.requires_grad_(True)
+        d_running += loss_D.item(); g_running += loss_G.item()
+
+    G.eval()
+    with torch.no_grad():
+        grid = G(fixed_z).cpu()                # [64,1,28,28], [-1,1]
+        utils.save_image(grid, f"week9_samples/epoch_{epoch+1:02d}.png",
+                         normalize=True, nrow=8)
+    print(f"epoch {epoch+1}: D={d_running/len(loader):.3f}, "
+          f"G={g_running/len(loader):.3f}")
+
+os.makedirs("week9_samples", exist_ok=True)
+torch.save({"G": G.state_dict(), "D": D.state_dict()},
+           "week9_samples/dcgan_mnist.pt")
+
+# ---------------- Part B: pretrained diffusion ---------------
+# Install a compatible diffusers/transformers/accelerate/safetensors stack.
+# Some model repos require a license agreement and Hugging Face login.
+from diffusers import DiffusionPipeline
+
+model_id = "stable-diffusion-v1-5/stable-diffusion-v1-5"  # choose an accessible checkpoint
+dtype = torch.float16 if device.type == "cuda" else torch.float32
+pipe = DiffusionPipeline.from_pretrained(
+    model_id, torch_dtype=dtype, use_safetensors=True
+).to(device)
+
+prompt = "an educational watercolor illustration of a tiny robot reading a book, " \
+         "centered composition, warm daylight, simple clean background"
+negative = "blurry, cluttered, low contrast, text, watermark"
+generator = torch.Generator(device=device).manual_seed(SEED)
+result = pipe(
+    prompt=prompt,
+    negative_prompt=negative,
+    num_inference_steps=30,
+    guidance_scale=6.5,
+    generator=generator,
+    num_images_per_prompt=1
+)
+result.images[0].save("week9_samples/pretrained_diffusion.png")
+print("Saved GAN grids/checkpoint and pretrained diffusion sample.")</code></pre>
+<h3>Code walkthrough and shape audit</h3><ol><li><b>Real-data scaling:</b> MNIST ToTensor creates [0,1]; Normalize(.5,.5) changes it to [−1,1], matching G’s tanh.</li><li><b>Generator shapes:</b> [B,100,1,1]→[B,128,7,7]→[B,64,14,14]→[B,1,28,28].</li><li><b>Discriminator:</b> image [B,1,28,28]→[B,64,14,14]→[B,128,7,7]→[B,1] logit.</li><li><b>Alternating updates:</b> fake is detached only for D training; D weights are frozen during G step while gradients can pass back to G.</li><li><b>Fixed grid:</b> reusing fixed_z makes epoch-to-epoch visual comparisons meaningful.</li><li><b>Pretrained pipeline:</b> model, text encoder, VAE, scheduler are loaded from the checkpoint; each call runs multiple denoising steps.</li><li><b>Reproducibility:</b> fixed seed, prompt, checkpoint and settings make comparisons controlled, but backends may not guarantee exact bitwise equality.</li><li><b>Security:</b> authenticate with the CLI or environment-managed credentials; never paste tokens into the notebook or public source.</li></ol><div class="box warn"><b>Compute and rights:</b> this script downloads MNIST and a pretrained checkpoint. Diffusion inference is memory-intensive; use a compatible smaller model or CPU offload when necessary. Read the checkpoint model card/license and respect image/data rights.</div></section>
+
+<section id="recap"><h2>7. Week 9 formula card and sources</h2><div class="grid"><div class="card"><h4>GAN update</h4><p>D learns real=1/fake=0; non-saturating G learns fake=1.</p></div><div class="card"><h4>Guidance</h4><p>ε<sub>g</sub>=ε<sub>u</sub>+w(ε<sub>c</sub>−ε<sub>u</sub>).</p></div><div class="card"><h4>LoRA</h4><p>W′=W+(α/r)BA; additional parameters r(d<sub>in</sub>+d<sub>out</sub>).</p></div><div class="card"><h4>Controlled sampling</h4><p>Hold prompt, seed, checkpoint, steps, scheduler, and resolution fixed when comparing one change.</p></div></div><p>Quiz alignment: the supplied October 2025 and March/July 2026 Quiz 1 papers are used for observed question format; most direct tested material is earlier weeks. The supplied exam notes include the GAN equilibrium answer D(G(z))≈0.5 and formula prompts, which are covered here.</p><ul><li><a href="https://docs.pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html">PyTorch DCGAN tutorial: training and architecture</a></li><li><a href="https://huggingface.co/docs/diffusers/api/pipelines/stable_diffusion/text2img">Hugging Face Diffusers text-to-image pipeline API</a></li><li><a href="https://huggingface.co/docs/diffusers/main/using-diffusers/loading_adapters">Diffusers: load pretrained LoRA/adapters</a></li><li><a href="https://arxiv.org/abs/1406.2661">Goodfellow et al., Generative Adversarial Nets</a></li><li><a href="https://www.youtube.com/playlist?list=PLZ2ps__7DhBa9hqi20allqocTSUUt3nWX">Student-supplied course playlist</a> (the link is retained; playlist metadata was not retrievable)</li></ul></section>
+<nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-10-transformers-tokenization-attention-in-depth-notes.html">Go to Week 10 &gt;</a></nav></div><footer class="footer">Week 9 · GAN &amp; Pretrained Diffusion Practice · Deep Learning &amp; GenAI exam notes</footer></main></div></body></html>

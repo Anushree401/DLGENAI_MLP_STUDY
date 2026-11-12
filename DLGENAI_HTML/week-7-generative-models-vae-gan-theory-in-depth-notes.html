@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 7 | Autoencoders, VAEs & GANs</title><style>
+:root{--n:#17374e;--t:#087e8b;--ink:#1d303d;--muted:#536a78;--line:#d5e0e6;--pale:#eaf6f5;--gold:#fff6df;--blue:#eef4fb;--green:#edf8f1;--code:#10202b}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.68 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.layout{max-width:1260px;margin:25px auto;padding:0 18px;display:grid;grid-template-columns:255px minmax(0,900px);gap:24px;align-items:start}.toc{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:white;border:1px solid var(--line);border-radius:12px;padding:16px}.toc b{display:block;color:var(--n);margin-bottom:8px}.toc a{display:block;padding:3px 0 3px 8px;border-left:2px solid transparent;text-decoration:none;color:var(--muted);font-size:.84rem}.toc a:hover{color:var(--t);border-color:var(--t)}main{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 9px 32px #102b3d10}.hero{padding:48px 56px 38px;background:linear-gradient(130deg,#132f45,#087e8b);color:white}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#b9efeb;font-size:.78rem;font-weight:750}.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.1;margin:.4em 0}.hero p{max-width:720px;color:#e6f5f5;font-size:1.08rem}.pill{display:inline-block;border:1px solid #ffffff66;border-radius:99px;padding:3px 10px;margin:3px;font-size:.77rem}.week-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 56px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#f7fafc}.week-navigation a,.week-navigation span{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 15px;border-radius:8px;font-weight:700;text-decoration:none}.week-navigation a{background:#eaf6f5;color:var(--n);border:1px solid #b9deda}.week-navigation a:hover{background:#dff1ef}.week-navigation .week-home{background:#fff;color:var(--muted);border-color:var(--line)}.week-navigation .week-disabled{color:#7c8992;background:#f0f2f4;border:1px solid var(--line)}.content{padding:20px 56px 55px}h2{font-size:1.75rem;color:var(--n);line-height:1.25;margin:2em 0 .55em;padding-top:.5em;border-top:1px solid var(--line)}h2:first-child{margin-top:.5em}h3{color:var(--t);font-size:1.24rem;margin:1.4em 0 .35em}h4{color:var(--n);margin:.3em 0}p{margin:.45em 0 .9em}li{margin:.25em 0}.lead{font-size:1.08rem;color:#354f60}.box{padding:14px 17px;border-left:4px solid var(--t);background:var(--pale);border-radius:6px;margin:14px 0}.exam{border-color:#5b80b6;background:var(--blue)}.warn{border-color:#d29a23;background:var(--gold)}.good{border-color:#478e66;background:var(--green)}.math{font:1.08em Cambria,"Times New Roman",serif;background:#f2f6f8;padding:1px 4px;border-radius:3px}.eq{display:block;text-align:center;font:1.16rem/1.7 Cambria,"Times New Roman",serif;background:#f2f7f9;color:var(--n);border:1px solid #dce7ec;border-radius:7px;padding:9px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:9px;padding:13px 15px}.card p{margin-bottom:.3em}.diagram{overflow:auto;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fcfefe;margin:16px 0}.diagram svg{display:block;max-width:100%;height:auto;margin:auto}.diagram figcaption{text-align:center;color:var(--muted);font-size:.88rem;margin-top:8px}.tablewrap{overflow-x:auto;margin:14px 0}table{width:100%;border-collapse:collapse;font-size:.91rem}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--n);color:#fff}tbody tr:nth-child(even){background:#f5f8fa}pre{overflow:auto;background:var(--code);color:#e7f0f5;padding:16px 18px;border-radius:9px;font:.84rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}code{font:.91em ui-monospace,SFMono-Regular,Consolas,monospace;background:#edf2f5;padding:.1em .3em;border-radius:4px}pre code{background:transparent;padding:0}details{border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:10px 14px}summary{cursor:pointer;color:var(--n);font-weight:700}.footer{padding:18px 56px;background:#f6f9fb;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+@media(max-width:900px){.layout{display:block;margin:0;padding:0}.toc{position:relative;top:auto;max-height:250px;margin:9px}.hero{padding:32px 23px}.content{padding:15px 23px 40px}.footer{padding:17px 23px}.grid{grid-template-columns:1fr}main{border-radius:0}.week-navigation{margin:12px 23px 0;flex-wrap:wrap}.week-navigation a,.week-navigation span{flex:1}}
+@media print{body{background:white;font-size:10.5pt}.layout{display:block;padding:0;margin:0}.toc{display:none}main{border:0;box-shadow:none}.hero{padding:22px 32px;print-color-adjust:exact}.content{padding:10px 32px}.footer{padding:10px 32px}.week-navigation{margin:8px 32px}h2{break-before:page}h2:first-child{break-before:auto}pre,.diagram,.box,.card,details{break-inside:avoid}}
+</style></head><body><div class="layout">
+<aside class="toc"><b>Week 7 contents</b><a href="#roadmap">How to use these notes</a><a href="#ae">Autoencoders</a><a href="#vae">Variational autoencoders</a><a href="#gan">Generative adversarial networks</a><a href="#compare">Compare AE, VAE & GAN</a><a href="#practice">Exam-pattern practice</a><a href="#fullcode">Complete VAE + GAN lab</a><a href="#recap">Formula card & references</a></aside>
+<main><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-8-diffusion-models-theory-in-depth-notes.html">Go to Week 8 &gt;</a></nav><header class="hero"><div class="eyebrow">Deep Learning &amp; GenAI · Week 7 Theory</div><h1>Generative models: autoencoders, VAEs, and GANs</h1><p>Build a precise mental model of reconstruction, latent-variable inference, adversarial training, losses, numericals, and implementation.</p><span class="pill">Autoencoders</span><span class="pill">ELBO &amp; KL</span><span class="pill">Reparameterization</span><span class="pill">GAN training</span></header>
+<div class="content"><section id="roadmap"><h2>How to use these notes</h2><p class="lead">This week connects two different meanings of “generate.” An autoencoder reconstructs an input through a compressed representation; a VAE learns a probability distribution in a latent space from which new examples can be sampled; a GAN trains a generator against a discriminator. Keep their objectives, latent spaces, and failure modes distinct.</p><div class="box exam"><b>Exam-pattern note:</b> The supplied Quiz 1 papers focus mainly on early neural-network and CNN material. The supplied exam notes include later-week conceptual prompts such as the LSTM forget gate and the ideal GAN discriminator output D(G(z))=0.5. So the GAN/AE/VAE practice below emphasizes definition traps, a short KL numeric, loss-sign reasoning, shape tracing, and a code update-order question—the same MCQ/numerical/code-reading style used in the papers.</div><figure class="diagram"><svg viewBox="0 0 840 260" role="img" aria-label="Autoencoder, variational autoencoder, and GAN architecture comparison"><defs><marker id="w7a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" fill="#17374e"><text x="18" y="42" font-size="15" font-weight="bold">Autoencoder</text><rect x="155" y="20" width="100" height="45" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="205" y="47" text-anchor="middle" font-size="13">image x</text><rect x="350" y="20" width="100" height="45" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="400" y="47" text-anchor="middle" font-size="13">code z</text><rect x="550" y="20" width="120" height="45" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="610" y="47" text-anchor="middle" font-size="13">reconstruction x̂</text><path d="M255 42H345M450 42H545" stroke="#087e8b" stroke-width="2" marker-end="url(#w7a)"/><text x="18" y="119" font-size="15" font-weight="bold">VAE</text><rect x="155" y="97" width="100" height="45" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="205" y="124" text-anchor="middle" font-size="13">image x</text><rect x="330" y="87" width="130" height="32" rx="7" fill="#edf8f1" stroke="#478e66"/><text x="395" y="108" text-anchor="middle" font-size="12">μ(x), log σ²(x)</text><rect x="330" y="125" width="130" height="32" rx="7" fill="#edf8f1" stroke="#478e66"/><text x="395" y="146" text-anchor="middle" font-size="12">z = μ + σ ⊙ ε</text><rect x="550" y="105" width="120" height="45" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="610" y="132" text-anchor="middle" font-size="13">reconstruction x̂</text><path d="M255 119H325M460 141C500 141 505 128 545 128" stroke="#087e8b" stroke-width="2" marker-end="url(#w7a)"/><text x="700" y="111" font-size="12">KL pushes q(z|x)</text><text x="700" y="130" font-size="12">toward prior p(z)</text><text x="18" y="214" font-size="15" font-weight="bold">GAN</text><rect x="155" y="191" width="110" height="45" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="210" y="218" text-anchor="middle" font-size="13">noise z</text><rect x="350" y="191" width="110" height="45" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="405" y="218" text-anchor="middle" font-size="13">generator G(z)</text><rect x="570" y="191" width="130" height="45" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="635" y="218" text-anchor="middle" font-size="13">discriminator D</text><path d="M265 213H345M460 213H565" stroke="#087e8b" stroke-width="2" marker-end="url(#w7a)"/><text x="518" y="184" font-size="11">real x also enters D</text><path d="M655 191C650 165 220 168 210 186" fill="none" stroke="#b76845" stroke-width="1.7" stroke-dasharray="5 4" marker-end="url(#w7a)"/></g></svg><figcaption>Figure 1. A deterministic autoencoder maps x to one code; a VAE predicts a distribution and samples it; a GAN maps a chosen noise prior through G and trains D to distinguish real from generated samples.</figcaption></figure></section>
+
+<section id="ae"><h2>1. Autoencoders: learn to reconstruct</h2><h3>1.1 Encoder, bottleneck, decoder</h3><p>An encoder <span class="math">z=f<sub>φ</sub>(x)</span> compresses an input into a latent code; a decoder <span class="math">x̂=g<sub>θ</sub>(z)</span> attempts to reconstruct it. Train by minimizing a reconstruction loss. For continuous data, MSE corresponds to a Gaussian observation model with fixed variance (up to scale). For binary-valued or appropriately normalized image pixels, binary cross-entropy corresponds to a Bernoulli observation model.</p><div class="eq">L<sub>recon</sub>(x,x̂) = −log p<sub>θ</sub>(x|z)  (often MSE or BCE under a chosen observation model)</div><p>A narrow bottleneck, weight decay, sparsity penalty, denoising corruption, or convolutional structure can encourage useful representations. But a plain deterministic autoencoder does <b>not</b> promise that arbitrary points sampled from a simple distribution decode into realistic examples. Its latent codes may occupy disconnected or irregular regions. Reconstruction is the training task; a well-defined generative prior is a separate modeling choice.</p>
+<h3>1.2 Variants and uses</h3><ul><li><b>Denoising AE:</b> corrupt x to x̃ but reconstruct clean x. Learns features robust to chosen corruptions.</li><li><b>Sparse AE:</b> penalize activation density, encouraging many code units to be inactive.</li><li><b>Convolutional AE:</b> use spatial convolutions in encoder/decoder for image structure.</li><li><b>Anomaly detection:</b> train on normal data and flag unusual reconstruction error. This is not automatically reliable: an expressive AE may also reconstruct outliers well.</li><li><b>Compression:</b> a learned latent is useful only if representation plus side information/coding cost is favorable.</li></ul><h3>1.3 Shape/parameter mini-example</h3><p>A flattened 28×28 image has 784 inputs. An MLP encoder 784→256→2 has (784×256+256)+(256×2+2)=200,960+514=201,474 parameters. If a symmetric decoder 2→256→784 is used, it adds (2×256+256)+(256×784+784)=768+201,488=202,256; total 403,730. The bottleneck width is 2, but parameter count is determined by all weights and biases.</p><pre><code># One deterministic autoencoder pass
+z = encoder(x)                  # [B, latent_dim]
+x_logits = decoder(z)           # [B, 784]
+loss = F.binary_cross_entropy_with_logits(x_logits, x, reduction="sum")</code></pre><p>If the decoder ends in sigmoid probabilities, use BCE; if it returns logits, use BCE-with-logits for numerical stability. Do not apply sigmoid and then pass those probabilities to BCE-with-logits.</p></section>
+
+<section id="vae"><h2>2. Variational autoencoders (VAEs)</h2><h3>2.1 Latent variable model</h3><p>A VAE posits a generative model <span class="math">p<sub>θ</sub>(x,z)=p(z)p<sub>θ</sub>(x|z)</span>, commonly with prior <span class="math">p(z)=N(0,I)</span>. Exact posterior inference <span class="math">p(z|x)</span> is often intractable, so an encoder approximates it with <span class="math">q<sub>φ</sub>(z|x)</span>. For a diagonal Gaussian, the encoder returns a mean vector μ(x) and log-variance vector logσ²(x).</p><div class="eq">q<sub>φ</sub>(z|x)=N(μ(x), diag(σ²(x)))</div><p>The training objective maximizes the evidence lower bound (ELBO): <span class="math">log p<sub>θ</sub>(x) ≥ E<sub>q</sub>[log p<sub>θ</sub>(x|z)] − KL(q<sub>φ</sub>(z|x) || p(z))</span>. Equivalently minimize its negative: reconstruction negative log-likelihood plus KL regularization.</p><div class="eq">L<sub>VAE</sub> = −E<sub>q(z|x)</sub>[log p<sub>θ</sub>(x|z)] + KL(q<sub>φ</sub>(z|x) || p(z))</div>
+<h3>2.2 Reparameterization trick</h3><p>Sampling z directly from a distribution whose parameters depend on the encoder would obstruct ordinary backpropagation through that random draw. Instead, sample parameter-free noise <span class="math">ε∼N(0,I)</span> and form <span class="math">z=μ+σ⊙ε</span>. The randomness is isolated in ε; gradients flow through μ and σ. Numerically compute <span class="math">σ=exp(0.5·logσ²)</span>, because the network predicts log variance for unconstrained values while variance stays positive.</p><figure class="diagram"><svg viewBox="0 0 750 140" role="img" aria-label="Reparameterization makes latent sampling differentiable"><defs><marker id="w7b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" fill="#17374e" text-anchor="middle"><rect x="40" y="40" width="110" height="50" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="95" y="70">x</text><rect x="220" y="40" width="150" height="50" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="295" y="61">encoder</text><text x="295" y="79" font-size="12">μ, log σ²</text><rect x="440" y="12" width="105" height="42" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="492" y="38">ε ~ N(0,I)</text><rect x="440" y="76" width="105" height="42" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="492" y="102">z=μ+σε</text><rect x="610" y="40" width="100" height="50" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="660" y="70">decoder</text><path d="M150 65H215M370 65C400 65 400 97 435 97M545 97H605M492 54V70" fill="none" stroke="#087e8b" stroke-width="2" marker-end="url(#w7b)"/></g></svg><figcaption>Figure 2. Randomness is provided by ε; the deterministic transform z=μ+σε keeps a differentiable path to encoder parameters.</figcaption></figure>
+<h3>2.3 KL divergence for a diagonal Gaussian</h3><p>For q=N(μ,σ²) and p=N(0,1) in one dimension:</p><div class="eq">KL(q||p)=½(μ²+σ²−1−lnσ²)</div><p>For d independent latent dimensions, sum this expression over dimensions. The KL is non-negative and reaches 0 exactly when q=p. In code use log variance directly to avoid taking a log of a tiny variance.</p><div class="box good"><b>Worked numeric:</b> μ=1 and σ²=0.5. Then ln(0.5)=−0.6931, so KL=0.5[1+0.5−1−(−0.6931)]=0.5×1.1931=<b>0.5966 nats</b>. If μ=0 and σ²=1, KL=0.</div><p>For μ=[0,1], logσ²=[0,ln(.5)], sum KL=0+0.5966=0.5966. Mean-over-dim reduction would instead report 0.2983; always notice the reduction convention when comparing numbers.</p>
+<h3>2.4 β-VAE and posterior collapse</h3><p>A β-VAE uses <span class="math">L=reconstruction+β·KL</span>. Larger β pushes q(z|x) closer to the prior and can encourage a more regular/disentangled latent representation, but often worsens reconstruction. β is a tradeoff, not a free quality improvement. Posterior collapse occurs when q(z|x) becomes close to p(z) and the decoder largely ignores z; KL becomes near zero while reconstruction may remain decent. Remedies include KL warm-up/annealing, free bits, decoder changes, and careful capacity tuning.</p>
+<h3>2.5 Sampling and interpolation</h3><p>After training, draw z~N(0,I) and decode. Sampling from the prior works because training regularized encoded posteriors toward that prior. Interpolate between zA and zB to inspect latent geometry; linear interpolation in a Gaussian latent may pass through low-density regions, so smoothly changing outputs are an empirical property, not a theorem.</p></section>
+
+<section id="gan"><h2>3. Generative adversarial networks (GANs)</h2><h3>3.1 The two-player game</h3><p>The generator maps noise <span class="math">z∼p<sub>z</sub></span> to a synthetic sample G(z). The discriminator returns a score/probability D(x) that an input is real rather than generated. D learns from real examples labeled 1 and generated examples labeled 0; G learns to make generated examples look real to D.</p><div class="eq">min<sub>G</sub> max<sub>D</sub> V(D,G)=E<sub>x~p<sub>data</sub></sub>[log D(x)] + E<sub>z~p<sub>z</sub></sub>[log(1−D(G(z)))]</div><p>In the original minimax form, G minimizes the second term. Early in training D(G(z)) may be near 0, so that loss can saturate and provide weak gradients. The common <b>non-saturating generator loss</b> instead maximizes log D(G(z)), equivalently minimizes −log D(G(z)); it has the same ideal target but often stronger early gradients.</p>
+<h3>3.2 Optimal discriminator and equilibrium</h3><p>For fixed generator distribution p<sub>g</sub>, the optimal discriminator is <span class="math">D*(x)=p<sub>data</sub>(x)/(p<sub>data</sub>(x)+p<sub>g</sub>(x))</span>. When distributions match, <span class="math">p<sub>g</sub>=p<sub>data</sub></span>, D*(x)=1/2 wherever the distributions overlap. Thus at the ideal equilibrium the discriminator cannot tell real from fake and outputs 0.5; 0.5 does not mean the generator is bad.</p><div class="box exam"><b>Likely MCQ trap:</b> At equilibrium, D(G(z))=0.5. If a generator sample is clearly rejected early in training, D(G(z)) near 0 may actually mean D is currently confident the sample is fake, not that the discriminator is “50% correct.” Distinguish D’s probability score from overall classifier accuracy.</div>
+<h3>3.3 Loss numeric with binary cross entropy</h3><p>Suppose D(real)=0.8 and D(fake)=0.2. Using mean BCE for one real and one fake example, <span class="math">L<sub>D</sub>=½[−ln(.8)−ln(1−.2)]</span>=½(0.2231+0.2231)=<b>0.2231</b>. For the non-saturating generator loss on this fake, <span class="math">L<sub>G</sub>=−ln(.2)=1.609</span>. If D(fake) rises to .8, non-saturating generator loss becomes −ln(.8)=.223. Always note whether a question asks a sum or mean reduction.</p>
+<h3>3.4 Alternating optimization and detach</h3><ol><li><b>D update:</b> score real images; generate fake images; detach them from G’s graph; compute real=1/fake=0 losses; backpropagate and step D.</li><li><b>G update:</b> generate fresh fake images; pass them through D but label them real for the generator objective; backpropagate through D’s operations into G; step G.</li><li>Do not update G using D’s real/fake labels directly as if G were a classifier. G wants D(fake) high.</li></ol><pre><code># Discriminator phase
+optimizer_D.zero_grad()
+loss_D = bce(D(real), ones) + bce(D(G(z).detach()), zeros)
+loss_D.backward(); optimizer_D.step()
+# Generator phase
+optimizer_G.zero_grad()
+loss_G = bce(D(G(z)), ones)       # fool D
+loss_G.backward(); optimizer_G.step()</code></pre><p>For the generator phase, D’s parameters can be temporarily frozen while retaining gradient flow through D to its input; then restore them before its next update. A common bug is accidentally detaching G(z) during the generator phase, which blocks the gradient to G.</p>
+<h3>3.5 Training difficulties and practical improvements</h3><div class="tablewrap"><table><thead><tr><th>Failure mode</th><th>What it means</th><th>Possible response</th></tr></thead><tbody><tr><td>Mode collapse</td><td>Many z values map to a few similar outputs; low diversity</td><td>Inspect diversity; adjust D/G balance; minibatch features; alternative objectives</td></tr><tr><td>Vanishing G gradient</td><td>D is too confident and minimax G loss saturates</td><td>Non-saturating generator objective; improve balance</td></tr><tr><td>Oscillation / instability</td><td>Two opponents chase a moving target</td><td>Careful learning rates, architecture, normalization, update ratio</td></tr><tr><td>Overpowerful D</td><td>D separates train reals from generated fakes too easily</td><td>Regularize D; check data and update schedule</td></tr><tr><td>Memorization</td><td>Generated outputs resemble training instances</td><td>Monitor train/test similarity and nearest neighbors</td></tr></tbody></table></div><p>Wasserstein GANs replace the discriminator probability with a critic score and use a Wasserstein-distance-inspired objective; Lipschitz control (e.g. gradient penalty) is important. Do not call the critic a probability discriminator unless it has been transformed and trained as one.</p>
+<h3>3.6 Convolutional GANs and conditional generation</h3><p>DCGAN uses convolutional layers in D and transposed convolutions or upsampling-plus-convolution in G. Common design choices include strided convolutions for downsampling, batch normalization in hidden layers, ReLU in G, LeakyReLU in D, and tanh output when images are scaled to [−1,1]. Labels may be fed to G and D for a conditional GAN. Conditioning enables requested classes but does not guarantee the model follows them.</p></section>
+
+<section id="compare"><h2>4. Compare AE, VAE, and GAN accurately</h2><div class="tablewrap"><table><thead><tr><th>Property</th><th>Deterministic AE</th><th>VAE</th><th>GAN</th></tr></thead><tbody><tr><td>Training target</td><td>Reconstruct input</td><td>Maximize ELBO (reconstruction plus KL)</td><td>Adversarial game between G and D</td></tr><tr><td>Encoder/inference model</td><td>Usually deterministic code</td><td>Approximate posterior q(z|x)</td><td>Not required in basic GAN</td></tr><tr><td>How to generate</td><td>No guaranteed prior sampler</td><td>Sample from prior, decode</td><td>Sample noise, pass through G</td></tr><tr><td>Typical strength</td><td>Compression/reconstruction</td><td>Structured latent and explicit likelihood framework</td><td>Sharp perceptual samples possible</td></tr><tr><td>Typical issue</td><td>Latent holes / poor arbitrary sampling</td><td>Tradeoff; blur or posterior collapse</td><td>Instability, mode collapse, no explicit likelihood in basic form</td></tr></tbody></table></div><p>“VAE samples are always blurry” and “GANs always produce sharper images” are tendencies often seen in simple settings, not universal laws. Quality depends on likelihood, architecture, data, loss, optimization, and metric.</p></section>
+
+<section id="practice"><h2>5. Exam-pattern practice with worked solutions</h2><details><summary>Q1. What does D(G(z)) equal at the ideal GAN equilibrium?</summary><p>0.5, because p<sub>g</sub>=p<sub>data</sub> and the optimal discriminator has no evidence to distinguish them. It is not 0 or 1.</p></details><details><summary>Q2. For q=N(μ=0, σ²=1) and p=N(0,1), compute KL(q||p).</summary><p>½(0²+1−1−ln1)=0. Identical distributions have zero KL.</p></details><details><summary>Q3. For q=N(μ=1, σ²=.5), calculate one-dimensional KL to N(0,1).</summary><p>½(1+.5−1−ln.5)=0.5966 nats.</p></details><details><summary>Q4. In a GAN discriminator update, why use G(z).detach()?</summary><p>The discriminator update should change discriminator parameters only. Detach blocks this loss’s graph from generator parameters. In the generator update, do not detach: the generator needs the gradient through D back to G.</p></details><details><summary>Q5. A VAE predicts log variance a=−2. What is σ?</summary><p>σ=exp(a/2)=exp(−1)≈0.3679. Variance=exp(−2)≈0.1353.</p></details><details><summary>Q6. A model returns decoder logits. Which reconstruction loss is coherent with binary pixels?</summary><p><code>BCEWithLogitsLoss</code> / binary cross-entropy with logits. Do not sigmoid first and then use a logits-based loss.</p></details></section>
+
+<section id="fullcode"><h2>6. Complete end-of-week program: train a VAE and a DCGAN</h2><p>This single MNIST lab trains a compact MLP VAE and a small convolutional GAN side by side. Both use the same images, scaled to [−1,1] for the GAN; the VAE uses [0,1] Bernoulli pixels and decoder logits. It is written for conceptual clarity and a few epochs, not benchmark performance.</p><pre><code>"""Week 7 lab: compact MNIST VAE + DCGAN (PyTorch)."""
+import torch
+from torch import nn
+from torch.nn import functional as F
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
+
+SEED = 11
+torch.manual_seed(SEED)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+batch_size, latent_dim = 128, 20
+
+# The VAE expects [0,1]; the GAN expects [-1,1]. Keep both explicitly.
+mnist = datasets.MNIST(
+    root="data", train=True, download=True,
+    transform=transforms.ToTensor()
+)
+loader = DataLoader(mnist, batch_size=batch_size, shuffle=True,
+                    drop_last=True, num_workers=0)
+
+# -------------------------- VAE ------------------------------
+class VAE(nn.Module):
+    def __init__(self, zdim=20):
+        super().__init__()
+        self.enc1 = nn.Linear(784, 400)
+        self.mu = nn.Linear(400, zdim)
+        self.logvar = nn.Linear(400, zdim)
+        self.dec1 = nn.Linear(zdim, 400)
+        self.dec2 = nn.Linear(400, 784)  # logits, no sigmoid here
+
+    def encode(self, x):
+        h = F.relu(self.enc1(x.flatten(1)))
+        return self.mu(h), self.logvar(h)
+
+    def reparameterize(self, mu, logvar):
+        std = torch.exp(0.5 * logvar)
+        eps = torch.randn_like(std)
+        return mu + std * eps
+
+    def decode(self, z):
+        return self.dec2(F.relu(self.dec1(z)))
+
+    def forward(self, x):
+        mu, logvar = self.encode(x)
+        z = self.reparameterize(mu, logvar)
+        return self.decode(z), mu, logvar
+
+def vae_loss(logits, x, mu, logvar):
+    # Sum pixels per example and latent dimensions, then average the batch.
+    recon = F.binary_cross_entropy_with_logits(
+        logits, x.flatten(1), reduction="none"
+    ).sum(dim=1)
+    kl = -0.5 * (1 + logvar - mu.pow(2) - logvar.exp()).sum(dim=1)
+    return (recon + kl).mean(), recon.mean(), kl.mean()
+
+vae = VAE(latent_dim).to(device)
+opt_vae = torch.optim.Adam(vae.parameters(), lr=1e-3)
+
+# -------------------------- DCGAN ----------------------------
+class Generator(nn.Module):
+    def __init__(self, zdim=100):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.ConvTranspose2d(zdim, 128, 7, 1, 0, bias=False), # 1 -> 7
+            nn.BatchNorm2d(128), nn.ReLU(True),
+            nn.ConvTranspose2d(128, 64, 4, 2, 1, bias=False),  # 7 -> 14
+            nn.BatchNorm2d(64), nn.ReLU(True),
+            nn.ConvTranspose2d(64, 1, 4, 2, 1),                # 14 -> 28
+            nn.Tanh()
+        )
+    def forward(self, z):
+        return self.net(z)
+
+class Discriminator(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Conv2d(1, 64, 4, 2, 1), nn.LeakyReLU(0.2, inplace=True),
+            nn.Conv2d(64, 128, 4, 2, 1, bias=False),
+            nn.BatchNorm2d(128), nn.LeakyReLU(0.2, inplace=True),
+            nn.Flatten(), nn.Linear(128 * 7 * 7, 1) # one realness logit
+        )
+    def forward(self, x):
+        return self.net(x)
+
+G, D = Generator().to(device), Discriminator().to(device)
+opt_G = torch.optim.Adam(G.parameters(), lr=2e-4, betas=(0.5, 0.999))
+opt_D = torch.optim.Adam(D.parameters(), lr=2e-4, betas=(0.5, 0.999))
+bce_logits = nn.BCEWithLogitsLoss()
+zdim_gan = 100
+
+for epoch in range(3):
+    vae.train(); G.train(); D.train()
+    vae_total = d_total = g_total = 0.0
+    for real01, _ in loader:
+        real01 = real01.to(device)                    # [B,1,28,28], [0,1]
+        b = real01.size(0)
+
+        # VAE step: x -> (mu,logvar) -> z -> reconstruction logits.
+        opt_vae.zero_grad(set_to_none=True)
+        recon_logits, mu, logvar = vae(real01)
+        loss_vae, recon_part, kl_part = vae_loss(
+            recon_logits, real01, mu, logvar
+        )
+        loss_vae.backward()
+        opt_vae.step()
+        vae_total += loss_vae.item()
+
+        # GAN input normalization must match G's tanh output [-1,1].
+        real = real01 * 2.0 - 1.0
+        ones = torch.ones(b, 1, device=device)
+        zeros = torch.zeros(b, 1, device=device)
+
+        # 1) Train D: true images -> 1; detached generated images -> 0.
+        opt_D.zero_grad(set_to_none=True)
+        z = torch.randn(b, zdim_gan, 1, 1, device=device)
+        fake = G(z)
+        loss_D_real = bce_logits(D(real), ones)
+        loss_D_fake = bce_logits(D(fake.detach()), zeros)
+        loss_D = loss_D_real + loss_D_fake
+        loss_D.backward()
+        opt_D.step()
+
+        # 2) Train G: ask D to classify generated images as real.
+        # Freeze D weights, but keep the input-gradient path through D.
+        opt_G.zero_grad(set_to_none=True)
+        for p in D.parameters():
+            p.requires_grad_(False)
+        z = torch.randn(b, zdim_gan, 1, 1, device=device)
+        fake = G(z)
+        loss_G = bce_logits(D(fake), ones)
+        loss_G.backward()       # gradient passes through D into G
+        opt_G.step()
+        for p in D.parameters():
+            p.requires_grad_(True)
+        d_total += loss_D.item(); g_total += loss_G.item()
+
+    print(f"epoch {epoch+1}: VAE={vae_total/len(loader):.2f} "
+          f"D={d_total/len(loader):.2f} G={g_total/len(loader):.2f}")
+
+# Generate a small batch from each learned prior.
+vae.eval(); G.eval()
+with torch.no_grad():
+    z = torch.randn(16, latent_dim, device=device)
+    vae_images = torch.sigmoid(vae.decode(z)).reshape(16, 1, 28, 28)
+    z_gan = torch.randn(16, zdim_gan, 1, 1, device=device)
+    gan_images = G(z_gan)                    # already in [-1,1]
+print("VAE samples:", vae_images.shape, "range", vae_images.min().item(),
+      vae_images.max().item())
+print("GAN samples:", gan_images.shape, "range", gan_images.min().item(),
+      gan_images.max().item())</code></pre>
+<h3>Program walkthrough and exam audit</h3><ol><li><b>Dataset scales:</b> VAE uses [0,1] pixels as Bernoulli targets; GAN real images are mapped to [−1,1] to match tanh output.</li><li><b>VAE shapes:</b> flatten 784, encoder gives μ/logvar [B,20], sample z [B,20], decoder gives 784 logits per image.</li><li><b>VAE loss:</b> sum 784 reconstruction terms per example and 20 KL terms per example, then average examples. Other valid reductions change reported scale, not the objective’s conceptual parts.</li><li><b>Discriminator step:</b> fake.detach means D training cannot modify G. Real and fake labels are shaped [B,1] to match D’s logits.</li><li><b>Generator step:</b> label generated images as real to D; do not detach fake in this phase.</li><li><b>Architecture shapes:</b> G: [B,100,1,1]→[B,128,7,7]→[B,64,14,14]→[B,1,28,28]; D reverses spatial scale to one logit per image.</li><li><b>Evaluation:</b> inspect sample grids and diversity, not just adversarial losses. GAN loss values alone are not a reliable image-quality score.</li></ol><div class="box warn"><b>Compute note:</b> the code downloads MNIST and trains for three epochs. CPU runtime may be noticeable. Start with a small subset for debugging; for visual quality, train much longer on a GPU and save generated grids at fixed latent seeds.</div></section>
+
+<section id="recap"><h2>7. Formula card, traps, and references</h2><div class="grid"><div class="card"><h4>VAE sampling</h4><p>σ=exp(½ logσ²); z=μ+σ⊙ε; ε~N(0,I).</p></div><div class="card"><h4>Negative ELBO</h4><p>Reconstruction NLL + KL(qφ(z|x)||p(z)); β-VAE multiplies KL by β.</p></div><div class="card"><h4>Diagonal Gaussian KL</h4><p>½Σ(μ²+σ²−1−logσ²), against N(0,I).</p></div><div class="card"><h4>GAN equilibrium</h4><p>When p<sub>g</sub>=p<sub>data</sub>, optimal D(x)=½. For non-saturating G, minimize −logD(G(z)).</p></div></div><ul><li>AE reconstruction alone does not guarantee a sampleable latent prior.</li><li>In VAE code, <code>logvar</code> is not variance; exponentiate it.</li><li>KL is nonnegative; identical q and p give zero.</li><li>Generator fake target is real; discriminator fake target is fake.</li><li>Detach only the fake branch during discriminator learning, not generator learning.</li><li>Do not report GAN equilibrium from generator loss alone; compare distributions and D behavior.</li></ul><h3>References and source alignment</h3><p>Course alignment uses the supplied Week 7 plan, the provided <i>Understanding Deep Learning</i> book (GAN and VAE chapters), and the supplied quiz/exam materials. The question papers emphasize early-week MCQ, numeric, and code tracing; later-week GAN equilibrium/autoencoder/VAE concepts are included as likely concept-transfer practice rather than quoted past questions.</p><ul><li><a href="https://arxiv.org/abs/1312.6114">Kingma &amp; Welling, Auto-Encoding Variational Bayes (VAE)</a></li><li><a href="https://arxiv.org/abs/1406.2661">Goodfellow et al., Generative Adversarial Nets</a></li><li><a href="https://docs.pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html">PyTorch DCGAN tutorial</a></li><li><a href="https://github.com/pytorch/examples/tree/main/vae">PyTorch VAE example</a></li><li><a href="https://www.youtube.com/playlist?list=PLZ2ps__7DhBa9hqi20allqocTSUUt3nWX">Course playlist supplied by the student</a> (linked; metadata could not be retrieved here)</li></ul></section>
+<nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-8-diffusion-models-theory-in-depth-notes.html">Go to Week 8 &gt;</a></nav></div><footer class="footer">Week 7 · Generative AI for Vision: VAEs &amp; GANs · Deep Learning &amp; GenAI exam notes</footer></main></div></body></html>

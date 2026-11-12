@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 6 | Sequential Data Practice</title><style>
+:root{--n:#17374e;--t:#087e8b;--ink:#1d303d;--muted:#536a78;--line:#d5e0e6;--pale:#eaf6f5;--gold:#fff6df;--blue:#eef4fb;--green:#edf8f1;--code:#10202b}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.68 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.layout{max-width:1260px;margin:25px auto;padding:0 18px;display:grid;grid-template-columns:255px minmax(0,900px);gap:24px;align-items:start}.toc{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:white;border:1px solid var(--line);border-radius:12px;padding:16px}.toc b{display:block;color:var(--n);margin-bottom:8px}.toc a{display:block;padding:3px 0 3px 8px;border-left:2px solid transparent;text-decoration:none;color:var(--muted);font-size:.84rem}.toc a:hover{color:var(--t);border-color:var(--t)}main{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 9px 32px #102b3d10}.hero{padding:48px 56px 38px;background:linear-gradient(130deg,#132f45,#087e8b);color:white}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#b9efeb;font-size:.78rem;font-weight:750}.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.1;margin:.4em 0}.hero p{max-width:720px;color:#e6f5f5;font-size:1.08rem}.pill{display:inline-block;border:1px solid #ffffff66;border-radius:99px;padding:3px 10px;margin:3px;font-size:.77rem}.week-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 56px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#f7fafc}.week-navigation a,.week-navigation span{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 15px;border-radius:8px;font-weight:700;text-decoration:none}.week-navigation a{background:#eaf6f5;color:var(--n);border:1px solid #b9deda}.week-navigation a:hover{background:#dff1ef}.week-navigation .week-home{background:#fff;color:var(--muted);border-color:var(--line)}.week-navigation .week-disabled{color:#7c8992;background:#f0f2f4;border:1px solid var(--line)}.content{padding:20px 56px 55px}h2{font-size:1.75rem;color:var(--n);line-height:1.25;margin:2em 0 .55em;padding-top:.5em;border-top:1px solid var(--line)}h2:first-child{margin-top:.5em}h3{color:var(--t);font-size:1.24rem;margin:1.4em 0 .35em}h4{color:var(--n);margin:.3em 0}p{margin:.45em 0 .9em}li{margin:.25em 0}.lead{font-size:1.08rem;color:#354f60}.box{padding:14px 17px;border-left:4px solid var(--t);background:var(--pale);border-radius:6px;margin:14px 0}.exam{border-color:#5b80b6;background:var(--blue)}.warn{border-color:#d29a23;background:var(--gold)}.good{border-color:#478e66;background:var(--green)}.math{font:1.08em Cambria,"Times New Roman",serif;background:#f2f6f8;padding:1px 4px;border-radius:3px}.eq{display:block;text-align:center;font:1.16rem/1.7 Cambria,"Times New Roman",serif;background:#f2f7f9;color:var(--n);border:1px solid #dce7ec;border-radius:7px;padding:9px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:9px;padding:13px 15px}.card p{margin-bottom:.3em}.diagram{overflow:auto;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fcfefe;margin:16px 0}.diagram svg{display:block;max-width:100%;height:auto;margin:auto}.diagram figcaption{text-align:center;color:var(--muted);font-size:.88rem;margin-top:8px}.tablewrap{overflow-x:auto;margin:14px 0}table{width:100%;border-collapse:collapse;font-size:.91rem}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--n);color:#fff}tbody tr:nth-child(even){background:#f5f8fa}pre{overflow:auto;background:var(--code);color:#e7f0f5;padding:16px 18px;border-radius:9px;font:.84rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}code{font:.91em ui-monospace,SFMono-Regular,Consolas,monospace;background:#edf2f5;padding:.1em .3em;border-radius:4px}pre code{background:transparent;padding:0}details{border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:10px 14px}summary{cursor:pointer;color:var(--n);font-weight:700}.footer{padding:18px 56px;background:#f6f9fb;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+@media(max-width:900px){.layout{display:block;margin:0;padding:0}.toc{position:relative;top:auto;max-height:250px;margin:9px}.hero{padding:32px 23px}.content{padding:15px 23px 40px}.footer{padding:17px 23px}.grid{grid-template-columns:1fr}main{border-radius:0}.week-navigation{margin:12px 23px 0;flex-wrap:wrap}.week-navigation a,.week-navigation span{flex:1}}
+@media print{body{background:white;font-size:10.5pt}.layout{display:block;padding:0;margin:0}.toc{display:none}main{border:0;box-shadow:none}.hero{padding:22px 32px;print-color-adjust:exact}.content{padding:10px 32px}.footer{padding:10px 32px}.week-navigation{margin:8px 32px}h2{break-before:page}h2:first-child{break-before:auto}pre,.diagram,.box,.card,details{break-inside:avoid}}
+</style></head><body><div class="layout">
+<aside class="toc"><b>Week 6 contents</b><a href="#roadmap">How to use these notes</a><a href="#representation">Represent and batch sequences</a><a href="#sentiment">Sentiment with LSTM</a><a href="#generation">Text generation</a><a href="#forecast">Time-series forecasting</a><a href="#numericals">Worked numericals</a><a href="#practice">Exam-pattern practice</a><a href="#fullcode">Complete program</a><a href="#recap">Formula card & references</a></aside>
+<main><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-7-generative-models-vae-gan-theory-in-depth-notes.html">Go to Week 7 &gt;</a></nav><header class="hero"><div class="eyebrow">Deep Learning &amp; GenAI · Week 6 Practice</div><h1>Sequence models in practice</h1><p>In-depth hands-on notes for sentiment classification, autoregressive text generation, and time-series forecasting.</p><span class="pill">Sentiment LSTM</span><span class="pill">Next-token prediction</span><span class="pill">Forecasting</span><span class="pill">Code patterns</span></header>
+<div class="content"><section id="roadmap"><h2>How to use these notes</h2><p class="lead">Week 6 turns sequence-model theory into three practical pipelines: sentiment classification, next-token generation, and time-series forecasting. For every code question, trace the tensor shape, identify what is known at prediction time, and check that the loss sees the correct targets.</p><div class="box exam"><b>Exam-pattern note:</b> The supplied Quiz 1 papers mostly ask code-output/shape questions, training-loop order, numerical calculations, and concepts tested through plausible distractors. Their strongest direct coverage is Weeks 1–4, so they do not provide many direct Week 6 precedents. This guide uses that same style for sequence code: print the shape, trace one batch, calculate a small loss or metric, and explain why the split or mask is correct. The supplied exam notes also explicitly flag sequence-model concepts such as LSTM gates.</div><figure class="diagram"><svg viewBox="0 0 820 205" role="img" aria-label="Three sequence workflows: text sentiment, next-token generation, and time-series forecasting"><defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" fill="#17374e"><text x="15" y="45" font-size="14" font-weight="bold">Sentiment</text><text x="15" y="103" font-size="14" font-weight="bold">Generation</text><text x="15" y="161" font-size="14" font-weight="bold">Forecast</text><g font-size="12" text-anchor="middle"><text x="150" y="30">tokens</text><text x="305" y="30">embedding + LSTM</text><text x="490" y="30">last valid state</text><text x="680" y="30">positive / negative</text><text x="150" y="88">tokens 1…t</text><text x="305" y="88">RNN / LSTM</text><text x="490" y="88">logits at each step</text><text x="680" y="88">token 2…t+1</text><text x="150" y="146">past window</text><text x="305" y="146">RNN / LSTM</text><text x="490" y="146">forecast head</text><text x="680" y="146">future value(s)</text></g><g fill="#eaf6f5" stroke="#087e8b"><rect x="95" y="38" width="110" height="27" rx="6"/><rect x="250" y="38" width="110" height="27" rx="6"/><rect x="435" y="38" width="110" height="27" rx="6"/><rect x="625" y="38" width="110" height="27" rx="6"/><rect x="95" y="96" width="110" height="27" rx="6"/><rect x="250" y="96" width="110" height="27" rx="6"/><rect x="435" y="96" width="110" height="27" rx="6"/><rect x="625" y="96" width="110" height="27" rx="6"/><rect x="95" y="154" width="110" height="27" rx="6"/><rect x="250" y="154" width="110" height="27" rx="6"/><rect x="435" y="154" width="110" height="27" rx="6"/><rect x="625" y="154" width="110" height="27" rx="6"/></g><g stroke="#087e8b" stroke-width="2" marker-end="url(#a)"><path d="M205 51H245M360 51H430M545 51H620M205 109H245M360 109H430M545 109H620M205 167H245M360 167H430M545 167H620"/></g></g></svg><figcaption>Figure 1. The recurrent backbone is reused; the target and readout determine whether the task is classification, generation, or forecasting.</figcaption></figure></section>
+
+<section id="representation"><h2>1. From raw sequence to a model-ready batch</h2><h3>1.1 Tokenization, vocabulary, and special tokens</h3><p>A text model does not consume words directly. A tokenizer maps text to token IDs. A vocabulary maps each known token to an integer; an embedding table maps each integer to a learned vector. A practical vocabulary reserves IDs for <code>PAD</code> (batch filler), <code>UNK</code> (unseen token), and often <code>BOS</code>/<code>EOS</code> (sequence boundaries).</p><div class="eq">text → tokenizer → integer IDs → embedding vectors → sequence model</div><p>Build the vocabulary from the training split only. If test text helps decide which tokens get a vocabulary entry, the test split has influenced training. Word-level tokenization is easy to inspect; subword tokenization handles rare words better but changes the meaning of vocabulary size and perplexity.</p><div class="box warn"><b>Important distinction:</b> token IDs are category labels, not numeric measurements. ID 40 is not “twice” ID 20. The embedding layer learns a geometry; never feed arbitrary token IDs as continuous scalar features unless that is intentionally designed.</div>
+<h3>1.2 Padding and lengths</h3><p>Sequences in a minibatch often have different lengths. Right-pad them to the batch maximum length so they form a rectangular tensor. Keep the true length for each row. Padding is not language and must not influence the summary state, pooled representation, or token loss.</p><pre><code>from torch.nn.utils.rnn import pad_sequence
+# seqs: list of integer tensors, e.g. [tensor([4, 8]), tensor([3, 2, 9])]
+tokens = pad_sequence(seqs, batch_first=True, padding_value=PAD_ID)
+lengths = torch.tensor([len(s) for s in seqs])
+# tokens: [B, T_max]; lengths: [B]</code></pre><p>For a dense padded batch, an attention mask is often <code>tokens != PAD_ID</code>. For an RNN, use packed sequences when appropriate or gather the output at <code>lengths - 1</code>. Simply selecting <code>output[:, -1]</code> is wrong if the last column is padding. In a bidirectional model, use the returned final states carefully: the reverse direction’s final state is not the same as the reverse component of the last output timestep.</p>
+<h3>1.3 Shape contract</h3><div class="tablewrap"><table><thead><tr><th>Object</th><th>Common shape (batch_first=True)</th><th>Meaning</th></tr></thead><tbody><tr><td>token IDs</td><td>[B,T]</td><td>B sequences, padded to T tokens</td></tr><tr><td>embedded tokens</td><td>[B,T,E]</td><td>E features per token</td></tr><tr><td>univariate time series</td><td>[B,T,1]</td><td>one feature at each time</td></tr><tr><td>multivariate time series</td><td>[B,T,F]</td><td>F features per time</td></tr><tr><td>LSTM output</td><td>[B,T,H] (one direction)</td><td>hidden representation at every step</td></tr><tr><td>class logits</td><td>[B,C]</td><td>one class score per class</td></tr><tr><td>next-token logits</td><td>[B,T,V]</td><td>score over V tokens at each input position</td></tr></tbody></table></div></section>
+
+<section id="sentiment"><h2>2. Sentiment analysis with an LSTM</h2><h3>2.1 Many-to-one classification</h3><p>For a review “the film was surprisingly good”, the model reads token vectors in order and updates state. The final valid state summarizes the prefix; a linear classifier maps it to two logits. The predicted class is <code>argmax(logits)</code>. During training pass raw logits to <code>CrossEntropyLoss</code> and integer labels in <code>{0,…,C−1}</code>. Do not apply softmax before this loss.</p><div class="eq">IDs [B,T] → Embedding [B,T,E] → LSTM → h<sub>final</sub> [B,H] → Linear → logits [B,C]</div><p>For a one-layer unidirectional LSTM with <code>batch_first=True</code>, input is [B,T,E], output is [B,T,H], and each final state <code>h_n</code>/<code>c_n</code> has shape [1,B,H]. <code>h_n[-1]</code> gives [B,H]. This is the final recurrent state, not a softmax probability.</p>
+<h3>2.2 Worked parameter-count example</h3><p>Suppose vocabulary size V=1,000, embedding width E=32, LSTM hidden width H=64, and C=2 classes. With a trainable embedding and PyTorch’s default two bias vectors per LSTM gate block:</p><ol><li>Embedding: V×E = 1,000×32 = 32,000.</li><li>LSTM: 4H(E+H)+8H = 4×64×(32+64)+8×64 = 24,576+512 = 25,088.</li><li>Linear head: H×C+C = 64×2+2 = 130.</li><li>Total = 32,000+25,088+130 = <b>57,218 trainable parameters</b>.</li></ol><p>Why the 8H? Each of four gates has one input bias and one recurrent bias, each of width H. If the framework or a custom implementation combines biases, the formula may differ; state assumptions in an exam answer.</p>
+<h3>2.3 Small code: a shape-safe classifier</h3><pre><code>class SentimentLSTM(nn.Module):
+    def __init__(self, vocab_size, emb_dim, hidden, classes, pad_id):
+        super().__init__()
+        self.embedding = nn.Embedding(vocab_size, emb_dim, padding_idx=pad_id)
+        self.rnn = nn.LSTM(emb_dim, hidden, batch_first=True)
+        self.head = nn.Linear(hidden, classes)
+
+    def forward(self, token_ids, lengths):
+        x = self.embedding(token_ids)          # [B,T,E]
+        out, (h_n, c_n) = self.rnn(x)          # out [B,T,H]
+        rows = torch.arange(x.size(0), device=x.device)
+        last = out[rows, lengths - 1]          # [B,H], excludes right-padding
+        return self.head(last)                 # [B,C] logits</code></pre><p><code>padding_idx</code> stops the padding embedding from being updated, but it does not itself prevent a recurrent layer from processing padded time steps. Gathering at each last valid index or packing is still necessary.</p>
+<h3>2.4 Evaluate the classifier</h3><p>Accuracy can conceal class imbalance. Inspect the confusion matrix, precision, recall, and F1. For positive class: precision=TP/(TP+FP), recall=TP/(TP+FN), and F1=2PR/(P+R). Choose the positive label deliberately. Split by user/reviewer when repeated authors could leak style across train and test.</p><div class="box good"><b>Exam answer pattern:</b> First list input, recurrent output, and logits shapes. Then say the correct loss/label pairing. Finally point out whether padding, train/eval mode, or gradient reset is mishandled.</div></section>
+
+<section id="generation"><h2>3. Character or word-level text generation</h2><h3>3.1 Shift the sequence by one token</h3><p>Given a tokenized sequence <code>[BOS, I, like, tea, EOS]</code>, the input is <code>[BOS, I, like, tea]</code> and the target is <code>[I, like, tea, EOS]</code>. At position t, the logits predict the next token. Training compares all positions against shifted targets, ignoring PAD targets with <code>ignore_index</code>.</p><figure class="diagram"><svg viewBox="0 0 760 170" role="img" aria-label="Teacher forcing shifts a token sequence one position to make next-token labels"><g font-family="Arial" fill="#17374e" text-anchor="middle"><text x="100" y="28" font-size="14" font-weight="bold">Input</text><text x="100" y="85" font-size="14" font-weight="bold">Target</text><g font-size="13"><text x="230" y="28">BOS</text><text x="330" y="28">I</text><text x="430" y="28">like</text><text x="530" y="28">tea</text><text x="230" y="85">I</text><text x="330" y="85">like</text><text x="430" y="85">tea</text><text x="530" y="85">EOS</text></g><g fill="#eaf6f5" stroke="#087e8b"><rect x="195" y="38" width="70" height="34" rx="6"/><rect x="295" y="38" width="70" height="34" rx="6"/><rect x="395" y="38" width="70" height="34" rx="6"/><rect x="495" y="38" width="70" height="34" rx="6"/></g><g fill="#fff6df" stroke="#d29a23"><rect x="195" y="96" width="70" height="34" rx="6"/><rect x="295" y="96" width="70" height="34" rx="6"/><rect x="395" y="96" width="70" height="34" rx="6"/><rect x="495" y="96" width="70" height="34" rx="6"/></g><g stroke="#687f8d" stroke-width="1.7" stroke-dasharray="5 4"><path d="M230 74V92"/><path d="M330 74V92"/><path d="M430 74V92"/><path d="M530 74V92"/></g><text x="390" y="154" font-size="12">logits at each input position are scored against the token directly below</text></g></svg><figcaption>Figure 2. The target is the same stream shifted one place to the left; the model never receives the future target as its input at that position.</figcaption></figure>
+<h3>3.2 Teacher forcing and inference are different</h3><p>During teacher forcing, each next model input is the true previous token. During generation, the model feeds back its own sampled or selected token. This train/inference difference is called exposure bias. Generate autoregressively until EOS or a maximum length.</p><p>Greedy decoding chooses the highest-probability token each step and can be repetitive. Temperature τ rescales logits by z/τ before softmax: smaller τ sharpens the distribution; larger τ flattens it. Temperature is not a training parameter and does not guarantee a better sample. Top-k keeps only k highest scores; nucleus/top-p keeps the smallest probability-sorted set whose cumulative probability reaches p.</p>
+<h3>3.3 Numerical: next-token loss and perplexity</h3><p>If the correct next token receives probability p=0.20, its negative log-likelihood is −ln(0.20)=1.609 nats. If four equally weighted target positions have probabilities .5, .25, .8, .4, then mean NLL = [−ln(.5)−ln(.25)−ln(.8)−ln(.4)]/4 = (0.693+1.386+0.223+0.916)/4 = 0.805. Perplexity=e<sup>0.805</sup>≈2.24. A perplexity near 2.24 means the model’s average uncertainty is comparable to choosing among about 2.24 equally likely options; it is not an accuracy percentage. Comparisons require the same dataset and tokenization.</p>
+<h3>3.4 Small code: shift and mask</h3><pre><code># tokens is [B,T] with right padding and an EOS token
+inputs = tokens[:, :-1]
+targets = tokens[:, 1:]
+logits = language_model(inputs)       # [B,T-1,V]
+loss = F.cross_entropy(
+    logits.reshape(-1, vocab_size),
+    targets.reshape(-1),
+    ignore_index=PAD_ID
+)</code></pre><p>Cross entropy internally applies log-softmax in a numerically stable way. Do not one-hot encode integer target IDs for <code>CrossEntropyLoss</code>. A comprehension/code-output question may ask what shape flattening creates: [B(T−1),V] logits and [B(T−1)] target IDs.</p></section>
+
+<section id="forecast"><h2>4. Time-series forecasting without leakage</h2><h3>4.1 A sliding-window dataset</h3><p>For a one-step univariate forecast with window L, each example maps the previous L observations to the next value: <span class="math">[y<sub>t−L+1</sub>,…,y<sub>t</sub>] → y<sub>t+1</sub></span>. For F known features, input shape is [B,L,F]; target can be [B,1] or [B,H] for horizon H. Multi-step forecasting must state whether it predicts one point, a whole horizon, or feeds its own predictions back recursively.</p><pre><code>def make_windows(series, lookback):
+    X, y = [], []
+    for end in range(lookback, len(series)):
+        X.append(series[end-lookback:end])
+        y.append(series[end])
+    return np.asarray(X), np.asarray(y)</code></pre><h3>4.2 Chronological split and fit preprocessing only on train</h3><p>Never randomly shuffle time points before splitting: future information can leak into training. Split the raw timeline first (for example, earliest 70% train, next 15% validation, newest 15% test). Fit mean/standard deviation on the train period only and transform all later periods using those train statistics. For a validation target immediately after the training boundary, its input window may contain earlier training observations because those observations would be known at prediction time; however no target or fitted statistic from the future may enter training.</p><div class="box warn"><b>Leakage traps:</b> random splitting a time series; scaling using the full-series mean; using a feature whose future value is not actually available; allowing overlapping windows with future targets to cross the split; selecting a forecast horizon after seeing test results.</div>
+<h3>4.3 Metrics: MAE and RMSE</h3><p>For truth [10,12,14] and prediction [11,10,15], errors are [1,−2,1]. MAE=(|1|+|−2|+|1|)/3=4/3≈1.333. MSE=(1+4+1)/3=2. RMSE=√2≈1.414. MAE is in target units and is less sensitive to a large outlier; RMSE is also in target units but penalizes large errors more strongly. Always compare with a naive baseline such as persistence <span class="math">ŷ<sub>t+1</sub>=y<sub>t</sub></span> or seasonal-naive forecasting.</p><h3>4.4 Rolling-origin evaluation</h3><p>For a time series, train through time t, forecast t+1…t+H, advance the origin, and repeat. Report metrics by horizon: a model can be good at one step and poor at longer horizons. Recursive forecasts accumulate error; direct models predict each horizon directly; sequence-to-sequence models emit an entire horizon. Choose based on data size, horizon, and deployment constraints.</p></section>
+
+<section id="numericals"><h2>5. Worked numericals and code-reading patterns</h2><h3>Numerical A: LSTM batch shapes</h3><p>Let B=16, T=25, E=40, H=64, C=3, one direction, one layer, and <code>batch_first=True</code>. Token IDs [16,25]; embedding [16,25,40]; LSTM output [16,25,64]; final h and c [1,16,64]; remove layer axis to [16,64]; classifier logits [16,3]. The integer labels must be [16].</p><h3>Numerical B: embedding + recurrent parameters</h3><p>V=2,000, E=32, H=48, C=2: embedding=64,000; LSTM=4H(E+H)+8H=4×48×80+384=15,744; classifier=48×2+2=98; total=79,842. This assumes the default two bias vectors per PyTorch LSTM layer and a trainable embedding.</p><h3>Numerical C: Perplexity from one token</h3><p>Target probability .1 gives NLL=−ln(.1)=2.302585 nats. For a single token, perplexity=e<sup>NLL</sup>=10. For a sequence, exponentiate the mean token NLL, not the sum.</p><h3>Common exam-style code traps</h3><div class="tablewrap"><table><thead><tr><th>Snippet/problem</th><th>Correct reasoning</th><th>Common wrong answer</th></tr></thead><tbody><tr><td>Use <code>out[:, -1]</code> on right-padded sequence</td><td>Last column can be PAD; use lengths−1 or packed state</td><td>“Last index is always the final word”</td></tr><tr><td>Feed <code>softmax(logits)</code> into CrossEntropyLoss</td><td>Use raw logits; CE performs log-softmax</td><td>“Softmax is required because it is classification”</td></tr><tr><td>Use sequence tokens as both input and target</td><td>Shift by one position for next-token prediction</td><td>“Predict the current token from itself”</td></tr><tr><td>Shuffle monthly observations before split</td><td>Chronological split prevents future leakage</td><td>“Random split is always safer”</td></tr><tr><td>Call <code>optimizer.step()</code> before backward</td><td>Compute loss, backward, then step</td><td>“Step computes gradients”</td></tr></tbody></table></div></section>
+
+<section id="practice"><h2>6. Exam-pattern practice with worked answers</h2><details><summary>Q1. A batch has 8 padded token sequences of width 12; embedding width 20. What are the token, embedding, and one-direction LSTM output shapes if H=32 and batch_first=True?</summary><p>Token IDs [8,12]; embedding [8,12,20]; LSTM output [8,12,32]. With one layer/direction, h_n and c_n are [1,8,32]. If the true lengths differ, the final representation must select each row’s last real timestep.</p></details><details><summary>Q2. Which LSTM gate controls how much of the old cell state is retained?</summary><p>The forget gate: <span class="math">c<sub>t</sub>=f<sub>t</sub>⊙c<sub>t−1</sub>+i<sub>t</sub>⊙g<sub>t</sub></span>. Since f is sigmoid-valued in [0,1], a component near 1 preserves that component of memory, while a component near 0 removes it. The gate is not a class probability.</p></details><details><summary>Q3. If one target token has p=.1, compute NLL and single-token perplexity.</summary><p>NLL=−ln(.1)=2.3026 nats; perplexity=exp(2.3026)=10.</p></details><details><summary>Q4. A validation loss is computed after training. Which operations should be absent?</summary><p>No backward pass and no optimizer update. Set <code>model.eval()</code> (dropout/BatchNorm behavior) and use <code>torch.no_grad()</code> or inference mode (autograd graph). These controls solve different problems.</p></details><details><summary>Q5. A forecast has true values [4,6] and predictions [5,3]. Find MAE and RMSE.</summary><p>Errors [1,−3]; MAE=(1+3)/2=2. MSE=(1+9)/2=5; RMSE=√5≈2.236 in target units.</p></details></section>
+
+<section id="fullcode"><h2>7. One complete end-of-week program: sentiment, generation, and forecasting</h2><p>This CPU-friendly lab creates small synthetic datasets so the entire workflow is inspectable without downloading a corpus. It trains (1) an LSTM sentiment classifier from variable-length token sequences, (2) a GRU character-level next-token model with autoregressive sampling, and (3) an LSTM one-step forecaster on a chronologically split synthetic signal. The tiny data is for learning code flow, not for claiming useful model quality.</p><pre><code>"""Week 6 lab: three sequence tasks in one small PyTorch program."""
+import math
+import random
+import numpy as np
+import torch
+from torch import nn
+from torch.nn import functional as F
+from torch.nn.utils.rnn import pad_sequence
+from torch.utils.data import DataLoader, TensorDataset
+
+SEED = 7
+random.seed(SEED); np.random.seed(SEED); torch.manual_seed(SEED)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# ------------------------------------------------------------
+# A. SENTIMENT: right-padded token IDs -> two class logits
+# ------------------------------------------------------------
+PAD, UNK = 0, 1
+positive = ["good", "bright", "love", "great", "warm"]
+negative = ["bad", "dull", "hate", "awful", "cold"]
+neutral = ["movie", "story", "was", "quite", "really", "the"]
+
+# Deterministic toy reviews. Real work: replace with a real labeled corpus.
+reviews, labels = [], []
+for _ in range(40):
+    reviews.append([random.choice(neutral), random.choice(positive),
+                    random.choice(neutral)])
+    labels.append(1)
+    reviews.append([random.choice(neutral), random.choice(negative)])
+    labels.append(0)
+vocab_words = sorted(set(positive + negative + neutral))
+word_to_id = {word: i + 2 for i, word in enumerate(vocab_words)}
+vocab_size = len(word_to_id) + 2
+encoded = [torch.tensor([word_to_id[w] for w in r], dtype=torch.long)
+           for r in reviews]
+lengths = torch.tensor([len(r) for r in encoded], dtype=torch.long)
+tokens = pad_sequence(encoded, batch_first=True, padding_value=PAD)
+labels = torch.tensor(labels, dtype=torch.long)
+
+# Hold out a deterministic tail, and do not tune based on the final test set.
+cut = int(0.8 * len(labels))
+train_ds = TensorDataset(tokens[:cut], lengths[:cut], labels[:cut])
+valid_ds = TensorDataset(tokens[cut:], lengths[cut:], labels[cut:])
+train_loader = DataLoader(train_ds, batch_size=16, shuffle=True)
+valid_loader = DataLoader(valid_ds, batch_size=16, shuffle=False)
+
+class SentimentModel(nn.Module):
+    def __init__(self, vocab, emb=16, hidden=24):
+        super().__init__()
+        self.embedding = nn.Embedding(vocab, emb, padding_idx=PAD)
+        self.lstm = nn.LSTM(emb, hidden, batch_first=True)
+        self.classifier = nn.Linear(hidden, 2)
+
+    def forward(self, ids, lens):
+        x = self.embedding(ids)                 # [B,T,E]
+        out, _ = self.lstm(x)                  # [B,T,H]
+        row = torch.arange(ids.size(0), device=ids.device)
+        last_valid = out[row, lens - 1]        # [B,H], not padded output[:, -1]
+        return self.classifier(last_valid)     # raw [B,2] logits
+
+sentiment = SentimentModel(vocab_size).to(device)
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(sentiment.parameters(), lr=0.01)
+for epoch in range(8):
+    sentiment.train()
+    for xb, lb, yb in train_loader:
+        xb, lb, yb = xb.to(device), lb.to(device), yb.to(device)
+        optimizer.zero_grad()
+        logits = sentiment(xb, lb)
+        loss = criterion(logits, yb)
+        loss.backward()
+        nn.utils.clip_grad_norm_(sentiment.parameters(), 1.0)
+        optimizer.step()
+    sentiment.eval()
+    correct = total = 0
+    with torch.no_grad():
+        for xb, lb, yb in valid_loader:
+            logits = sentiment(xb.to(device), lb.to(device))
+            correct += (logits.argmax(1).cpu() == yb).sum().item()
+            total += yb.numel()
+    print(f"sentiment epoch {epoch+1}: val accuracy={correct/total:.3f}")
+
+# ------------------------------------------------------------
+# B. CHARACTER GENERATION: predict the next character
+# ------------------------------------------------------------
+text = ("deep learning learns patterns. " * 80)
+chars = sorted(set(text))
+char_to_id = {c: i for i, c in enumerate(chars)}
+id_to_char = {i: c for c, i in char_to_id.items()}
+ids = torch.tensor([char_to_id[c] for c in text], dtype=torch.long)
+context = 20
+X = torch.stack([ids[i:i+context] for i in range(len(ids)-context)])
+y = ids[context:]
+char_loader = DataLoader(TensorDataset(X, y), batch_size=64, shuffle=True)
+
+class CharGRU(nn.Module):
+    def __init__(self, vocab, emb=24, hidden=48):
+        super().__init__()
+        self.embedding = nn.Embedding(vocab, emb)
+        self.gru = nn.GRU(emb, hidden, batch_first=True)
+        self.head = nn.Linear(hidden, vocab)
+    def forward(self, x):
+        out, _ = self.gru(self.embedding(x))
+        return self.head(out[:, -1])            # predict char after context
+
+char_model = CharGRU(len(chars)).to(device)
+char_opt = torch.optim.Adam(char_model.parameters(), lr=0.005)
+for epoch in range(5):
+    char_model.train()
+    total_loss = 0.0
+    for xb, yb in char_loader:
+        xb, yb = xb.to(device), yb.to(device)
+        char_opt.zero_grad()
+        logits = char_model(xb)
+        loss = criterion(logits, yb)
+        loss.backward()
+        nn.utils.clip_grad_norm_(char_model.parameters(), 1.0)
+        char_opt.step()
+        total_loss += loss.item()
+    print(f"generation epoch {epoch+1}: mean batch loss="
+          f"{total_loss/len(char_loader):.3f}")
+
+def generate(prefix="deep learning", count=80, temperature=0.8):
+    char_model.eval()
+    context_ids = [char_to_id.get(c, 0) for c in prefix[-context:]]
+    if len(context_ids) < context:
+        context_ids = [0] * (context-len(context_ids)) + context_ids
+    result = list(prefix)
+    with torch.no_grad():
+        for _ in range(count):
+            x = torch.tensor([context_ids[-context:]], device=device)
+            logits = char_model(x)[0] / temperature
+            probs = torch.softmax(logits, dim=0)
+            next_id = torch.multinomial(probs, 1).item()
+            context_ids.append(next_id)
+            result.append(id_to_char[next_id])
+    return "".join(result)
+print("generated sample:", generate())
+
+# ------------------------------------------------------------
+# C. FORECASTING: chronological split, windows, one-step target
+# ------------------------------------------------------------
+# Smooth signal plus small noise; real forecast data needs domain-aware baselines.
+rng = np.random.default_rng(SEED)
+time = np.arange(700, dtype=np.float32)
+series = (np.sin(time * 0.045) + 0.25*np.sin(time * 0.13)
+          + 0.04*rng.normal(size=len(time))).astype(np.float32)
+train_end, val_end, lookback = 490, 595, 24
+# Fit scaling on training observations only (before making any later windows).
+mu, sigma = series[:train_end].mean(), series[:train_end].std()
+scaled = (series - mu) / sigma
+
+def windows_for_targets(first_target, last_target):
+    xs, ys = [], []
+    # target indices are [first_target, last_target); each input ends at target-1.
+    for target in range(first_target, last_target):
+        xs.append(scaled[target-lookback:target])
+        ys.append(scaled[target])
+    return (torch.tensor(np.asarray(xs), dtype=torch.float32).unsqueeze(-1),
+            torch.tensor(np.asarray(ys), dtype=torch.float32).unsqueeze(-1))
+
+Xtr, ytr = windows_for_targets(lookback, train_end)
+Xva, yva = windows_for_targets(train_end, val_end)
+Xte, yte = windows_for_targets(val_end, len(series))
+train_forecast = DataLoader(TensorDataset(Xtr, ytr), batch_size=32, shuffle=True)
+
+class ForecastLSTM(nn.Module):
+    def __init__(self, hidden=32):
+        super().__init__()
+        self.lstm = nn.LSTM(input_size=1, hidden_size=hidden, batch_first=True)
+        self.head = nn.Linear(hidden, 1)
+    def forward(self, x):
+        _, (h, _) = self.lstm(x)
+        return self.head(h[-1])                   # [B,1]
+
+forecaster = ForecastLSTM().to(device)
+forecast_opt = torch.optim.Adam(forecaster.parameters(), lr=0.01)
+for epoch in range(8):
+    forecaster.train()
+    for xb, yb in train_forecast:
+        xb, yb = xb.to(device), yb.to(device)
+        forecast_opt.zero_grad()
+        pred = forecaster(xb)
+        loss = F.mse_loss(pred, yb)
+        loss.backward()
+        nn.utils.clip_grad_norm_(forecaster.parameters(), 1.0)
+        forecast_opt.step()
+    forecaster.eval()
+    with torch.no_grad():
+        val_pred = forecaster(Xva.to(device)).cpu()
+        val_mae_scaled = (val_pred - yva).abs().mean().item()
+    print(f"forecast epoch {epoch+1}: val MAE (scaled)={val_mae_scaled:.3f}")
+
+# Convert scaled predictions to original units for interpretable metrics.
+forecaster.eval()
+with torch.no_grad():
+    pred_scaled = forecaster(Xte.to(device)).cpu().numpy().ravel()
+pred_original = pred_scaled * sigma + mu
+truth_original = yte.numpy().ravel() * sigma + mu
+mae = np.mean(np.abs(pred_original - truth_original))
+rmse = np.sqrt(np.mean((pred_original - truth_original)**2))
+print(f"test MAE={mae:.3f}; RMSE={rmse:.3f}; units=series units")</code></pre>
+<h3>Walkthrough and audit checklist</h3><ol><li><b>Sentiment inputs:</b> integer token IDs are padded; lengths preserve the actual sequence size. The last-valid-output gather excludes PAD suffixes.</li><li><b>Classification:</b> logits [B,2] and integer class IDs [B] match CrossEntropyLoss. Gradients are cleared, computed, clipped, then applied.</li><li><b>Validation:</b> eval mode and no-grad are used; neither changes parameters. The split is only a toy tail split; realistic data should split by time, user, or source as appropriate.</li><li><b>Text generation:</b> inputs and labels are shifted by one. At inference, the sampled output is appended to context; temperature changes the categorical distribution.</li><li><b>Forecast:</b> train scaling is fit before validation/test. Window targets belong to the split they are forecast for; earlier observed history can be context.</li><li><b>Metrics:</b> forecast metrics are reported after converting from standardized values back to the original units.</li></ol><div class="box warn"><b>Production upgrades:</b> replace synthetic sentiment labels and the repeated toy corpus with a real dataset; use a validation-based model-selection protocol, class-aware metrics, vocabulary and tokenizer saved with the checkpoint, and rolling-origin evaluation for forecasting.</div></section>
+
+<section id="recap"><h2>8. Week 6 formula card and final checklist</h2><div class="grid"><div class="card"><h4>Sequence / classifier</h4><p>Input [B,T,F]; embedding [B,T,E]; logits [B,C]; LSTM count 4H(I+H)+8H with default biases.</p></div><div class="card"><h4>Next-token objective</h4><p>NLL=−Σ<sub>t</sub>log p(x<sub>t+1</sub>|x<sub>≤t</sub>); PPL=exp(mean NLL).</p></div><div class="card"><h4>Forecast metrics</h4><p>MAE=mean|y−ŷ|; RMSE=√mean((y−ŷ)²); report units and horizon.</p></div><div class="card"><h4>Data integrity</h4><p>Vocabulary and scaler fit on train only; chronological split; ignore PAD in sequence summaries and token loss.</p></div></div><ul><li>Can I explain why next-token targets are shifted?</li><li>Can I trace [B,T,E] to [B,C] and find the final valid token?</li><li>Can I compute NLL, perplexity, MAE, and RMSE by hand?</li><li>Can I identify leakage and misplaced gradient/update steps?</li></ul><h3>References and source alignment</h3><p>Course alignment: supplied Week 6 plan (sentiment with LSTM, text generation, forecasting); supplied Quiz 1 papers and exam notes (question formats and applicable code/numerical patterns); supplied <i>Understanding Deep Learning</i> reference book. Direct Quiz 1 coverage of Weeks 5–8 is limited; the paper-style exercises here are explicitly labeled as transfer practice.</p><ul><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTM.html">PyTorch LSTM API: equations, shapes, and batch_first</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.utils.rnn.pad_sequence.html">PyTorch pad_sequence</a></li><li><a href="https://docs.pytorch.org/docs/stable/notes/autograd.html">PyTorch autograd mechanics</a></li><li><a href="https://www.youtube.com/playlist?list=PLZ2ps__7DhBa9hqi20allqocTSUUt3nWX">Course playlist supplied by the student</a> (linked for review; playlist metadata could not be retrieved here)</li></ul></section>
+<nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-7-generative-models-vae-gan-theory-in-depth-notes.html">Go to Week 7 &gt;</a></nav></div><footer class="footer">Week 6 · Sequential Data Practice · Deep Learning &amp; GenAI exam notes</footer></main></div></body></html>

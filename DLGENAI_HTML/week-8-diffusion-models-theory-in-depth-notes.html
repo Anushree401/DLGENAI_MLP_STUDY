@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 8 | Diffusion Models</title><style>
+:root{--n:#17374e;--t:#087e8b;--ink:#1d303d;--muted:#536a78;--line:#d5e0e6;--pale:#eaf6f5;--gold:#fff6df;--blue:#eef4fb;--green:#edf8f1;--code:#10202b}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.68 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.layout{max-width:1260px;margin:25px auto;padding:0 18px;display:grid;grid-template-columns:255px minmax(0,900px);gap:24px;align-items:start}.toc{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:white;border:1px solid var(--line);border-radius:12px;padding:16px}.toc b{display:block;color:var(--n);margin-bottom:8px}.toc a{display:block;padding:3px 0 3px 8px;border-left:2px solid transparent;text-decoration:none;color:var(--muted);font-size:.84rem}.toc a:hover{color:var(--t);border-color:var(--t)}main{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 9px 32px #102b3d10}.hero{padding:48px 56px 38px;background:linear-gradient(130deg,#132f45,#087e8b);color:white}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#b9efeb;font-size:.78rem;font-weight:750}.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.1;margin:.4em 0}.hero p{max-width:720px;color:#e6f5f5;font-size:1.08rem}.pill{display:inline-block;border:1px solid #ffffff66;border-radius:99px;padding:3px 10px;margin:3px;font-size:.77rem}.week-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 56px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#f7fafc}.week-navigation a,.week-navigation span{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 15px;border-radius:8px;font-weight:700;text-decoration:none}.week-navigation a{background:#eaf6f5;color:var(--n);border:1px solid #b9deda}.week-navigation a:hover{background:#dff1ef}.week-navigation .week-home{background:#fff;color:var(--muted);border-color:var(--line)}.week-navigation .week-disabled{color:#7c8992;background:#f0f2f4;border:1px solid var(--line)}.content{padding:20px 56px 55px}h2{font-size:1.75rem;color:var(--n);line-height:1.25;margin:2em 0 .55em;padding-top:.5em;border-top:1px solid var(--line)}h2:first-child{margin-top:.5em}h3{color:var(--t);font-size:1.24rem;margin:1.4em 0 .35em}h4{color:var(--n);margin:.3em 0}p{margin:.45em 0 .9em}li{margin:.25em 0}.lead{font-size:1.08rem;color:#354f60}.box{padding:14px 17px;border-left:4px solid var(--t);background:var(--pale);border-radius:6px;margin:14px 0}.exam{border-color:#5b80b6;background:var(--blue)}.warn{border-color:#d29a23;background:var(--gold)}.good{border-color:#478e66;background:var(--green)}.math{font:1.08em Cambria,"Times New Roman",serif;background:#f2f6f8;padding:1px 4px;border-radius:3px}.eq{display:block;text-align:center;font:1.16rem/1.7 Cambria,"Times New Roman",serif;background:#f2f7f9;color:var(--n);border:1px solid #dce7ec;border-radius:7px;padding:9px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:9px;padding:13px 15px}.card p{margin-bottom:.3em}.diagram{overflow:auto;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fcfefe;margin:16px 0}.diagram svg{display:block;max-width:100%;height:auto;margin:auto}.diagram figcaption{text-align:center;color:var(--muted);font-size:.88rem;margin-top:8px}.tablewrap{overflow-x:auto;margin:14px 0}table{width:100%;border-collapse:collapse;font-size:.91rem}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--n);color:#fff}tbody tr:nth-child(even){background:#f5f8fa}pre{overflow:auto;background:var(--code);color:#e7f0f5;padding:16px 18px;border-radius:9px;font:.84rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}code{font:.91em ui-monospace,SFMono-Regular,Consolas,monospace;background:#edf2f5;padding:.1em .3em;border-radius:4px}pre code{background:transparent;padding:0}details{border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:10px 14px}summary{cursor:pointer;color:var(--n);font-weight:700}.footer{padding:18px 56px;background:#f6f9fb;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+@media(max-width:900px){.layout{display:block;margin:0;padding:0}.toc{position:relative;top:auto;max-height:250px;margin:9px}.hero{padding:32px 23px}.content{padding:15px 23px 40px}.footer{padding:17px 23px}.grid{grid-template-columns:1fr}main{border-radius:0}.week-navigation{margin:12px 23px 0;flex-wrap:wrap}.week-navigation a,.week-navigation span{flex:1}}
+@media print{body{background:white;font-size:10.5pt}.layout{display:block;padding:0;margin:0}.toc{display:none}main{border:0;box-shadow:none}.hero{padding:22px 32px;print-color-adjust:exact}.content{padding:10px 32px}.footer{padding:10px 32px}.week-navigation{margin:8px 32px}h2{break-before:page}h2:first-child{break-before:auto}pre,.diagram,.box,.card,details{break-inside:avoid}}
+</style></head><body><div class="layout">
+<aside class="toc"><b>Week 8 contents</b><a href="#roadmap">How to use these notes</a><a href="#intuition">Forward diffusion</a><a href="#train">Denoiser training</a><a href="#numericals">Worked numericals</a><a href="#sample">Reverse sampling & guidance</a><a href="#traps">Common traps</a><a href="#practice">Exam-pattern practice</a><a href="#fullcode">Complete DDPM lab</a><a href="#recap">Formula card & references</a></aside>
+<main><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><span class="week-disabled" aria-disabled="true">No next week</span></nav><header class="hero"><div class="eyebrow">Deep Learning &amp; GenAI · Week 8 Theory</div><h1>Diffusion models: learn to denoise</h1><p>From Gaussian corruption to a learned reverse process: equations, schedule numericals, guided sampling, and a complete PyTorch DDPM lab.</p><span class="pill">DDPM forward process</span><span class="pill">Noise prediction</span><span class="pill">Reverse sampling</span><span class="pill">Latent diffusion</span></header>
+<div class="content"><section id="roadmap"><h2>How to use these notes</h2><p class="lead">Diffusion is easiest to understand as a deliberately destructive forward process followed by a learned reverse process. The forward direction adds known Gaussian noise; the neural network learns to remove it. For exam numericals, keep α, ᾱ, β, and the predicted noise separate, write the square-root coefficients first, and substitute only at the end.</p><div class="box exam"><b>Exam-pattern note:</b> Direct Quiz 1 coverage of diffusion is limited. The supplied exam notes flag DDPM as a lower-priority direct quiz topic but include it in the formula bank. Accordingly, this guide teaches the full process and uses exam-style coefficient substitution, schedule interpretation, tensor-shape tracing, and “which quantity is predicted?” distractors rather than treating these examples as actual past questions.</div><figure class="diagram"><svg viewBox="0 0 820 230" role="img" aria-label="Diffusion forward process adds noise and reverse process denoises from random noise"><defs><marker id="w8a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" fill="#17374e" text-anchor="middle"><text x="410" y="25" font-size="15" font-weight="bold">Forward: fixed corruption q(xₜ | xₜ₋₁)</text><g><rect x="45" y="45" width="125" height="70" rx="10" fill="#edf8f1" stroke="#478e66"/><text x="107" y="76" font-size="14">clean image</text><text x="107" y="98" font-size="12">x₀</text><rect x="240" y="45" width="125" height="70" rx="10" fill="#eaf6f5" stroke="#087e8b"/><text x="302" y="76" font-size="14">slightly noisy</text><text x="302" y="98" font-size="12">x₁</text><rect x="435" y="45" width="125" height="70" rx="10" fill="#fff6df" stroke="#d29a23"/><text x="497" y="76" font-size="14">more noisy</text><text x="497" y="98" font-size="12">xₜ</text><rect x="650" y="45" width="125" height="70" rx="10" fill="#f7eaea" stroke="#b76845"/><text x="712" y="76" font-size="14">almost noise</text><text x="712" y="98" font-size="12">xT ~ N(0,I)</text></g><path d="M170 80H232M365 80H427M560 80H642" stroke="#087e8b" stroke-width="2" marker-end="url(#w8a)"/><text x="410" y="150" font-size="15" font-weight="bold">Reverse: learned denoiser εθ(xₜ,t) predicts the added noise</text><path d="M710 176H500M495 176H305M300 176H110" stroke="#b76845" stroke-width="2" marker-end="url(#w8a)"/><text x="410" y="211" font-size="12">sample xT from noise, then make T learned reverse steps to obtain x₀</text></g></svg><figcaption>Figure 1. Training can jump directly to a noisy xₜ using a closed-form Gaussian; generation starts from noise and iteratively denoises.</figcaption></figure></section>
+
+<section id="intuition"><h2>1. Why diffusion can generate images</h2><h3>1.1 The forward Markov chain</h3><p>Take a clean data example <span class="math">x₀</span>. Choose a variance schedule β₁,…,β<sub>T</sub>, with small positive β<sub>t</sub>&lt;1. Define α<sub>t</sub>=1−β<sub>t</sub>. The fixed forward transition is</p><div class="eq">q(x<sub>t</sub>|x<sub>t−1</sub>)=N(√α<sub>t</sub>x<sub>t−1</sub>, β<sub>t</sub>I)</div><p>Each transition slightly shrinks signal and adds independent Gaussian noise. Repeating this T times gradually removes recognizable structure. The forward transitions are chosen by us; they are not the learned generator.</p><h3>1.2 Closed-form sample at any timestep</h3><p>Let <span class="math">ᾱ<sub>t</sub>=∏<sub>s=1</sub><sup>t</sup>α<sub>s</sub></span>. Because Gaussians compose, one can sample xₜ from x₀ directly:</p><div class="eq">q(x<sub>t</sub>|x₀)=N(√ᾱ<sub>t</sub>x₀,(1−ᾱ<sub>t</sub>)I)<br>x<sub>t</sub>=√ᾱ<sub>t</sub>x₀ + √(1−ᾱ<sub>t</sub>)ε,  ε~N(0,I)</div><p>This formula is central: during training, sample random t and ε; construct xₜ in one step instead of simulating every earlier transition. ᾱ measures retained signal: near 1, xₜ is close to x₀; near 0, xₜ is mostly noise.</p><figure class="diagram"><svg viewBox="0 0 760 165" role="img" aria-label="A noisy sample is the sum of signal and noise components"><g font-family="Arial" fill="#17374e" text-anchor="middle"><rect x="30" y="40" width="180" height="75" rx="9" fill="#edf8f1" stroke="#478e66"/><text x="120" y="69" font-size="14">signal term</text><text x="120" y="94" font-size="15">√ᾱₜ x₀</text><text x="245" y="83" font-size="26">+</text><rect x="280" y="40" width="180" height="75" rx="9" fill="#fff6df" stroke="#d29a23"/><text x="370" y="69" font-size="14">noise term</text><text x="370" y="94" font-size="15">√(1−ᾱₜ) ε</text><text x="495" y="83" font-size="26">=</text><rect x="530" y="40" width="180" height="75" rx="9" fill="#eaf6f5" stroke="#087e8b"/><text x="620" y="69" font-size="14">noisy image</text><text x="620" y="94" font-size="15">xₜ</text><text x="380" y="148" font-size="12">At each pixel, the same scalar coefficients blend clean value and sampled Gaussian noise.</text></g></svg><figcaption>Figure 2. A single pixel follows the same scalar formula; for an image, ε is a tensor matching the image shape.</figcaption></figure>
+<h3>1.3 Schedule intuition and signal-to-noise ratio</h3><p>A β schedule controls how quickly information is destroyed. Linear schedules are simple; cosine-style schedules distribute signal degradation differently. Define signal-to-noise ratio <span class="math">SNR(t)=ᾱ<sub>t</sub>/(1−ᾱ<sub>t</sub>)</span>. At early t, SNR is large; late t, it is small. A schedule must make x<sub>T</sub> close enough to the chosen prior (typically standard Gaussian) for reverse generation to start from that prior without a large train/test mismatch.</p><div class="box warn"><b>Notation trap:</b> β<sub>t</sub> is the variance added at step t; α<sub>t</sub>=1−β<sub>t</sub> is one-step signal retention; ᾱ<sub>t</sub> is the cumulative product of all α values through t. Do not use α and ᾱ interchangeably.</div></section>
+
+<section id="train"><h2>2. Train a denoiser to predict noise</h2><h3>2.1 Noise-prediction objective</h3><p>Given a clean x₀, choose t uniformly, sample ε~N(0,I), and create xₜ from the closed form. A neural network receives both xₜ and t and predicts the injected noise:</p><div class="eq">L<sub>simple</sub>=E<sub>x₀,t,ε</sub>[||ε−ε<sub>θ</sub>(x<sub>t</sub>,t)||²]</div><p>The timestep matters: a model must know whether its input is lightly or heavily corrupted. A U-Net predicts a noise tensor with the same spatial shape/channels as ε. The widely used simple objective is related to optimizing a variational bound; it is not literally “compare predicted clean image to noise.”</p><h3>2.2 Why a U-Net?</h3><p>Diffusion denoisers need both large context and fine spatial detail. U-Net downsampling blocks expand receptive field; skip connections bring fine features back during upsampling. Timestep embeddings are injected into blocks so the network can adapt to noise level. For text/class conditional models, embeddings can modulate features or enter through cross-attention.</p><div class="tablewrap"><table><thead><tr><th>Input/target</th><th>Shape example</th><th>Role</th></tr></thead><tbody><tr><td>Clean images x₀</td><td>[B,3,H,W]</td><td>Training examples</td></tr><tr><td>Sampled noise ε</td><td>[B,3,H,W]</td><td>Known target for denoiser</td></tr><tr><td>Noisy xₜ</td><td>[B,3,H,W]</td><td>Image input at random t</td></tr><tr><td>Time index t</td><td>[B]</td><td>Noise-level condition</td></tr><tr><td>Predicted noise εθ</td><td>[B,3,H,W]</td><td>Same shape as target ε</td></tr></tbody></table></div><h3>2.3 Small code: forward corruption</h3><pre><code># abar is the cumulative alpha product, indexed from 0 for t=1
+noise = torch.randn_like(x0)
+t = torch.randint(0, T, (x0.size(0),), device=x0.device)
+a_bar_t = abar[t].view(-1, 1, 1, 1)
+xt = a_bar_t.sqrt() * x0 + (1.0 - a_bar_t).sqrt() * noise
+predicted_noise = denoiser(xt, t)
+loss = F.mse_loss(predicted_noise, noise)</code></pre><p>The same per-example coefficient is broadcast over channel/height/width. Indexing errors often come from mixing mathematical timesteps 1…T with Python indices 0…T−1.</p></section>
+
+<section id="numericals"><h2>3. Worked diffusion numericals</h2><h3>Numerical A: mix signal and noise</h3><p>Suppose ᾱ<sub>t</sub>=0.64, x₀=2, ε=−1. Then √ᾱ=.8 and √(1−ᾱ)=.6, so xₜ=.8(2)+.6(−1)=1.6−.6=<b>1.0</b>. The clean signal coefficient is .8 and the noise coefficient is .6.</p><h3>Numerical B: alternate values</h3><p>Suppose ᾱ=.25, x₀=4, ε=2. Coefficients are √.25=.5 and √.75≈.8660. Thus xₜ=.5(4)+.8660(2)=2+1.732=<b>3.732</b>. Notice the noise contributes positively because this sampled ε was positive.</p><h3>Numerical C: cumulative schedule</h3><p>Let β₁=.1 and β₂=.2. Then α₁=.9, α₂=.8; ᾱ₂=.9×.8=.72. For x₀=1, ε=.5 at t=2, x₂=√.72×1+√.28×.5≈.8485+.2646=<b>1.1131</b>. Do not add β values to get ᾱ.</p><h3>Numerical D: one reverse mean and variance</h3><p>Use α=.9, β=.1, ᾱ<sub>t</sub>=.72, ᾱ<sub>t−1</sub>=.8, xₜ=1.2, predicted εθ=.5. The DDPM noise-parameterized reverse mean is</p><div class="eq">μ<sub>θ</sub>(x<sub>t</sub>,t)=1/√α<sub>t</sub>[x<sub>t</sub>−β<sub>t</sub>/√(1−ᾱ<sub>t</sub>) · ε<sub>θ</sub>]</div><p>Substitute: 1/√.9 × [1.2−.1/√.28×.5] ≈1.0541×(1.2−.0945)=<b>1.1653</b>. The posterior variance is β̃<sub>t</sub>=β<sub>t</sub>(1−ᾱ<sub>t−1</sub>)/(1−ᾱ<sub>t</sub>)=.1×.2/.28=<b>.07143</b>; standard deviation≈.2673. If z=.25, x<sub>t−1</sub>=μ+√β̃ z≈1.1653+.2673(.25)=<b>1.2321</b>. At final t=1, omit the extra Gaussian noise term to return the clean estimate.</p><div class="box good"><b>Check:</b> In the forward formula, coefficient of x₀ is √ᾱ and coefficient of ε is √(1−ᾱ). In the reverse formula, the model predicts εθ, then a schedule-dependent formula computes the mean. It does not directly output x<sub>t−1</sub>.</div></section>
+
+<section id="sample"><h2>4. Reverse sampling and conditioning</h2><h3>4.1 DDPM reverse step</h3><p>At generation time, begin with <span class="math">x<sub>T</sub>~N(0,I)</span>. For t=T,…,1, predict εθ(xₜ,t), compute the reverse mean, optionally add Gaussian noise, and step to x<sub>t−1</sub>. Repeating T steps yields an image. In the simplified DDPM parameterization the variance may be fixed to β̃<sub>t</sub> or another schedule choice; the paper and implementation specify it. At t=1, do not inject another noise draw.</p><div class="eq">x<sub>t−1</sub>=μ<sub>θ</sub>(x<sub>t</sub>,t)+√β̃<sub>t</sub>z,  z~N(0,I),  t&gt;1</div><p>Sampling cost is proportional to the number of denoising steps because each step invokes the network. Fewer-step samplers trade time against quality and are design-dependent.</p>
+<h3>4.2 DDPM vs DDIM</h3><p>DDPM is the classic stochastic reverse chain with a particular learned or fixed reverse variance. DDIM constructs a family of non-Markovian sampling trajectories sharing the training objective; a common setting is deterministic for a fixed initial noise. DDIM can skip steps. Neither means “diffusion takes one forward pass”—generation still follows a sequence of denoising updates.</p>
+<h3>4.3 Classifier-free guidance</h3><p>Train the conditional denoiser sometimes without its condition so it learns both ε<sub>uncond</sub> and ε<sub>cond</sub>. At inference:</p><div class="eq">ε<sub>guided</sub>=ε<sub>uncond</sub>+w(ε<sub>cond</sub>−ε<sub>uncond</sub>)</div><p>w=0 gives the unconditional prediction; w=1 gives the conditional prediction; w&gt;1 extrapolates toward stronger condition agreement. Larger guidance can reduce diversity or create artifacts. Classifier guidance instead uses gradients of a separate classifier with respect to xₜ.</p>
+<h3>4.4 Latent diffusion</h3><p>Pixel-space diffusion operates on high-resolution RGB tensors and is expensive. Latent diffusion first encodes an image with an autoencoder to a smaller spatial latent, diffuses and denoises there, and decodes the final latent. Text/image conditions can interact through cross-attention. Compression lowers compute but the autoencoder bottleneck constrains detail. Stable-diffusion-style systems combine an image autoencoder, diffusion U-Net, text encoder, and scheduler; “Stable Diffusion is only a GAN” is false.</p></section>
+
+<section id="traps"><h2>5. Common concept and code traps</h2><div class="tablewrap"><table><thead><tr><th>Claim</th><th>Correct interpretation</th></tr></thead><tbody><tr><td>“The model predicts x₀ in the basic objective.”</td><td>The common simple DDPM objective trains εθ to predict sampled noise ε. Other parameterizations (x₀ or v prediction) also exist, but identify which the question states.</td></tr><tr><td>“The network adds noise during generation.”</td><td>The fixed forward process adds noise for training; reverse generation starts noisy and the learned model denoises. A sampler may add stochastic noise in reverse steps.</td></tr><tr><td>“ᾱ is the current β.”</td><td>ᾱₜ is a cumulative product of αₛ values.</td></tr><tr><td>“t is irrelevant after xₜ is formed.”</td><td>The same xₜ value distribution can arise at different noise levels; t tells the network the corruption level.</td></tr><tr><td>“At the last denoising step, always add noise.”</td><td>The terminal x₀ estimate commonly omits the stochastic term.</td></tr><tr><td>“Higher classifier-free guidance always improves quality.”</td><td>It strengthens conditioning but can reduce diversity and add artifacts.</td></tr><tr><td>“Noise prediction target shape is [B].”</td><td>ε has the full image shape [B,C,H,W], and εθ must match it.</td></tr></tbody></table></div><h3>Short code: schedule sanity</h3><pre><code>betas = torch.linspace(1e-4, 0.02, T)
+alpha = 1.0 - betas
+abar = torch.cumprod(alpha, dim=0)
+abar_prev = torch.cat([torch.ones(1), abar[:-1]])
+posterior_var = betas * (1.0 - abar_prev) / (1.0 - abar)
+# abar[t] is the product through mathematical step t+1 (zero-based index t).</code></pre></section>
+
+<section id="practice"><h2>6. Exam-pattern practice with worked answers</h2><details><summary>Q1. In the common DDPM training objective, what does εθ(xₜ,t) try to predict?</summary><p>The specific Gaussian noise ε that was sampled to create xₜ from x₀. The target has the same shape as x₀.</p></details><details><summary>Q2. If ᾱ=.64, x₀=2, ε=−1, compute xₜ.</summary><p>√.64=.8; √.36=.6; xₜ=.8×2+.6×(−1)=1.0.</p></details><details><summary>Q3. Given β₁=.1 and β₂=.2, what is ᾱ₂?</summary><p>α₁=.9, α₂=.8, hence ᾱ₂=.9×.8=.72.</p></details><details><summary>Q4. What does timestep conditioning provide?</summary><p>It informs the denoiser of the noise level/corruption stage, which determines how strongly image signal is retained and how much noise is present.</p></details><details><summary>Q5. Under classifier-free guidance, what happens at w=0 and w=1?</summary><p>w=0 yields ε_uncond; w=1 algebraically yields ε_cond. Values above 1 extrapolate toward the conditional direction.</p></details><details><summary>Q6. A code question shows noise [B,3,32,32] and prediction [B,1,32,32]. Is ordinary elementwise MSE valid?</summary><p>No: shapes do not match and broadcasting could produce a misleading tensor. The denoiser output must predict all 3 noise channels at every spatial location: [B,3,32,32].</p></details></section>
+
+<section id="fullcode"><h2>7. Complete end-of-week program: tiny DDPM on MNIST</h2><p>This compact example trains a small time-conditioned convolutional noise predictor on 28×28 MNIST images. It shows schedule construction, one-step corruption, noise-prediction training, and the full reverse sampler. This is a teaching implementation, not a high-quality production U-Net or a benchmark reproduction.</p><pre><code>"""Week 8 lab: a small DDPM noise-prediction model on MNIST."""
+import math
+import torch
+from torch import nn
+from torch.nn import functional as F
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
+
+SEED, T = 17, 100
+torch.manual_seed(SEED)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# MNIST is normalized to [-1,1], matching the example's data convention.
+dataset = datasets.MNIST(
+    root="data", train=True, download=True,
+    transform=transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Lambda(lambda x: 2.0 * x - 1.0)
+    ])
+)
+loader = DataLoader(dataset, batch_size=128, shuffle=True,
+                    drop_last=True, num_workers=0)
+
+# ------------------------- Schedule --------------------------
+betas = torch.linspace(1e-4, 0.02, T, device=device)
+alpha = 1.0 - betas
+abar = torch.cumprod(alpha, dim=0)
+abar_prev = torch.cat([torch.ones(1, device=device), abar[:-1]])
+posterior_var = betas * (1.0 - abar_prev) / (1.0 - abar)
+
+# ------------------- Time-conditioned CNN -------------------
+def timestep_embedding(t, dim=32):
+    """Sinusoidal embedding; t is integer shape [B]."""
+    half = dim // 2
+    scale = math.log(10000.0) / max(half - 1, 1)
+    freq = torch.exp(torch.arange(half, device=t.device) * -scale)
+    phase = t.float().unsqueeze(1) * freq.unsqueeze(0)
+    emb = torch.cat([torch.sin(phase), torch.cos(phase)], dim=1)
+    if dim % 2:
+        emb = F.pad(emb, (0, 1))
+    return emb
+
+class TinyDenoiser(nn.Module):
+    def __init__(self, time_dim=32, channels=64):
+        super().__init__()
+        self.time_mlp = nn.Sequential(
+            nn.Linear(time_dim, channels), nn.SiLU(),
+            nn.Linear(channels, channels)
+        )
+        self.conv1 = nn.Conv2d(1, channels, 3, padding=1)
+        self.norm1 = nn.GroupNorm(8, channels)
+        self.conv2 = nn.Conv2d(channels, channels, 3, padding=1)
+        self.norm2 = nn.GroupNorm(8, channels)
+        self.out = nn.Conv2d(channels, 1, 3, padding=1)
+
+    def forward(self, x, t):
+        temb = self.time_mlp(timestep_embedding(t))[:, :, None, None]
+        h = F.silu(self.norm1(self.conv1(x)))
+        h = h + temb                       # broadcast over H,W
+        residual = h
+        h = F.silu(self.norm2(self.conv2(h)))
+        h = h + residual                   # simple residual block
+        return self.out(F.silu(h))         # predicted ε, [B,1,28,28]
+
+model = TinyDenoiser().to(device)
+optimizer = torch.optim.Adam(model.parameters(), lr=2e-4)
+
+# ------------------------- Training --------------------------
+for epoch in range(3):
+    model.train()
+    total_loss = 0.0
+    for x0, _ in loader:
+        x0 = x0.to(device)                 # [B,1,28,28]
+        b = x0.size(0)
+        t = torch.randint(0, T, (b,), device=device)
+        eps = torch.randn_like(x0)
+        a_bar = abar[t].view(b, 1, 1, 1)
+        xt = a_bar.sqrt() * x0 + (1.0-a_bar).sqrt() * eps
+
+        optimizer.zero_grad(set_to_none=True)
+        eps_hat = model(xt, t)
+        loss = F.mse_loss(eps_hat, eps)    # target = sampled noise
+        loss.backward()
+        nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+        optimizer.step()
+        total_loss += loss.item()
+    print(f"epoch {epoch+1}: mean noise-prediction MSE="
+          f"{total_loss/len(loader):.4f}")
+
+# --------------------- Reverse sampling ----------------------
+@torch.no_grad()
+def sample_ddpm(n=16):
+    model.eval()
+    x = torch.randn(n, 1, 28, 28, device=device)  # x_T ~ N(0,I)
+    for ti in reversed(range(T)):
+        t = torch.full((n,), ti, device=device, dtype=torch.long)
+        eps_hat = model(x, t)
+        a = alpha[ti]
+        b = betas[ti]
+        a_bar = abar[ti]
+        # Posterior mean for the epsilon parameterization.
+        mean = (x - (b / torch.sqrt(1.0-a_bar)) * eps_hat) / torch.sqrt(a)
+        if ti > 0:
+            noise = torch.randn_like(x)
+            x = mean + torch.sqrt(posterior_var[ti]) * noise
+        else:
+            x = mean                         # no noise after final step
+    return x.clamp(-1.0, 1.0)
+
+samples = sample_ddpm(16)
+print("sample batch:", samples.shape,
+      "range:", samples.min().item(), samples.max().item())
+# To display/save with torchvision.utils.save_image, map [-1,1] back to [0,1].
+images_for_display = (samples + 1.0) / 2.0</code></pre>
+<h3>Line-by-line reasoning</h3><ol><li><b>Schedule:</b> <code>abar[t]</code> stores the product through zero-based index t. <code>abar_prev[0]=1</code> represents the clean boundary.</li><li><b>Time embedding:</b> an integer step becomes a fixed sinusoidal vector, then an MLP maps it to channel width. The feature map receives that vector by broadcasting across height/width.</li><li><b>Corruption:</b> one random t is chosen per image; a separate ε tensor is sampled. <code>x_t</code> is made in one closed-form step.</li><li><b>Objective:</b> network output and target noise have identical [B,1,28,28] shape. MSE teaches the network to estimate the injected noise.</li><li><b>Reverse mean:</b> learned ε̂ is inserted into the schedule-derived DDPM mean.</li><li><b>Posterior variance:</b> <code>posterior_var[t]</code> adds reverse randomness for t&gt;0; t=0 returns the final mean.</li><li><b>Range:</b> training images are [-1,1], while the initial noise is unbounded Gaussian. Clamping is a display convenience and can slightly alter the mathematical sampler.</li><li><b>Compute:</b> each sample invokes the denoiser T times. Increasing T raises sampling cost; a short schedule in this teaching example may yield poor images.</li></ol><div class="box warn"><b>Model limitation:</b> this small same-resolution CNN is not a full U-Net, uses no class/text conditioning, and trains for only three epochs. Production diffusion systems require larger datasets, stronger denoisers, tuned schedules, robust evaluation, and more compute.</div></section>
+
+<section id="recap"><h2>8. Week 8 formula card and final checklist</h2><div class="grid"><div class="card"><h4>Schedule</h4><p>αₜ=1−βₜ; ᾱₜ=∏<sub>s≤t</sub>αₛ.</p></div><div class="card"><h4>Direct forward sample</h4><p>xₜ=√ᾱₜx₀+√(1−ᾱₜ)ε.</p></div><div class="card"><h4>Training target</h4><p>εθ(xₜ,t) predicts ε; minimize mean squared error.</p></div><div class="card"><h4>Reverse mean</h4><p>μθ=1/√αₜ[xₜ−βₜ/√(1−ᾱₜ) εθ(xₜ,t)].</p></div></div><ul><li>Can I compute ᾱ from a short β schedule?</li><li>Can I substitute values into the forward mixture without swapping the square roots?</li><li>Can I state the network’s input, condition, target, and output shapes?</li><li>Can I explain why the reverse process iterates and why the final step omits sampled noise?</li><li>Can I distinguish DDPM, DDIM, classifier guidance, classifier-free guidance, and latent diffusion?</li></ul><h3>References and source alignment</h3><p>Course alignment uses the supplied Week 8 diffusion syllabus, the provided <i>Understanding Deep Learning</i> chapter on diffusion, and the supplied exam notes/question papers. Direct quiz coverage is limited, so worked questions are marked as formula-transfer/code-reading practice.</p><ul><li><a href="https://arxiv.org/abs/2006.11239">Ho, Jain &amp; Abbeel, Denoising Diffusion Probabilistic Models</a></li><li><a href="https://arxiv.org/abs/2010.02502">Song et al., Denoising Diffusion Implicit Models</a></li><li><a href="https://arxiv.org/abs/2112.10752">Rombach et al., High-Resolution Image Synthesis with Latent Diffusion Models</a></li><li><a href="https://docs.pytorch.org/docs/stable/notes/autograd.html">PyTorch autograd mechanics</a></li><li><a href="https://www.youtube.com/playlist?list=PLZ2ps__7DhBa9hqi20allqocTSUUt3nWX">Course playlist supplied by the student</a> (linked; metadata could not be retrieved here)</li></ul></section>
+<nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><span class="week-disabled" aria-disabled="true">No next week</span></nav></div><footer class="footer">Week 8 · Generative AI for Vision: Diffusion Models · Deep Learning &amp; GenAI exam notes</footer></main></div></body></html>

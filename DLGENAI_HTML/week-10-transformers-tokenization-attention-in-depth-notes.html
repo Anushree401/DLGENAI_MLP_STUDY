@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 10 | Transformers, Tokenization & Attention</title><style>
+:root{--n:#17374e;--t:#087e8b;--ink:#1d303d;--muted:#536a78;--line:#d5e0e6;--pale:#eaf6f5;--gold:#fff6df;--blue:#eef4fb;--green:#edf8f1;--code:#10202b}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.68 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.layout{max-width:1260px;margin:25px auto;padding:0 18px;display:grid;grid-template-columns:255px minmax(0,900px);gap:24px;align-items:start}.toc{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:white;border:1px solid var(--line);border-radius:12px;padding:16px}.toc b{display:block;color:var(--n);margin-bottom:8px}.toc a{display:block;padding:3px 0 3px 8px;border-left:2px solid transparent;text-decoration:none;color:var(--muted);font-size:.84rem}.toc a:hover{color:var(--t);border-color:var(--t)}main{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 9px 32px #102b3d10}.hero{padding:48px 56px 38px;background:linear-gradient(130deg,#132f45,#087e8b);color:white}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#b9efeb;font-size:.78rem;font-weight:750}.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.1;margin:.4em 0}.hero p{max-width:720px;color:#e6f5f5;font-size:1.08rem}.pill{display:inline-block;border:1px solid #ffffff66;border-radius:99px;padding:3px 10px;margin:3px;font-size:.77rem}.week-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 56px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#f7fafc}.week-navigation a,.week-navigation span{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 15px;border-radius:8px;font-weight:700;text-decoration:none}.week-navigation a{background:#eaf6f5;color:var(--n);border:1px solid #b9deda}.week-navigation a:hover{background:#dff1ef}.week-navigation .week-home{background:#fff;color:var(--muted);border-color:var(--line)}.week-navigation .week-disabled{color:#7c8992;background:#f0f2f4;border:1px solid var(--line)}.content{padding:20px 56px 55px}h2{font-size:1.75rem;color:var(--n);line-height:1.25;margin:2em 0 .55em;padding-top:.5em;border-top:1px solid var(--line)}h2:first-child{margin-top:.5em}h3{color:var(--t);font-size:1.24rem;margin:1.4em 0 .35em}h4{color:var(--n);margin:.3em 0}p{margin:.45em 0 .9em}li{margin:.25em 0}.lead{font-size:1.08rem;color:#354f60}.box{padding:14px 17px;border-left:4px solid var(--t);background:var(--pale);border-radius:6px;margin:14px 0}.exam{border-color:#5b80b6;background:var(--blue)}.warn{border-color:#d29a23;background:var(--gold)}.good{border-color:#478e66;background:var(--green)}.math{font:1.08em Cambria,"Times New Roman",serif;background:#f2f6f8;padding:1px 4px;border-radius:3px}.eq{display:block;text-align:center;font:1.16rem/1.7 Cambria,"Times New Roman",serif;background:#f2f7f9;color:var(--n);border:1px solid #dce7ec;border-radius:7px;padding:9px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:9px;padding:13px 15px}.card p{margin-bottom:.3em}.diagram{overflow:auto;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fcfefe;margin:16px 0}.diagram svg{display:block;max-width:100%;height:auto;margin:auto}.diagram figcaption{text-align:center;color:var(--muted);font-size:.88rem;margin-top:8px}.tablewrap{overflow-x:auto;margin:14px 0}table{width:100%;border-collapse:collapse;font-size:.91rem}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--n);color:#fff}tbody tr:nth-child(even){background:#f5f8fa}pre{overflow:auto;background:var(--code);color:#e7f0f5;padding:16px 18px;border-radius:9px;font:.84rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}code{font:.91em ui-monospace,SFMono-Regular,Consolas,monospace;background:#edf2f5;padding:.1em .3em;border-radius:4px}pre code{background:transparent;padding:0}details{border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:10px 14px}summary{cursor:pointer;color:var(--n);font-weight:700}.footer{padding:18px 56px;background:#f6f9fb;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+@media(max-width:900px){.layout{display:block;margin:0;padding:0}.toc{position:relative;top:auto;max-height:250px;margin:9px}.hero{padding:32px 23px}.content{padding:15px 23px 40px}.footer{padding:17px 23px}.grid{grid-template-columns:1fr}main{border-radius:0}.week-navigation{margin:12px 23px 0;flex-wrap:wrap}.week-navigation a,.week-navigation span{flex:1}}
+@media print{body{background:white;font-size:10.5pt}.layout{display:block;padding:0;margin:0}.toc{display:none}main{border:0;box-shadow:none}.hero{padding:22px 32px;print-color-adjust:exact}.content{padding:10px 32px}.footer{padding:10px 32px}.week-navigation{margin:8px 32px}h2{break-before:page}h2:first-child{break-before:auto}pre,.diagram,.box,.card,details{break-inside:avoid}}
+</style></head><body><div class="layout">
+<aside class="toc"><b>Week 10 contents</b><a href="#roadmap">How to use these notes</a><a href="#tokens">Tokens & embeddings</a><a href="#attention">Scaled dot-product attention</a><a href="#transformer">Multi-head & Transformer block</a><a href="#numericals">Worked numericals</a><a href="#practice">Exam-pattern practice</a><a href="#fullcode">Complete program</a><a href="#recap">Formula card & references</a></aside>
+<main><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-11-llm-architectures-peft-lora-in-depth-notes.html">Go to Week 11 &gt;</a></nav><header class="hero"><div class="eyebrow">Deep Learning &amp; GenAI · Week 10 Theory</div><h1>Transformers: tokens, attention, and context</h1><p>Understand tokenization and embeddings, derive scaled dot-product attention, trace tensor shapes and masks, and build a tiny decoder-only language model.</p><span class="pill">Tokenization</span><span class="pill">Embeddings</span><span class="pill">Q/K/V attention</span><span class="pill">Decoder Transformer</span></header>
+<div class="content"><section id="roadmap"><h2>How to use these notes</h2><p class="lead">A Transformer replaces recurrence with attention: each token builds a representation by weighting other token representations. This week starts with token IDs and embeddings, builds scaled dot-product and multi-head attention, then connects these ideas to the full Transformer and exam numericals.</p><div class="box exam"><b>Quiz-paper alignment:</b> The supplied Quiz 1 papers are dominated by early-week code/output, tensor-shape, parameter-count, and numerical questions; the provided exam notes specifically predict attention Q/K/V and positional-encoding questions. There are few direct Transformer PYQs in these papers. The worked problems below therefore follow the same short-numeric, code-trace, conceptual-distractor and shape-audit styles, and are labeled as practice patterns.</div><figure class="diagram"><svg viewBox="0 0 860 260" role="img" aria-label="Transformer encoder and decoder with self attention, causal masking, cross attention, and feed-forward networks"><defs><marker id="w10a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" fill="#17374e"><text x="210" y="28" font-size="15" text-anchor="middle" font-weight="bold">Encoder stack</text><text x="650" y="28" font-size="15" text-anchor="middle" font-weight="bold">Decoder stack</text><rect x="90" y="45" width="240" height="46" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="210" y="73" text-anchor="middle" font-size="13">Self-attention (all source positions)</text><rect x="90" y="111" width="240" height="46" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="210" y="139" text-anchor="middle" font-size="13">Position-wise feed-forward</text><rect x="530" y="45" width="240" height="46" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="650" y="73" text-anchor="middle" font-size="13">Masked self-attention (causal)</text><rect x="530" y="111" width="240" height="46" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="650" y="139" text-anchor="middle" font-size="13">Cross-attention: Q from decoder</text><text x="650" y="155" text-anchor="middle" font-size="10">K,V from encoder output</text><rect x="530" y="177" width="240" height="46" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="650" y="205" text-anchor="middle" font-size="13">Position-wise feed-forward</text><rect x="90" y="190" width="240" height="38" rx="8" fill="#f4f6fb" stroke="#8aa0ad"/><text x="210" y="214" text-anchor="middle" font-size="12">source embeddings + position</text><rect x="530" y="232" width="240" height="23" rx="6" fill="#f4f6fb" stroke="#8aa0ad"/><text x="650" y="248" text-anchor="middle" font-size="11">target embeddings + position</text><path d="M210 190V163M210 111V97M650 232V229M650 177V163M650 111V97" stroke="#087e8b" stroke-width="2" marker-end="url(#w10a)"/><path d="M331 68C420 68 430 132 525 132" stroke="#b76845" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#w10a)"/><text x="430" y="113" font-size="11" text-anchor="middle">encoder memory</text></g></svg><figcaption>Figure 1. Encoder self-attention is bidirectional; decoder self-attention hides future targets; decoder cross-attention reads encoder outputs.</figcaption></figure></section>
+
+<section id="tokens"><h2>1. Tokenization and word embeddings</h2><h3>1.1 Text becomes token IDs, not words-as-vectors</h3><p>A tokenizer divides text into units chosen by its vocabulary: whole words, subwords, bytes, or a hybrid. It adds special tokens such as beginning/end markers, classification separators, or padding depending on model and task. Token count is not word count: “unbelievable” might become one token or multiple pieces. The model receives integer IDs and converts each ID to a trainable/dense vector through an embedding matrix.</p><div class="eq">IDs [B,T] → embedding table E∈R<sup>V×d</sup> → vectors X∈R<sup>B×T×d</sup></div><p>V is vocabulary size and d is model width. Embedding parameters=Vd if there is no padding row freeze or tied output. If the vocabulary is 30,000 and d=512, that table has 15,360,000 weights. A decoder language model may tie its output projection to the input embedding, so count once when the weights are shared.</p><h3>1.2 Word embeddings vs contextual representations</h3><p>The embedding lookup gives a starting vector for each token. Transformer layers update it using surrounding context. The same word/token can therefore have different final contextual vectors in different sentences. Static word vectors have one learned vector per vocabulary item; contextual states depend on the sequence and position.</p><h3>1.3 Padding and attention masks</h3><p>Batching variable-length text often adds PAD tokens. An attention mask usually marks real tokens as 1 and padding as 0. The mask prevents a query from attending to padding keys. It is different from a causal mask, which prevents each position from seeing later positions. Some APIs use the inverse boolean convention: always read the function’s documentation.</p><pre><code>batch = tokenizer(texts, padding=True, truncation=True,
+                  return_tensors="pt")
+input_ids = batch["input_ids"]          # [B,T]
+attention_mask = batch["attention_mask"]  # 1=real, 0=padding (HF convention)
+</code></pre><div class="box warn"><b>Quiz-style trap:</b> Tokenizer padding mask is not the same as the decoder’s future-blocking causal mask. A causal decoder can also need a padding mask when examples have different lengths.</div></section>
+
+<section id="attention"><h2>2. Scaled dot-product attention</h2><h3>2.1 Query, key, value</h3><p>For each token, learned linear maps create a query Q, key K, and value V. A query asks what information to retrieve; keys are matched against it; values carry the content to mix. Similarity scores <span class="math">QKᵀ</span> are scaled by √d<sub>k</sub>, softmax-normalized over key positions, and used to average V.</p><div class="eq">Attention(Q,K,V)=softmax(QKᵀ/√d<sub>k</sub> + mask)V</div><p>For sequence length T, Q,K,V per head have shapes [B,T,d<sub>k</sub>]. Scores/weights have [B,T,T]. For each query, weights sum to one over keys if at least one key is allowed. The scale controls logit magnitude; without it, dot products can grow with d<sub>k</sub> and softmax may become too peaked.</p>
+<h3>2.2 Hand calculation: two keys, two values</h3><p>Let q=[1,0], k₁=[1,0], k₂=[0,1], v₁=[10,0], v₂=[0,10], d<sub>k</sub>=2. Raw dot products are [1,0]. Divide by √2: scores [.7071,0]. Softmax gives approximately [.6698,.3302]. The output is .6698[10,0]+.3302[0,10]=<b>[6.698,3.302]</b>. The first value has more weight because its key aligns with q.</p><figure class="diagram"><svg viewBox="0 0 740 195" role="img" aria-label="Attention query scores two keys, softmax produces weights, weighted sum mixes values"><defs><marker id="w10b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" fill="#17374e" text-anchor="middle"><rect x="20" y="55" width="100" height="60" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="70" y="80" font-size="13">query q</text><text x="70" y="99" font-size="12">[1,0]</text><rect x="190" y="20" width="130" height="58" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="255" y="45" font-size="13">key 1 [1,0]</text><text x="255" y="64" font-size="12">score .707</text><rect x="190" y="98" width="130" height="58" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="255" y="123" font-size="13">key 2 [0,1]</text><text x="255" y="142" font-size="12">score 0</text><rect x="400" y="43" width="130" height="88" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="465" y="73" font-size="13">softmax weights</text><text x="465" y="97" font-size="12">.670 and .330</text><text x="465" y="116" font-size="11">sum = 1</text><rect x="610" y="43" width="110" height="88" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="665" y="73" font-size="13">weighted V</text><text x="665" y="98" font-size="12">[6.70,3.30]</text><path d="M120 78C145 78 158 49 184 49M120 92C145 92 158 127 184 127M320 49C350 49 365 73 394 73M320 127C350 127 365 102 394 102M530 87H604" fill="none" stroke="#087e8b" stroke-width="2" marker-end="url(#w10b)"/><text x="370" y="181" font-size="11">large score → larger softmax weight → stronger value contribution</text></g></svg><figcaption>Figure 2. Attention is a content-weighted mixture: matching q to k determines how much each v contributes.</figcaption></figure>
+<h3>2.3 Why softmax is over keys</h3><p>Each query produces one row of scores over all keys. Normalize along that key axis, then multiply by the values. Softmax on the query axis would answer a different question and often creates a shape-correct but conceptually wrong implementation.</p><pre><code># Q,K,V: [B,heads,T,head_dim]
+scores = Q @ K.transpose(-2, -1) / math.sqrt(head_dim)
+weights = torch.softmax(scores, dim=-1)  # normalize over key positions
+context = weights @ V                  # [B,heads,T,head_dim]</code></pre></section>
+
+<section id="transformer"><h2>3. Multi-head attention and Transformer block</h2><h3>3.1 Project, split into heads, combine</h3><p>Given X [B,T,d<sub>model</sub>], learned W<sub>Q</sub>,W<sub>K</sub>,W<sub>V</sub> create Q,K,V. With h heads, split width d<sub>model</sub> into d<sub>k</sub>=d<sub>model</sub>/h per head, attend independently, concatenate, and apply output projection W<sub>O</sub>. Each head can learn a different relationship pattern; it is not guaranteed each head has a human-readable role.</p><div class="eq">head<sub>i</sub>=Attention(XW<sub>Qi</sub>,XW<sub>Ki</sub>,XW<sub>Vi</sub>)<br>MHA=Concat(head₁,…,head<sub>h</sub>)W<sub>O</sub></div><p>If d<sub>model</sub>=512 and h=8, each head width is 64. A common shape pipeline is [B,T,512]→[B,8,T,64] for Q/K/V, scores [B,8,T,T], context [B,8,T,64], concatenate back to [B,T,512].</p>
+<h3>3.2 Residual, normalization, feed-forward network</h3><p>A Transformer layer combines attention and position-wise feed-forward networks (FFNs), using residual connections and LayerNorm (pre-norm or post-norm order depends on architecture). FFN maps each token independently through two learned projections, e.g. d→d<sub>ff</sub>→d with a nonlinearity. Residuals offer a short path through the layer; LayerNorm normalizes feature statistics within each token, unlike BatchNorm’s batch/spatial aggregation.</p><h3>3.3 Positional information</h3><p>Self-attention alone is permutation-equivariant: permuting token order and corresponding rows/columns permutes outputs in the same way; it does not inherently know “first” or “next.” Add positional information using learned position embeddings, sinusoidal encodings, relative position methods, or rotary embeddings depending on architecture.</p><div class="eq">PE(pos,2i)=sin(pos / 10000<sup>2i/d</sup>)<br>PE(pos,2i+1)=cos(pos / 10000<sup>2i/d</sup>)</div><p>Worked component: d=4, pos=1. For i=0, denominator=1, so PE(1,0)=sin(1)≈.8415 and PE(1,1)=cos(1)≈.5403. For i=1, denominator=10000<sup>2/4</sup>=100, so PE(1,2)=sin(.01)≈.0100 and PE(1,3)=cos(.01)≈.99995. Frequencies vary across feature pairs.</p>
+<h3>3.4 Attention masks</h3><ul><li><b>Padding mask:</b> ignore filler tokens in batch.</li><li><b>Causal mask:</b> target position t cannot attend to positions greater than t. Apply before softmax by setting forbidden scores to −∞ (or a sufficiently negative value).</li><li><b>Cross-attention mask:</b> decoder queries may ignore padded encoder keys.</li></ul><p>For a causal sequence of length 4, allowed matrix (query rows, key columns) is lower triangular: position 0 sees only 0; position 1 sees 0–1; position 2 sees 0–2; position 3 sees 0–3. During parallel training, all target positions are processed at once, but the mask prevents future-token leakage.</p>
+<h3>3.5 Complexity and long contexts</h3><p>Dense attention scores require O(T²) entries per head and O(T²d) matrix multiply cost for sequence length T and width d. Doubling T roughly quadruples the attention matrix. Linear projections and FFNs scale roughly linearly with T (for fixed width), but long contexts are often dominated by attention memory/compute. Sparse, local, grouped-query, and other efficient variants change the tradeoff.</p></section>
+
+<section id="numericals"><h2>4. Solved Transformer numericals</h2><h3>Numerical A: score scaling and output</h3><p>For query q=[1,0], keys k₁=[1,0], k₂=[0,1] and d<sub>k</sub>=2, scaled logits=[1/√2,0]=[.7071,0]. Softmax ≈ [.6698,.3302]. For values [10,0] and [0,10], context ≈ [6.698,3.302]. Show the division by √d<sub>k</sub> before softmax.</p><h3>Numerical B: tensor shape in multi-head attention</h3><p>B=2, T=5, d<sub>model</sub>=64, h=4. Then d<sub>k</sub>=16; Q,K,V shape [2,4,5,16]; score shape [2,4,5,5]; context [2,4,5,16]; concatenated output [2,5,64]. Attention weights sum to 1 across the last axis (keys) for every [batch,head,query], absent all-masked rows.</p><h3>Numerical C: parameter count for Q/K/V/output projections</h3><p>For d=64 and four dense d→d maps (Q,K,V,O), weights=4d²=4×4096=16,384. With one bias of width d per map, add 4×64=256, total <b>16,640</b>. This does not include FFN, embeddings, LayerNorm, or other Transformer blocks.</p><h3>Numerical D: embedding and positional parameter count</h3><p>Vocabulary V=20,000, model width d=256, maximum learned context length P=512: token embedding=20,000×256=5,120,000; learned position embedding=512×256=131,072; total=5,251,072 before any tied output projection. Sinusoidal position encodings have no trainable parameters.</p><h3>Numerical E: attention scaling</h3><p>For q·k=4 and d<sub>k</sub>=16, scaled score=4/√16=1. For q·k=4 and d<sub>k</sub>=64, scaled score=.5. Larger key dimension is scaled to control typical dot-product magnitude.</p><h3>Numerical F: sequence length cost</h3><p>For T=1,024, one head’s score matrix has T²=1,048,576 entries per batch item. At T=2,048, it has 4,194,304—four times more. With 12 heads and B=2, the second configuration has 100,663,296 score values before accounting for dtype/intermediates.</p></section>
+
+<section id="practice"><h2>5. Exam-style practice with worked solutions</h2><details><summary>Q1. Why add positional information to self-attention?</summary><p>Content-only self-attention does not encode token order. Positional information lets the model distinguish different arrangements and use relative/absolute position cues.</p></details><details><summary>Q2. For Q,K,V shape [B,8,T,64], what is the score shape?</summary><p>QKᵀ over the final feature dimension gives [B,8,T,T]. The last two axes are query positions and key positions.</p></details><details><summary>Q3. Along which dimension does softmax normalize in ordinary attention?</summary><p>Over the keys for each query; with the shape above, dim=−1.</p></details><details><summary>Q4. What is forbidden by a causal mask?</summary><p>A position t cannot use any key from a future position greater than t. This prevents next-token training from seeing its answer.</p></details><details><summary>Q5. A four-head model has d_model=256. What is each head width if evenly split?</summary><p>256/4=64 features per head.</p></details><details><summary>Q6. Is a Transformer attention score matrix linear or quadratic in sequence length?</summary><p>Quadratic: it contains T×T scores for each head and batch item.</p></details></section>
+
+<section id="fullcode"><h2>6. Complete end-of-week program: train a tiny decoder-only Transformer</h2><p>This fully self-contained character-level language-model lab uses a tiny repeated text corpus to demonstrate token IDs, embeddings, learned positions, causal self-attention, next-token loss, and autoregressive sampling. It is an architecture exercise, not a useful pretrained LLM.</p><pre><code>"""Week 10 lab: a tiny GPT-style decoder-only Transformer."""
+import math
+import torch
+from torch import nn
+from torch.nn import functional as F
+
+SEED = 41
+torch.manual_seed(SEED)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Character-level tokens keep this example self-contained and inspectable.
+text = ("attention lets each token read useful context. " * 200)
+chars = sorted(set(text))
+stoi = {ch: i for i, ch in enumerate(chars)}
+itos = {i: ch for ch, i in stoi.items()}
+data = torch.tensor([stoi[ch] for ch in text], dtype=torch.long)
+vocab_size = len(chars)
+BLOCK, BATCH = 48, 32
+
+# Split in sequence order; never train on the future tail.
+split = int(0.9 * len(data))
+train_data, val_data = data[:split], data[split:]
+
+def get_batch(source, batch_size=BATCH):
+    starts = torch.randint(len(source) - BLOCK - 1, (batch_size,))
+    x = torch.stack([source[i:i+BLOCK] for i in starts])
+    y = torch.stack([source[i+1:i+BLOCK+1] for i in starts])
+    return x.to(device), y.to(device)          # both [B,T]
+
+class DecoderBlock(nn.Module):
+    def __init__(self, width, heads, expansion=4, dropout=0.1):
+        super().__init__()
+        self.norm1 = nn.LayerNorm(width)
+        self.attn = nn.MultiheadAttention(
+            width, heads, dropout=dropout, batch_first=True
+        )
+        self.norm2 = nn.LayerNorm(width)
+        self.ffn = nn.Sequential(
+            nn.Linear(width, expansion*width), nn.GELU(),
+            nn.Linear(expansion*width, width), nn.Dropout(dropout)
+        )
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x, causal_mask):
+        h = self.norm1(x)
+        # In PyTorch bool attn_mask=True marks a forbidden query-key pair.
+        attended, _ = self.attn(h, h, h, attn_mask=causal_mask,
+                                need_weights=False)
+        x = x + self.dropout(attended)
+        x = x + self.ffn(self.norm2(x))
+        return x
+
+class TinyGPT(nn.Module):
+    def __init__(self, vocab, width=96, heads=4, layers=2, block=BLOCK):
+        super().__init__()
+        self.block_size = block
+        self.token_embedding = nn.Embedding(vocab, width)
+        self.position_embedding = nn.Embedding(block, width)
+        self.blocks = nn.ModuleList([
+            DecoderBlock(width, heads) for _ in range(layers)
+        ])
+        self.final_norm = nn.LayerNorm(width)
+        self.lm_head = nn.Linear(width, vocab, bias=False)
+        # Tie output classifier to token embeddings to reduce parameters.
+        self.lm_head.weight = self.token_embedding.weight
+
+    def forward(self, idx, targets=None):
+        b, t = idx.shape
+        if t > self.block_size:
+            raise ValueError("input longer than configured context")
+        pos = torch.arange(t, device=idx.device)
+        x = self.token_embedding(idx) + self.position_embedding(pos)[None, :, :]
+        causal = torch.triu(
+            torch.ones(t, t, device=idx.device, dtype=torch.bool), diagonal=1
+        )
+        for block in self.blocks:
+            x = block(x, causal)
+        logits = self.lm_head(self.final_norm(x)) # [B,T,V]
+        loss = None
+        if targets is not None:
+            loss = F.cross_entropy(
+                logits.reshape(b*t, vocab_size), targets.reshape(b*t)
+            )
+        return logits, loss
+
+    @torch.no_grad()
+    def generate(self, idx, new_tokens, temperature=0.8):
+        self.eval()
+        for _ in range(new_tokens):
+            context = idx[:, -self.block_size:]
+            logits, _ = self(context)
+            next_logits = logits[:, -1, :] / temperature
+            probabilities = torch.softmax(next_logits, dim=-1)
+            next_id = torch.multinomial(probabilities, num_samples=1)
+            idx = torch.cat([idx, next_id], dim=1)
+        return idx
+
+model = TinyGPT(vocab_size).to(device)
+optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4)
+print("vocab:", vocab_size,
+      "trainable parameters:", sum(p.numel() for p in model.parameters()
+                                     if p.requires_grad))
+
+for step in range(800):
+    model.train()
+    xb, yb = get_batch(train_data)
+    _, loss = model(xb, yb)
+    optimizer.zero_grad(set_to_none=True)
+    loss.backward()
+    nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+    optimizer.step()
+    if step % 100 == 0:
+        model.eval()
+        with torch.no_grad():
+            vx, vy = get_batch(val_data)
+            _, val_loss = model(vx, vy)
+        print(f"step {step}: train={loss.item():.3f}, "
+              f"validation={val_loss.item():.3f}")
+
+start = torch.tensor([[stoi["a"]]], device=device)
+output_ids = model.generate(start, new_tokens=180, temperature=0.8)[0].tolist()
+print("sample:", "".join(itos[i] for i in output_ids))</code></pre>
+<h3>Walkthrough</h3><ol><li><b>Tokenization:</b> characters receive IDs; a real LLM normally uses subword/byte tokenizer with special tokens.</li><li><b>Next-token targets:</b> y is x shifted one position. At each index, predict the following character.</li><li><b>Position embeddings:</b> token vector and position vector are added; context length cannot exceed BLOCK in this implementation.</li><li><b>Causal mask:</b> upper-triangular True entries block future key positions; training remains parallel across the sequence.</li><li><b>Attention output:</b> [B,T,width] enters and leaves each attention block; FFN acts independently per token.</li><li><b>Logits/loss:</b> [B,T,V] is flattened to [B×T,V], labels to [B×T], and cross entropy compares each next-token target.</li><li><b>Generation:</b> feed the most recent context, sample from the last position, append one token, repeat.</li><li><b>Limits:</b> the repeated toy corpus has narrow vocabulary and data; loss/samples teach mechanics only.</li></ol><div class="box warn"><b>Exam connection:</b> If asked for output dimensions, state batch B, sequence T, model width d, heads h, per-head width d/h, attention score [B,h,T,T], and logits [B,T,V]. Then inspect mask polarity and softmax axis.</div></section>
+
+<section id="recap"><h2>7. Formula card and references</h2><div class="grid"><div class="card"><h4>Attention</h4><p>softmax(QKᵀ/√d<sub>k</sub> + mask)V; normalize over keys.</p></div><div class="card"><h4>Head width</h4><p>d<sub>k</sub>=d<sub>model</sub>/h, when width is split evenly.</p></div><div class="card"><h4>Dense attention scores</h4><p>[B,h,T,T]; memory/cost grows quadratically in T.</p></div><div class="card"><h4>Positional encoding</h4><p>Supplies order signal; sinusoidal/learned/relative choices vary by model.</p></div></div><ul><li>Can I explain why Q,K,V have distinct roles?</li><li>Can I calculate one softmax-weighted value vector by hand?</li><li>Can I draw causal and padding masks and tell which direction they block?</li><li>Can I trace [B,T,d] through splitting and concatenating heads?</li><li>Can I count embedding, Q/K/V/O, and positional parameters without double-counting tied weights?</li></ul><h3>Sources and alignment</h3><p>Study alignment: supplied Week 10 syllabus image; supplied exam master notes; all four Quiz 1 papers (their directly tested content is mostly earlier weeks); the supplied reference book. Practice patterns here mirror paper formats while being original Transformer exercises.</p><ul><li><a href="https://arxiv.org/abs/1706.03762">Vaswani et al., Attention Is All You Need</a></li><li><a href="https://arxiv.org/abs/1810.04805">Devlin et al., BERT: Pre-training of Deep Bidirectional Transformers</a></li><li><a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MultiheadAttention.html">PyTorch MultiheadAttention API and mask shapes</a></li><li><a href="https://huggingface.co/docs/transformers/main/en/tokenizer_summary">Hugging Face tokenizer summary</a></li><li><a href="https://www.youtube.com/playlist?list=PLZ2ps__7DhBa9hqi20allqocTSUUt3nWX">Student-supplied course playlist</a> (retained as a resource link; metadata unavailable)</li></ul></section>
+<nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-11-llm-architectures-peft-lora-in-depth-notes.html">Go to Week 11 &gt;</a></nav></div><footer class="footer">Week 10 · Large Language Models: Transformer Architecture · Deep Learning &amp; GenAI exam notes</footer></main></div></body></html>

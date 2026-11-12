@@ -8,23 +8,38 @@
     :root { --ink:#182538; --muted:#5e6c80; --line:#dbe3ed; --blue:#1f5596; --bg:#f3f6fb; }
     * { box-sizing:border-box; }
     body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-    main { max-width:850px; margin:0 auto; padding:72px 22px; }
+    main { max-width:1200px; margin:0 auto; padding:72px 28px; }
     h1 { font-size:clamp(2rem,5vw,3.1rem); line-height:1.08; margin:0 0 14px; }
     p { color:var(--muted); }
     .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; margin:30px 0; }
+    .home-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin:30px 0; align-items:stretch; }
     a.card { display:block; background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px; color:var(--ink); text-decoration:none; box-shadow:0 3px 14px #142b460a; }
     a.card:hover { border-color:var(--blue); box-shadow:0 8px 22px #142b4617; transform:translateY(-1px); }
     .tag { color:#fff; background:#28588b; display:inline-block; border-radius:7px; padding:3px 8px; font-size:.75rem; font-weight:700; }
     h2 { margin:13px 0 7px; font-size:1.25rem; }
     .note { margin-top:28px; background:#fff6df; border:1px solid #ead6a2; border-radius:12px; padding:14px 17px; color:#614900; }
     code { background:#edf2f8; padding:1px 5px; border-radius:4px; }
+
+    a.weekly-card-link { min-height:250px; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:12px; margin:0; padding:22px; color:var(--ink); text-decoration:none; transition:transform .15s,box-shadow .15s,border-color .15s; }
+    a.weekly-card-link:hover { border-color:var(--blue); box-shadow:0 8px 22px #142b4617; transform:translateY(-1px); }
+    .weekly-card-link h2 { margin:13px 0 7px; }
+    .weekly-card-link p { margin:0; }
+    .week-row { display:grid; grid-template-columns:88px minmax(0,1fr) auto; align-items:center; gap:18px; padding:19px 0; }
+    .week-row + .week-row { border-top:1px solid var(--line); }
+    .week-copy h2 { margin:0 0 4px; }
+    .week-copy p { margin:0; }
+    @media (max-width:900px) { .home-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:650px) { main { padding:42px 18px; } .home-grid { grid-template-columns:1fr; gap:14px; } a.weekly-card-link { min-height:0; } }
   </style>
 </head>
 <body>
   <main>
-    <h1>MLP + DL &amp; GenAI Study Notes</h1>
-    <p>Detailed notes, worked examples, editable code cells, and official documentation references.</p>
-    <div class="cards">
+    <h1>Deep Learning &amp; GenAI Weekly Contents</h1>
+    <p>Open the weekly contents to choose a topic, then move between weeks from the notes.</p>
+    <div class="home-grid">
+      <a class="card weekly-card-link" href="weekly-contents.html">
+        <div><span class="tag">DL &amp; GenAI</span><h2>Weekly Content for Deep Learning and Generative AI</h2><p>Browse conceptual and practice notes for each week.</p></div>
+      </a>
       <a class="card" href="MLP_Final_Notes.html">
         <span class="tag">MLP</span>
         <h2>Machine Learning Practice</h2>

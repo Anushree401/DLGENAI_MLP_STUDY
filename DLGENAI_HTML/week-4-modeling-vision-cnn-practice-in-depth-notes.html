@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week 4 CNN Practice | In-Depth Notes</title>
+<style>
+:root{--n:#17374e;--t:#087e8b;--ink:#1d303d;--muted:#536a78;--line:#d5e0e6;--pale:#eaf6f5;--gold:#fff6df;--blue:#eef4fb;--green:#edf8f1;--code:#10202b}
+*{box-sizing:border-box}body{margin:0;background:#eef2f5;color:var(--ink);font:16px/1.68 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.layout{max-width:1260px;margin:25px auto;padding:0 18px;display:grid;grid-template-columns:255px minmax(0,900px);gap:24px;align-items:start}.toc{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:white;border:1px solid var(--line);border-radius:12px;padding:16px}.toc b{display:block;color:var(--n);margin-bottom:8px}.toc a{display:block;padding:3px 0 3px 8px;border-left:2px solid transparent;text-decoration:none;color:var(--muted);font-size:.84rem}.toc a:hover{color:var(--t);border-color:var(--t)}main{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 9px 32px #102b3d10}.hero{padding:48px 56px 38px;background:linear-gradient(130deg,#132f45,#087e8b);color:white}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#b9efeb;font-size:.78rem;font-weight:750}.hero h1{font-size:clamp(2.2rem,5vw,3.5rem);line-height:1.1;margin:.4em 0}.hero p{max-width:720px;color:#e6f5f5;font-size:1.08rem}.pill{display:inline-block;border:1px solid #ffffff66;border-radius:99px;padding:3px 10px;margin:3px;font-size:.77rem}.content{padding:20px 56px 55px}h2{font-size:1.75rem;color:var(--n);line-height:1.25;margin:2em 0 .55em;padding-top:.5em;border-top:1px solid var(--line)}h2:first-child{margin-top:.5em}h3{color:var(--t);font-size:1.24rem;margin:1.4em 0 .35em}h4{color:var(--n);margin:.3em 0}p{margin:.45em 0 .9em}li{margin:.25em 0}.lead{font-size:1.08rem;color:#354f60}.box{padding:14px 17px;border-left:4px solid var(--t);background:var(--pale);border-radius:6px;margin:14px 0}.exam{border-color:#5b80b6;background:var(--blue)}.warn{border-color:#d29a23;background:var(--gold)}.good{border-color:#478e66;background:var(--green)}.math{font:1.08em Cambria,"Times New Roman",serif;background:#f2f6f8;padding:1px 4px;border-radius:3px}.eq{display:block;text-align:center;font:1.16rem/1.7 Cambria,"Times New Roman",serif;background:#f2f7f9;color:var(--n);border:1px solid #dce7ec;border-radius:7px;padding:9px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:9px;padding:13px 15px}.card p{margin-bottom:.3em}.diagram{overflow:auto;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fcfefe;margin:16px 0}.diagram svg{display:block;max-width:100%;height:auto;margin:auto}.diagram figcaption{text-align:center;color:var(--muted);font-size:.88rem;margin-top:8px}.tablewrap{overflow-x:auto;margin:14px 0}table{width:100%;border-collapse:collapse;font-size:.91rem}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:var(--n);color:#fff}tbody tr:nth-child(even){background:#f5f8fa}pre{overflow:auto;background:var(--code);color:#e7f0f5;padding:16px 18px;border-radius:9px;font:.84rem/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}code{font:.91em ui-monospace,SFMono-Regular,Consolas,monospace;background:#edf2f5;padding:.1em .3em;border-radius:4px}pre code{background:transparent;padding:0}details{border:1px solid var(--line);border-radius:8px;margin:10px 0;padding:10px 14px}summary{cursor:pointer;color:var(--n);font-weight:700}.footer{padding:18px 56px;background:#f6f9fb;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+@media(max-width:900px){.layout{display:block;margin:0;padding:0}.toc{position:relative;top:auto;max-height:240px;margin:9px}.hero{padding:32px 23px}.content{padding:15px 23px 40px}.footer{padding:17px 23px}.grid{grid-template-columns:1fr}main{border-radius:0}}
+@media print{body{background:white;font-size:10.5pt}.layout{display:block;padding:0;margin:0}.toc{display:none}main{border:0;box-shadow:none}.hero{padding:22px 32px;print-color-adjust:exact}.content{padding:10px 32px}.footer{padding:10px 32px}h2{break-before:page}h2:first-child{break-before:auto}pre,.diagram,.box,.card,details{break-inside:avoid}}
+
+.week-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 22px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#f7fafc}
+.week-navigation a,.week-navigation span{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 13px;border-radius:8px;font-weight:650;text-decoration:none}
+.week-navigation a{background:#eaf6f5;color:var(--n);border:1px solid #b9deda}
+.week-navigation a:hover{background:#dff1ef}
+.week-navigation .week-home{background:#fff;color:var(--muted);border-color:var(--line);font-size:.9rem}
+.week-navigation .week-disabled{color:#7c8992;background:#f0f2f4;border:1px solid var(--line);font-size:.9rem}
+.week-navigation .week-position{color:var(--muted);font-size:.87rem;font-weight:600}
+@media(max-width:600px){.week-navigation{flex-wrap:wrap}.week-navigation .week-position{order:-1;width:100%;text-align:center}.week-navigation a,.week-navigation span{flex:1}}
+</style></head><body><div class="layout">
+<nav class="toc"><b>Week 4 contents</b><a href="#roadmap">How to use the guide</a><a href="#task">1. Image-classification task</a><a href="#data">2. MNIST, FashionMNIST, CIFAR-10</a><a href="#pipeline">3. Data pipeline &amp; transforms</a><a href="#model">4. CNN classifier architecture</a><a href="#shape">5. Shape-tracing example</a><a href="#train">6. Train/eval loop</a><a href="#metrics">7. Evaluation &amp; errors</a><a href="#augment">8. Augmentation &amp; generalization</a><a href="#pyq">9. Quiz-paper patterns</a><a href="#numerical">10. Worked numericals</a><a href="#snippets">11. Small code snippets</a><a href="#debug">12. Debugging checklist</a><a href="#practice">13. Practice questions</a><a href="#recap">14. Formula/checklist</a><a href="#full">15. Complete CNN program at end</a></nav>
+<main><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-5-sequence-models-rnn-lstm-theory-in-depth-notes.html">Go to Week 5 &gt;</a></nav><header class="hero"><div class="eyebrow">Deep Learning &amp; GenAI · Week 4 Practice</div><h1>Train a CNN<br>to classify images</h1><p>Practical image classification with MNIST, FashionMNIST, and CIFAR-10: data pipelines, transforms, tensor shapes, CNN architecture, training loops, evaluation, and exam-style code/numericals.</p><span class="pill">PyTorch + torchvision</span><span class="pill">CNN workflow</span><span class="pill">Shapes &amp; parameters</span><span class="pill">Quiz-style patterns</span></header>
+<div class="content">
+
+<section id="roadmap"><h2>How to use the guide</h2><p class="lead">Week 4 is the hands-on continuation of Week 3's CNN theory: build a CNN image classifier (examples include MNIST and CIFAR-10), train it, and evaluate it. The quiz papers use short PyTorch code-reading and shape/parameter questions, so this guide pairs implementation patterns with manual calculations.</p><div class="box exam"><b>Quiz emphasis that matters here:</b> exact tensor shapes; preprocessing transforms that are defined versus actually attached; Conv2d input/output channel order; convolution parameter counts (bias included/excluded); pooling with zero parameters; flatten dimensions; CNN parameter subtotals; and training-loop bugs such as missing <code>zero_grad()</code>. These turn up as MCQs, one-or-more-correct statements, and short numerical answers.</div><p>The end-to-end order is: inspect data → split → transform → batch → define CNN → calculate shapes and parameter counts → choose loss/optimizer → train → validate → evaluate test once → inspect predictions and errors. Every stage has a contract. Check it before training rather than trying to interpret a loss curve from a broken pipeline.</p><div class="box warn"><b>Framework:</b> the course Week 2 practice lists TensorFlow/Keras, but the supplied Quiz 1 papers predominantly ask PyTorch/torchvision code. This Week 4 guide uses PyTorch for the implementation patterns that match the papers. The underlying ideas are framework-independent.</div></section>
+
+<section id="task"><h2>1. What an image classifier does</h2><p>An image classifier maps an image tensor to scores over a fixed set of classes. For a single image x, a CNN computes logits <span class="math">z∈ℝ<sup>C</sup></span>, one score per class. Training compares logits with the correct class label using a classification loss such as cross-entropy.</p><div class="eq">image x → feature extractor f<sub>θ</sub>(x) → C logits → loss(logits, class ID)</div><p>Logits are not probabilities. Softmax turns them into a probability distribution when needed for interpretation; cross-entropy in PyTorch should receive the raw logits. Predicted class is usually <code>logits.argmax(dim=1)</code>.</p><figure class="diagram"><svg viewBox="0 0 760 220" role="img" aria-label="Image classification pipeline from image tensor through CNN to class logits and prediction"><defs><marker id="arr4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" text-anchor="middle"><rect x="18" y="50" width="130" height="82" rx="10" fill="#eef4fb" stroke="#7190a5"/><text x="83" y="82" fill="#17374e" font-size="15">Image</text><text x="83" y="108" fill="#536a78" font-size="12">[1,28,28]</text><rect x="190" y="50" width="160" height="82" rx="10" fill="#eaf6f5" stroke="#087e8b"/><text x="270" y="82" fill="#17374e" font-size="15">CNN feature</text><text x="270" y="108" fill="#536a78" font-size="12">edges → patterns</text><rect x="393" y="50" width="145" height="82" rx="10" fill="#fff6df" stroke="#d29a23"/><text x="465" y="82" fill="#17374e" font-size="15">Class logits</text><text x="465" y="108" fill="#536a78" font-size="12">[10 scores]</text><rect x="580" y="50" width="160" height="82" rx="10" fill="#edf8f1" stroke="#478e66"/><text x="660" y="82" fill="#17374e" font-size="15">Predicted class</text><text x="660" y="108" fill="#536a78" font-size="12">argmax / label</text><path d="M148 91H182M350 91H385M538 91H572" stroke="#087e8b" stroke-width="2.5" marker-end="url(#arr4)"/><text x="380" y="180" fill="#536a78" font-size="13">During training, compare logits with the true class; update CNN weights to lower cross-entropy.</text></g></svg><figcaption>Figure 1. A classifier outputs one score per class; a loss uses the true class to train the feature extractor and head together.</figcaption></figure><h3>Classification objective</h3><p>For a batch of B examples and C classes, logits have shape [B,C]; labels are integer class IDs of shape [B]. Cross-entropy for example i is <span class="math">−log softmax(zᵢ)<sub>yᵢ</sub></span>. The batch loss commonly averages across B.</p><div class="box"><b>Example:</b> if true class is 7 and softmax probability p₇=.8, single-example loss=−ln(.8)≈.223. If true class probability=.1, loss≈2.303. Accuracy only looks at the top score; cross-entropy also evaluates confidence.</div></section>
+
+<section id="data"><h2>2. The datasets: MNIST, FashionMNIST, CIFAR-10</h2><div class="tablewrap"><table><thead><tr><th>Dataset</th><th>Image shape per example</th><th>Classes</th><th>Notes for a basic CNN</th></tr></thead><tbody><tr><td>MNIST</td><td>1×28×28 (grayscale)</td><td>10 digits, 0–9</td><td>Small; good first CNN exercise; low compute.</td></tr><tr><td>FashionMNIST</td><td>1×28×28 (grayscale)</td><td>10 clothing categories</td><td>Same dimensions as MNIST, harder visual distinctions. Mean/std commonly used in course examples: about .286/.353.</td></tr><tr><td>CIFAR-10</td><td>3×32×32 (RGB)</td><td>10 object categories</td><td>Color images; more visual variability; normalize per RGB channel.</td></tr></tbody></table></div><p>torchvision datasets return an image and target. The image's in-memory representation depends on whether a transform is supplied. A PIL image is not yet a model-ready float tensor. A standard PyTorch Conv2d expects a batch in NCHW order: MNIST [B,1,28,28], CIFAR-10 [B,3,32,32].</p><h3>Training/validation/test roles</h3><ul><li><b>Training:</b> loss gradients update weights.</li><li><b>Validation:</b> compare epochs/model settings and choose early stopping; do not update weights.</li><li><b>Test:</b> final performance estimate after decisions; avoid repeated tuning on it.</li></ul><p>For image benchmarks, official test sets are often supplied. Use a validation subset from training for model selection. If randomly splitting, use a fixed seed; stratified splits help keep class proportions comparable.</p></section>
+
+<section id="pipeline"><h2>3. Image pipeline: transforms, normalization, and batches</h2><h3>ToTensor</h3><p><code>transforms.ToTensor()</code> converts a PIL image or uint8 array to a floating tensor, changes channel order to C×H×W, and maps common 8-bit pixel values from [0,255] to [0,1]. Therefore a FashionMNIST image becomes [1,28,28], and an RGB CIFAR image becomes [3,32,32].</p><h3>Normalize</h3><div class="eq">x′<sub>c</sub> = (x<sub>c</sub>−μ<sub>c</sub>)/σ<sub>c</sub></div><p>For grayscale, μ and σ are single numbers. For RGB, use one value per channel. Normalization centers and scales input distributions; it does not guarantee the output remains in [0,1]. After normalizing, values may be negative and may exceed 1.</p><p>FashionMNIST example uses μ=.2860 and σ=.3530. A pixel value .5 becomes (.5−.286)/.353≈.606. A pixel value 0 becomes −.286/.353≈−.810.</p><h3>Compose order</h3><p>Apply transforms in order. For most torchvision image workflows: crop/flip augmentation operates on image, ToTensor converts to tensor, Normalize adjusts tensor values. Many PIL-based augmentation transforms must run before ToTensor; tensor-based ones may run after.</p><pre><code>transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.2860,), (0.3530,))
+])
+train_ds = datasets.FashionMNIST(
+    root="./data",
+    train=True,
+    download=True,
+    transform=transform  # attach transform to dataset
+)</code></pre><div class="box exam"><b>Exact PYQ trap:</b> the March papers show a transform variable defined but omit <code>transform=transform</code> when constructing FashionMNIST. Defining a Compose object does not apply it. Without attachment, returned images remain untransformed PIL images. Dataset transforms are typically called lazily in <code>__getitem__</code> when a sample is requested.</div><h3>DataLoader</h3><p>DataLoader batches examples, optionally shuffles training order, and can use worker processes. For batch size B, image batch shape is [B,C,H,W], label shape [B]. Training usually uses <code>shuffle=True</code>; validation/test usually use <code>shuffle=False</code>. The final batch may be smaller unless <code>drop_last=True</code>.</p><h3>Normalize channel tuples correctly</h3><p>For grayscale use one-element tuples: <code>Normalize((mean,), (std,))</code>. For RGB, length-three tuples, e.g. <code>Normalize((.49,.48,.45),(.20,.20,.20))</code>. Means/stds must match channel count. Applying 3-channel normalization to a one-channel image is a shape/configuration error.</p><figure class="diagram"><svg viewBox="0 0 760 230" role="img" aria-label="Image data pipeline from PIL pixels through tensor conversion, normalization, batching, and model"><defs><marker id="arr4b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087e8b"/></marker></defs><g font-family="Arial" text-anchor="middle"><rect x="12" y="45" width="130" height="82" rx="9" fill="#eef4fb" stroke="#7190a5"/><text x="77" y="77" fill="#17374e" font-size="14">PIL image</text><text x="77" y="102" fill="#536a78" font-size="12">uint8, H×W×C</text><rect x="166" y="45" width="130" height="82" rx="9" fill="#eaf6f5" stroke="#087e8b"/><text x="231" y="77" fill="#17374e" font-size="14">ToTensor</text><text x="231" y="102" fill="#536a78" font-size="12">float, C×H×W</text><rect x="320" y="45" width="130" height="82" rx="9" fill="#eaf6f5" stroke="#087e8b"/><text x="385" y="77" fill="#17374e" font-size="14">Normalize</text><text x="385" y="102" fill="#536a78" font-size="12">(x−μ)/σ</text><rect x="474" y="45" width="118" height="82" rx="9" fill="#fff6df" stroke="#d29a23"/><text x="533" y="77" fill="#17374e" font-size="14">DataLoader</text><text x="533" y="102" fill="#536a78" font-size="12">[B,C,H,W]</text><rect x="616" y="45" width="132" height="82" rx="9" fill="#edf8f1" stroke="#478e66"/><text x="682" y="77" fill="#17374e" font-size="14">CNN</text><text x="682" y="102" fill="#536a78" font-size="12">logits [B,C]</text><g stroke="#087e8b" stroke-width="2.5" marker-end="url(#arr4b)"><path d="M142 86H158"/><path d="M296 86H312"/><path d="M450 86H466"/><path d="M592 86H608"/></g><text x="380" y="178" fill="#536a78" font-size="13">Each stage changes representation; check both image dtype/range and tensor shape.</text></g></svg><figcaption>Figure 2. A transform must be wired into dataset access before batches reach the model.</figcaption></figure></section>
+
+<section id="model"><h2>4. Build a CNN image classifier</h2><h3>Feature extractor and classifier head</h3><p>A basic CNN repeatedly extracts local features with convolution, applies nonlinearity, optionally downsamples, and ends with a classification head. For a simple MNIST CNN:</p><div class="eq">image → Conv → ReLU → Pool → Conv → ReLU → Pool → Flatten → Dense → logits</div><p>Convolution preserves useful spatial structure. Pooling reduces H,W while preserving channels. Flatten converts C×H×W into a vector. Dense layers combine learned features to produce class scores.</p><h3>Design choices</h3><ul><li><b>in_channels:</b> number of channels in each input image (1 grayscale, 3 RGB).</li><li><b>out_channels:</b> number of learned filters/feature maps.</li><li><b>kernel_size:</b> local pattern extent, often 3×3.</li><li><b>padding:</b> controls spatial size; for 3×3 stride 1, padding 1 preserves H,W.</li><li><b>pooling:</b> often 2×2 stride 2 halves each spatial dimension.</li><li><b>final output width:</b> number of classes (10 for MNIST, FashionMNIST, CIFAR-10).</li></ul><h3>Why logits rather than softmax in the model?</h3><p>PyTorch's <code>CrossEntropyLoss</code> combines log-softmax and negative log likelihood stably. Return raw logits from the model. During evaluation, <code>argmax(logits)</code> gives the predicted class. Apply softmax only if you need probabilities for inspection/calibration.</p></section>
+
+<section id="shape"><h2>5. Shape-tracing example: every layer</h2><p>Input MNIST batch [B,1,28,28]. Use Conv 1→16, 3×3, stride1,padding1; MaxPool2; Conv16→32, 3×3,padding1; MaxPool2; flatten; Dense to 128; Dense to 10.</p><div class="tablewrap"><table><thead><tr><th>Operation</th><th>Output shape</th><th>Why</th></tr></thead><tbody><tr><td>Input</td><td>[B,1,28,28]</td><td>Batch, channel, height, width</td></tr><tr><td>Conv1</td><td>[B,16,28,28]</td><td>Padding1 preserves 28; 16 filters create 16 channels</td></tr><tr><td>ReLU</td><td>[B,16,28,28]</td><td>Elementwise, shape unchanged</td></tr><tr><td>MaxPool 2×2,s2</td><td>[B,16,14,14]</td><td>Halves H,W; channels unchanged</td></tr><tr><td>Conv2 16→32</td><td>[B,32,14,14]</td><td>Padding1 preserves spatial size</td></tr><tr><td>Pool 2×2,s2</td><td>[B,32,7,7]</td><td>Halves 14 to 7</td></tr><tr><td>Flatten from dim1</td><td>[B,1568]</td><td>32×7×7=1568 features</td></tr><tr><td>Linear 1568→128</td><td>[B,128]</td><td>128 hidden values</td></tr><tr><td>Linear 128→10</td><td>[B,10]</td><td>10 class logits</td></tr></tbody></table></div><p>For CIFAR-10, the same shape formulas apply, but input is [B,3,32,32]. If the same two conv/pool stages are used: after first conv/pool 16×16, after second conv/pool 8×8. With 32 channels, flatten has 32×8×8=2,048 features.</p><figure class="diagram"><svg viewBox="0 0 760 235" role="img" aria-label="MNIST CNN shape progression through convolution, pooling, flatten and classifier"><defs><marker id="arr4c" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#087e8b"/></marker></defs><g font-family="Arial" text-anchor="middle"><g><rect x="8" y="50" width="90" height="78" rx="8" fill="#eef4fb" stroke="#7190a5"/><text x="53" y="80" fill="#17374e" font-size="13">Input</text><text x="53" y="105" fill="#536a78" font-size="11">1×28×28</text><rect x="111" y="50" width="92" height="78" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="157" y="80" fill="#17374e" font-size="13">Conv</text><text x="157" y="105" fill="#536a78" font-size="11">16×28×28</text><rect x="216" y="50" width="80" height="78" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="256" y="80" fill="#17374e" font-size="13">Pool</text><text x="256" y="105" fill="#536a78" font-size="11">16×14×14</text><rect x="309" y="50" width="92" height="78" rx="8" fill="#eaf6f5" stroke="#087e8b"/><text x="355" y="80" fill="#17374e" font-size="13">Conv</text><text x="355" y="105" fill="#536a78" font-size="11">32×14×14</text><rect x="414" y="50" width="80" height="78" rx="8" fill="#fff6df" stroke="#d29a23"/><text x="454" y="80" fill="#17374e" font-size="13">Pool</text><text x="454" y="105" fill="#536a78" font-size="11">32×7×7</text><rect x="507" y="50" width="99" height="78" rx="8" fill="#eef4fb" stroke="#7190a5"/><text x="556" y="80" fill="#17374e" font-size="13">Flatten</text><text x="556" y="105" fill="#536a78" font-size="11">1568</text><rect x="619" y="50" width="130" height="78" rx="8" fill="#edf8f1" stroke="#478e66"/><text x="684" y="80" fill="#17374e" font-size="13">Classifier</text><text x="684" y="105" fill="#536a78" font-size="11">10 logits</text></g><g stroke="#087e8b" stroke-width="2" marker-end="url(#arr4c)"><path d="M98 89H107M203 89H212M296 89H305M401 89H410M494 89H503M606 89H615"/></g><text x="380" y="177" fill="#536a78" font-size="13">Track N separately; the table lists C×H×W for each example.</text></g></svg><figcaption>Figure 3. Shape trace for a two-block MNIST classifier.</figcaption></figure><div class="box warn"><b>Flatten trap:</b> for PyTorch NCHW data, use <code>torch.flatten(x, start_dim=1)</code>. It preserves batch axis. Flattening from dimension 0 accidentally merges examples and features.</div></section>
+
+<section id="train"><h2>6. Training loop: from minibatch to updated filters</h2><p>Training adjusts convolution kernels, biases, and dense weights together. Cross-entropy gives a loss; backpropagation calculates gradients through convolution and pooling; optimizer updates parameters. A standard update cycle is:</p><div class="eq">zero_grad → forward → loss → backward → optimizer.step</div><p>PyTorch accumulates gradients by default. If you omit <code>optimizer.zero_grad()</code>, each <code>backward()</code> adds to the existing gradient buffer. This can cause wrong updates; both March Quiz 1 sets ask about this bug.</p><h3>Correct train/evaluation modes</h3><div class="tablewrap"><table><thead><tr><th>Setting</th><th>Effect</th><th>Does it turn off gradients?</th></tr></thead><tbody><tr><td><code>model.train()</code></td><td>Dropout active; BatchNorm uses batch stats.</td><td>No</td></tr><tr><td><code>model.eval()</code></td><td>Dropout disabled; BatchNorm uses running stats.</td><td>No</td></tr><tr><td><code>torch.no_grad()</code></td><td>Stops autograd graph construction.</td><td>Yes, in that context</td></tr></tbody></table></div><p><code>eval()</code> and <code>no_grad()</code> are distinct. Evaluation commonly uses both. Calling <code>model.eval()</code> is not a requirement for optimizer updates, nor does it update parameters by itself.</p><h3>Epoch-level loss/accuracy calculation</h3><p>If batch loss is a mean, multiply it by batch size before summing to obtain an epoch average when batches differ in size. Accuracy count should accumulate correct predictions and divide by total examples.</p><pre><code>running_loss += loss.item() * images.size(0)
+correct += (logits.argmax(dim=1) == labels).sum().item()
+total += labels.size(0)
+epoch_loss = running_loss / total
+epoch_accuracy = correct / total</code></pre></section>
+
+<section id="metrics"><h2>7. Evaluate performance and inspect errors</h2><p>Accuracy is the fraction of correct class predictions. On balanced MNIST it is a useful first summary, but it can conceal a class-specific failure. Use a confusion matrix to see which true classes are mistaken for which predicted classes.</p><h3>Confusion matrix orientation</h3><p>One common convention uses rows for true class and columns for predicted class; verify plotting library convention. Diagonal entries are correct. Off-diagonal entries identify confusions. For class k:</p><div class="eq">precisionₖ=TPₖ/(TPₖ+FPₖ) ; recallₖ=TPₖ/(TPₖ+FNₖ)</div><p>Macro averages weight classes equally. Weighted averages weight by class frequency. For a balanced dataset, the two may be close; for an imbalanced dataset, they can differ substantially.</p><h3>Look at examples, not only a scalar</h3><ul><li>Show the image, true class, predicted class, and confidence.</li><li>Inspect false positives and false negatives per class.</li><li>Check whether mistakes are ambiguous or systematic (e.g. transform bug, label mapping, channel normalization).</li><li>For confidence, remember neural-network softmax may be overconfident; a high max probability is not proof of correctness.</li></ul><p>Never tune architecture based repeatedly on the test set. Use validation for model selection and retain test for final reporting.</p></section>
+
+<section id="augment"><h2>8. Data augmentation and generalization</h2><p>Augmentation creates label-preserving variations of training images, such as small crops or horizontal flips when orientation does not change the class. It improves robustness by exposing the model to plausible variation; it does not create new independent labels or fix data leakage.</p><div class="tablewrap"><table><thead><tr><th>Dataset/task</th><th>Potentially sensible</th><th>Use caution / usually invalid</th></tr></thead><tbody><tr><td>MNIST digits</td><td>Small translations, slight affine changes.</td><td>Horizontal flips can turn a digit into an implausible or different symbol; large rotations change identity.</td></tr><tr><td>FashionMNIST</td><td>Small crops/translations; modest variation.</td><td>Vertical flips often make garments unrealistic.</td></tr><tr><td>CIFAR-10</td><td>Random crop, horizontal flip, mild color jitter.</td><td>Excessive distortions/color shifts can remove class-defining cues.</td></tr></tbody></table></div><p>Augmentation belongs only in training pipeline. Validation/test transforms should be deterministic and match expected evaluation preprocessing (typically ToTensor + Normalize). Augmenting test data inconsistently changes what is being measured.</p><h3>Overfitting and remedies</h3><p>Training loss decreases while validation loss rises: overfitting is plausible. Consider more training data, suitable augmentation, weight decay, dropout, smaller model, or early stopping. If both losses remain high, diagnose optimization, labels, input pipeline, and model capacity before adding regularization.</p></section>
+
+<section id="pyq"><h2>9. How the question papers test Week 4 ideas</h2><p>The exam master notes highlight CNN parameter count as a very frequent topic, with forward passes and code reading also recurring. Here are the exact patterns to practise.</p><div class="tablewrap"><table><thead><tr><th>Paper pattern</th><th>Example skill</th><th>Reliable method</th></tr></thead><tbody><tr><td>Code single-correct MCQ</td><td>Which Conv2d signature matches a 16-channel input?</td><td>Read first positional argument as in_channels; verify NCHW channel axis.</td></tr><tr><td>Dataset preprocessing code</td><td>Are images actually transformed?</td><td>Check whether transform was passed into dataset constructor.</td></tr><tr><td>Output-volume shape</td><td>Pool then 1×1 convolution</td><td>Track H,W,C separately; pool alters spatial axes, conv filters alter channel depth.</td></tr><tr><td>Multi-branch architecture</td><td>Inception output after concatenation</td><td>Check H,W match; sum channels only.</td></tr><tr><td>GAP MCQ</td><td>GAP output dimension and classifier parameter count</td><td>GAP maps H×W×C to C, then count Dense weights.</td></tr><tr><td>Short numerical</td><td>Receptive field, SAME padding, parameter difference</td><td>Write formula; note bias and whether kernel changes.</td></tr><tr><td>Linked CNN numeric block</td><td>conv/fc/pool counts across full model</td><td>Derive each layer's output shape before computing next Dense input size.</td></tr><tr><td>Training-loop code bug</td><td>Missing zero_grad()</td><td>PyTorch gradients accumulate unless cleared; model.eval is not optimizer setup.</td></tr></tbody></table></div><p>The March 2026 sets include essentially the same CNN concepts and numeric patterns; July 2026 broadens code reading, activation/gradient questions, and convolution shapes; the October 2025 paper includes a linked CNN block with convolution/dense parameter counts and pooling-layer count. Treat repeated patterns as a study priority, not as a promise that the next exam repeats them.</p><div class="box exam"><b>Important filter-resolution question:</b> both March papers mark 0 additional parameters when the image changes from 12×12×4 to 14×14×4 but the stated convolution filter remains 12×12. Resolution alone does not change Conv weights. A separate exam-master summary has a 208 calculation only if the kernel also changes from 12×12 to 14×14. Follow the kernel size actually stated in the question.</div></section>
+
+<section id="numerical"><h2>10. Worked numerical examples</h2><h3>A. Conv shape + parameter count</h3><p>Input [B,3,32,32]; Conv2d(3,16,k=3,s=1,p=1,bias=True). Spatial size: floor((32+2−3)/1)+1=32. Output [B,16,32,32]. Parameters: 3×3×3×16+16=448.</p><h3>B. Pool then pointwise conv (March pattern)</h3><p>6×6×2 → MaxPool2,stride2 =3×3×2. Conv1×1 with 4 filters =3×3×4. Shape answer: 3×3×4. The pointwise conv parameter count with bias would be 1×1×2×4+4=12; without bias, 8.</p><h3>C. Inception channel concatenation</h3><p>28×28×64, 28×28×128, 28×28×32, 28×28×32. Same spatial shape, so concatenate channels: 64+128+32+32=256. Output 28×28×256.</p><h3>D. Receptive field</h3><p>Three 3×3 convs, stride1: R₀=1, each adds 2; R=1+2+2+2=7. Answer 7×7. Do not use 3×3×3=27 or 9×9.</p><h3>E. SAME padding</h3><p>Stride1, K5: P=(5−1)/2=2. K3: P=1. Input 32×32 remains 32×32 for either odd kernel.</p><h3>F. FC versus convolution parameters</h3><p>10×10 grayscale→5 classes. Dense(100,5), no bias: 100×5=500. Five 10×10 Conv filters, C_in=1, no bias: 10×10×1×5=500. Equal in this example.</p><h3>G. GAP vs flatten parameter calculation</h3><p>Feature map 7×7×512, class count 10. Flatten size 25,088; Dense has 25,088×10+10=250,890 parameters. GAP size 512; Dense has 512×10+10=5,130. GAP+Dense saves 245,760 dense weights/bias parameters relative to flatten head.</p><h3>H. Full-network parameter count (exam-notes pattern)</h3><ol><li>Conv1: 3 input channels, 16 filters, 3×3, bias: 3×3×3×16+16=448.</li><li>Conv2: 16 input channels, 32 filters, 3×3, bias: 3×3×16×32+32=4,640.</li><li>If pooling yields 32×8×8, flatten size=2,048.</li><li>FC 2,048→128: 2,048×128+128=262,272.</li><li>FC 128→10: 128×10+10=1,290.</li><li>Total: 448+4,640+262,272+1,290=268,650.</li></ol><p>Always derive the flatten size from the actual convolution/pooling settings; this example assumes the feature-map size is 8×8 at fc1.</p><h3>I. BatchNorm parameter count</h3><p>BatchNorm2d on C=64 feature channels learns γ and β per channel: 2×64=128 trainable parameters. Running mean/variance are buffers, not learned parameters.</p><h3>J. Accuracy from counts</h3><p>Correct predictions=870 out of 1,000: accuracy=.87=87%. If a rare class has 5/20 correct but majority classes are near-perfect, overall accuracy may still look high; use classwise recall/confusion matrix to diagnose.</p></section>
+
+<section id="snippets"><h2>11. Small code snippets between topics</h2><h3>Dataset and loader</h3><pre><code>transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.1307,), (0.3081,))
+])
+train_ds = datasets.MNIST("./data", train=True,
+                          download=True, transform=transform)
+train_loader = DataLoader(train_ds, batch_size=64, shuffle=True)</code></pre><h3>Channel-first batch check</h3><pre><code>images, labels = next(iter(train_loader))
+print(images.shape)  # e.g. [64, 1, 28, 28]
+print(labels.shape)  # [64]
+print(images.dtype)  # torch.float32
+print(labels.dtype)  # torch.int64 / torch.long</code></pre><h3>Count only trainable parameters</h3><pre><code>trainable = sum(p.numel() for p in model.parameters()
+                if p.requires_grad)
+print(trainable)</code></pre><h3>Device movement</h3><pre><code>device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = model.to(device)
+images, labels = images.to(device), labels.to(device)
+# Model and tensors must be on the same device.</code></pre><h3>Prediction from logits</h3><pre><code>model.eval()
+with torch.no_grad():
+    logits = model(images)                    # [B,10]
+    predicted = logits.argmax(dim=1)
+    probabilities = logits.softmax(dim=1)     # optional interpretation</code></pre></section>
+
+<section id="debug"><h2>12. Debugging checklist: find mistakes before tuning</h2><div class="tablewrap"><table><thead><tr><th>Symptom</th><th>Likely cause</th><th>Check first</th></tr></thead><tbody><tr><td>Conv says expected 3 channels but got 1</td><td>in_channels mismatch or wrong tensor axis</td><td>Print [N,C,H,W]; first Conv2d arg equals C.</td></tr><tr><td>Matrix shapes cannot be multiplied at fc1</td><td>Flatten width calculated incorrectly</td><td>Run a dummy forward pass and print shape before flatten/linear.</td></tr><tr><td>Loss does not decrease</td><td>Wrong labels/loss, no updates, LR, transform omission</td><td>Overfit one minibatch; check gradients and parameter changes.</td></tr><tr><td>Accuracy remains near 10%</td><td>MNIST 10-class random-level behavior; labels/output mismatch or pipeline bug</td><td>Check label range, final logits width=10, target dtype long.</td></tr><tr><td>CUDA device mismatch</td><td>Model and image/label on different devices</td><td>Move model and all batch tensors to same device.</td></tr><tr><td>Training looks okay but validation poor</td><td>Overfit, split mismatch, train-only augmentations differ too much</td><td>Compare deterministic preprocessing and curves; inspect errors.</td></tr><tr><td>Unexpected memory use</td><td>Large batch, retained computation graphs, storing tensors with graphs</td><td>Use no_grad in evaluation; accumulate .item() values, not graph tensors.</td></tr><tr><td>Predictions all one class</td><td>Label imbalance, wrong loss/label format, gradients not updating</td><td>Check class counts, logits, loss, gradient norms, parameter values.</td></tr></tbody></table></div><p><b>Fast debugging sequence:</b> inspect one sample; inspect one batch; run model on one batch and print every shape; verify loss is finite; overfit a tiny subset; only then scale up training and tune.</p></section>
+
+<section id="practice"><h2>13. Practice questions with solutions</h2><details><summary>Q1. MNIST batch has shape [32,1,28,28]. Which Conv2d input channels?</summary><p>1. PyTorch uses NCHW, so channel axis is dimension 1.</p></details><details><summary>Q2. Transform is defined but absent from dataset constructor. Does dataset return normalized tensors?</summary><p>No. The transform must be passed via transform=...; otherwise it is not applied.</p></details><details><summary>Q3. Conv(1→8,k=3,p=1,s=1), followed by pool 2,s2. Input 28×28. Output shape?</summary><p>Conv preserves 28; pool gives 14. Full batch output [B,8,14,14].</p></details><details><summary>Q4. Count Conv parameters in Q3, bias included.</summary><p>3×3×1×8+8=80.</p></details><details><summary>Q5. Input [B,8,14,14], 2×2 pool stride2, then 1×1 Conv with 12 outputs. Shape?</summary><p>Pool→[B,8,7,7]; pointwise Conv→[B,12,7,7].</p></details><details><summary>Q6. A model has 64 channels and uses BatchNorm2d. Learnable parameter count?</summary><p>2×64=128, one γ and β per channel.</p></details><details><summary>Q7. Why does missing zero_grad create wrong updates in PyTorch?</summary><p>Gradients accumulate in parameter .grad across backward passes unless cleared.</p></details><details><summary>Q8. CIFAR-10 model receives RGB images. What are batch shape and first Conv2d in_channels?</summary><p>Typical tensor [B,3,32,32]; first layer in_channels=3.</p></details><details><summary>Q9. For [B,32,7,7], what is flatten width and how to preserve B?</summary><p>32×7×7=1568. Use torch.flatten(x,start_dim=1).</p></details><details><summary>Q10. Should softmax be applied before CrossEntropyLoss?</summary><p>No. Pass raw logits; CrossEntropyLoss handles stable log-softmax internally.</p></details><details><summary>Q11. Does doubling image height/width double Conv parameter count?</summary><p>No if kernel size and channel counts stay fixed. It increases output positions/compute, not shared weights.</p></details><details><summary>Q12. Explain why GAP can drastically reduce classifier parameters.</summary><p>It maps H×W×C to C features before Dense, instead of HWC, so the Dense input width is much smaller.</p></details></section>
+
+<section id="recap"><h2>14. Formula sheet and exam checklist</h2><div class="grid"><div class="card"><h4>Conv output axis</h4><p>floor((I+2P−D(K−1)−1)/S)+1.</p></div><div class="card"><h4>Conv params</h4><p>KhKwCinCout + Cout if bias.</p></div><div class="card"><h4>Dense params</h4><p>DinDout + Dout if bias.</p></div><div class="card"><h4>Flatten width</h4><p>C×H×W per example; preserve N.</p></div><div class="card"><h4>Pool2,stride2</h4><p>Approximately halves H,W; channels unchanged.</p></div><div class="card"><h4>BatchNorm2d</h4><p>2C learnable values: scale and shift.</p></div></div><ol><li>Is the tensor NCHW or NHWC?</li><li>Does input channel count match Conv2d argument 1?</li><li>Did I derive output H,W after every convolution/pool?</li><li>Does the flatten size match the next Linear input?</li><li>Did I count bias only when enabled?</li><li>Am I passing logits and correct label format to loss?</li><li>Are transforms attached and normalization channels correct?</li><li>Did I call zero_grad before each PyTorch backward pass?</li><li>Does eval use both model.eval() and no_grad where appropriate?</li><li>Did I avoid using test results to pick the architecture?</li></ol><p class="small">Aligned to the supplied Week 4 syllabus image, exam master notes, four Quiz 1 papers (26 Oct 2025; 15 Mar 2026 Sets 1 and 2; 19 Jul 2026), and the supplied reference book. The playlist/video contents were not incorporated because they could not be accessed/transcribed in this session.</p></section>
+
+<section id="full"><h2>15. Complete program at the end: train a small MNIST CNN</h2><p>This example is intentionally complete and follows the quiz-relevant PyTorch patterns: transform attachment, NCHW shapes, correct Conv2d arguments, explicit parameter count, loss on logits, device handling, training-loop order, validation mode, and final test evaluation.</p><pre><code>import torch
+from torch import nn
+from torch.utils.data import DataLoader, random_split
+from torchvision import datasets, transforms
+
+# ------------------------------------------------------------
+# 1) Reproducibility, device, and image transforms
+# ------------------------------------------------------------
+torch.manual_seed(7)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# MNIST is grayscale. ToTensor converts to float [0,1], shape [1,28,28].
+# Normalize uses training-set mean/std for MNIST.
+transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.1307,), (0.3081,))
+])
+
+# Important: pass transform=transform so dataset applies the pipeline.
+full_train = datasets.MNIST(
+    root="./data", train=True, download=True, transform=transform
+)
+test_ds = datasets.MNIST(
+    root="./data", train=False, download=True, transform=transform
+)
+
+# Reserve validation examples for model selection.
+train_ds, val_ds = random_split(
+    full_train, [50000, 10000],
+    generator=torch.Generator().manual_seed(7)
+)
+train_loader = DataLoader(train_ds, batch_size=64, shuffle=True)
+val_loader = DataLoader(val_ds, batch_size=128, shuffle=False)
+test_loader = DataLoader(test_ds, batch_size=128, shuffle=False)
+
+# ------------------------------------------------------------
+# 2) CNN architecture: [N,1,28,28] -> [N,10] logits
+# ------------------------------------------------------------
+class MNISTCNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(
+            in_channels=1, out_channels=16,
+            kernel_size=3, stride=1, padding=1
+        )
+        self.conv2 = nn.Conv2d(
+            in_channels=16, out_channels=32,
+            kernel_size=3, stride=1, padding=1
+        )
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.relu = nn.ReLU()
+        self.fc1 = nn.Linear(32 * 7 * 7, 128)
+        self.fc2 = nn.Linear(128, 10)
+
+    def forward(self, x):
+        x = self.relu(self.conv1(x))   # [N,1,28,28] -> [N,16,28,28]
+        x = self.pool(x)               # -> [N,16,14,14]
+        x = self.relu(self.conv2(x))   # -> [N,32,14,14]
+        x = self.pool(x)               # -> [N,32,7,7]
+        x = torch.flatten(x, start_dim=1)  # -> [N,1568]
+        x = self.relu(self.fc1(x))     # -> [N,128]
+        return self.fc2(x)             # -> [N,10] raw logits
+
+model = MNISTCNN().to(device)
+
+# Verify learned parameter total:
+# conv1 = 3*3*1*16 + 16 = 160
+# conv2 = 3*3*16*32 + 32 = 4640
+# fc1   = (32*7*7)*128 + 128 = 200832
+# fc2   = 128*10 + 10 = 1290
+# total = 206922
+print("trainable parameters:",
+      sum(p.numel() for p in model.parameters() if p.requires_grad))
+
+# ------------------------------------------------------------
+# 3) Configure the objective and optimizer
+# ------------------------------------------------------------
+# CrossEntropyLoss expects [N,10] logits and [N] integer labels.
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+
+# ------------------------------------------------------------
+# 4) Train the network
+# ------------------------------------------------------------
+for epoch in range(5):
+    model.train()  # dropout/batchnorm training behavior, if present
+    loss_sum, correct, count = 0.0, 0, 0
+
+    for images, labels in train_loader:
+        images = images.to(device)  # [N,1,28,28]
+        labels = labels.to(device)  # [N], integer IDs 0...9
+
+        optimizer.zero_grad()       # clear previous batch gradients
+        logits = model(images)      # forward pass
+        loss = criterion(logits, labels)
+        loss.backward()             # chain rule: compute d(loss)/d(params)
+        optimizer.step()            # update model parameters
+
+        batch_size = labels.size(0)
+        loss_sum += loss.item() * batch_size
+        correct += (logits.argmax(dim=1) == labels).sum().item()
+        count += batch_size
+
+    train_loss = loss_sum / count
+    train_accuracy = correct / count
+
+    # --------------------------------------------------------
+    # 5) Validate: no optimizer update
+    # --------------------------------------------------------
+    model.eval()
+    val_loss_sum, val_correct, val_count = 0.0, 0, 0
+    with torch.no_grad():
+        for images, labels in val_loader:
+            images, labels = images.to(device), labels.to(device)
+            logits = model(images)
+            loss = criterion(logits, labels)
+            batch_size = labels.size(0)
+            val_loss_sum += loss.item() * batch_size
+            val_correct += (logits.argmax(dim=1) == labels).sum().item()
+            val_count += batch_size
+
+    val_loss = val_loss_sum / val_count
+    val_accuracy = val_correct / val_count
+    print(
+        f"epoch {epoch + 1}: "
+        f"train loss={train_loss:.4f}, accuracy={train_accuracy:.4f}; "
+        f"val loss={val_loss:.4f}, accuracy={val_accuracy:.4f}"
+    )
+
+# ------------------------------------------------------------
+# 6) Test once after model choices are complete
+# ------------------------------------------------------------
+model.eval()
+test_correct, test_count = 0, 0
+with torch.no_grad():
+    for images, labels in test_loader:
+        images, labels = images.to(device), labels.to(device)
+        logits = model(images)
+        test_correct += (logits.argmax(dim=1) == labels).sum().item()
+        test_count += labels.size(0)
+
+print("test accuracy:", test_correct / test_count)
+
+# ------------------------------------------------------------
+# 7) Inspect one prediction
+# ------------------------------------------------------------
+images, labels = next(iter(test_loader))
+images = images.to(device)
+with torch.no_grad():
+    logits = model(images[:1])               # [1,10]
+    probabilities = logits.softmax(dim=1)   # optional display
+    prediction = logits.argmax(dim=1)
+
+print("true class:", labels[0].item())
+print("predicted class:", prediction.item())
+print("probabilities:", probabilities.cpu())</code></pre><h3>Walkthrough of the complete program</h3><ol><li><b>Transforms:</b> ToTensor converts PIL to float/channel-first and scales; Normalize standardizes. The transform is actually attached to both datasets.</li><li><b>Split:</b> validation comes from training data. Test data stays separate until final reporting.</li><li><b>Input contract:</b> DataLoader emits [N,1,28,28] for MNIST, compatible with Conv2d(1,...).</li><li><b>Convolution shapes:</b> padding 1 with 3×3 stride 1 preserves spatial size. Pool halves 28→14→7.</li><li><b>Flatten:</b> 32×7×7=1,568 values per example; start_dim=1 preserves batch axis.</li><li><b>Classifier:</b> final Linear returns ten logits, one per digit.</li><li><b>Parameter total:</b> conv1 160 + conv2 4,640 + fc1 200,832 + fc2 1,290 = 206,922. Pool/ReLU/flatten add zero.</li><li><b>Loss:</b> CrossEntropyLoss gets raw logits and integer IDs. Do not softmax before it.</li><li><b>Training:</b> zero_grad → forward → loss → backward → step. Omitting zero_grad causes gradients to accumulate, the bug highlighted in the PYQs.</li><li><b>Validation:</b> eval mode and no_grad; no optimizer update. Test is reserved for final evaluation.</li><li><b>Prediction:</b> argmax logits gives the class; softmax is used only to display class probabilities.</li></ol><div class="box good"><b>Final shape audit:</b> [N,1,28,28] → [N,16,28,28] → [N,16,14,14] → [N,32,14,14] → [N,32,7,7] → [N,1568] → [N,128] → [N,10].</div></section>
+</div><nav class="week-navigation" aria-label="Weekly contents and next week"><a class="week-home" href="../weekly-contents.html">&lt; Go back to contents page</a><a rel="next" href="week-5-sequence-models-rnn-lstm-theory-in-depth-notes.html">Go to Week 5 &gt;</a></nav>
+<footer class="footer">Week 4 · Modeling Vision: CNN Practice · Deep Learning &amp; GenAI exam notes</footer></main></div></body></html>
